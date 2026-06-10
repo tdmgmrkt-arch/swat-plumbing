@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Camera, Image as ImageIcon } from "lucide-react"
+import { Image as ImageIcon } from "lucide-react"
 import { AccentLine, TacticalLabel } from "@/components/ui/tactical-panel"
 import { cn } from "@/lib/utils"
 
@@ -228,21 +228,6 @@ function PlaceholderCard({ slot }: { slot: PhotoSlot }) {
         <p className="text-white/65 text-sm leading-relaxed mb-4">
           {slot.caption}
         </p>
-
-        {/* AI prompt — collapsed by default via <details> for cleaner default view */}
-        <details className="group/details">
-          <summary className="cursor-pointer list-none inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.25em] uppercase text-red-400 hover:text-red-300 font-mono">
-            <Camera className="h-3 w-3" aria-hidden="true" />
-            AI Generation Prompt
-            <span className="ml-1 text-white/40 group-open/details:hidden">▼</span>
-            <span className="ml-1 text-white/40 hidden group-open/details:inline">
-              ▲
-            </span>
-          </summary>
-          <p className="mt-3 p-3 bg-black/40 border border-white/10 rounded-sm text-white/65 text-xs leading-relaxed font-mono">
-            {slot.prompt}
-          </p>
-        </details>
       </div>
     </article>
   )
