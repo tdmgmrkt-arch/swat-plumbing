@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agency-internal context (not part of the public site repo)
+/CLIENT.md
+/ACTIVE_WORK.md
+
+# tooling artifacts
+.playwright-mcp/
+
+# root-level debug screenshots
+/*.jpeg
+/*.jpg
+/*.png
