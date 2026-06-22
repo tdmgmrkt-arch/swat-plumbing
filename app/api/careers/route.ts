@@ -1,3 +1,4 @@
+import { put } from "@vercel/blob"
 import { NextRequest, NextResponse } from "next/server"
 import {
   careersSchema,
@@ -51,7 +52,7 @@ export async function POST(req: NextRequest) {
   // Resume validation (optional file)
   const resume = formData.get("resume")
   let resumeMeta:
-    | { name: string; size: number; type: string; base64?: string }
+    | { name: string; size: number; type: string; url: string }
     | null = null
 
   if (resume instanceof File && resume.size > 0) {
@@ -67,12 +68,12 @@ export async function POST(req: NextRequest) {
         { status: 415 }
       )
     }
-    const buf = Buffer.from(await resume.arrayBuffer())
+    const blob = await put(resume.name, resume, { access: "public" })
     resumeMeta = {
       name: resume.name,
       size: resume.size,
       type: resume.type,
-      base64: buf.toString("base64"),
+      url: blob.url,
     }
   }
 
@@ -85,9 +86,7 @@ export async function POST(req: NextRequest) {
     position: data.position,
     additional_info: data.additional_info ?? "",
     resume_filename: resumeMeta?.name ?? null,
-    resume_size_bytes: resumeMeta?.size ?? null,
-    resume_mime: resumeMeta?.type ?? null,
-    resume_base64: resumeMeta?.base64 ?? null,
+    resume_url: resumeMeta?.url ?? null,
     source_page: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.swatplumbing.com"}/careers`,
     submitted_at: new Date().toISOString(),
   }
@@ -96,10 +95,7 @@ export async function POST(req: NextRequest) {
     console.warn(
       "[careers/route] GHL_CAREERS_WEBHOOK_URL is not set — application accepted but not forwarded"
     )
-    console.info("[careers/route] application payload (resume body omitted):", {
-      ...payload,
-      resume_base64: payload.resume_base64 ? `[${payload.resume_size_bytes} bytes]` : null,
-    })
+    console.info("[careers/route] application payload:", payload)
     // Still return 200 so the user gets a confirmation; ghl-engineer will wire
     // the webhook URL when the careers workflow is built.
     return NextResponse.json({ ok: true, pending_integration: true })
