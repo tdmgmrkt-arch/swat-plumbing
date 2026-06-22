@@ -1,12 +1,15 @@
 import { MetadataRoute } from "next"
 import { siteConfig } from "@/lib/site-config"
+import { canonicalUrl } from "@/lib/utils"
+import { allServices as builtServices } from "@/lib/services-config"
+import { builtCities } from "@/lib/cities-config"
+import { allBlogPosts } from "@/lib/blog-posts-config"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = siteConfig.url
   const now = new Date()
 
   const staticRoutes: MetadataRoute.Sitemap = siteConfig.staticPages.map((p) => ({
-    url: `${base}${p.href === "/" ? "" : p.href}`,
+    url: canonicalUrl(p.href === "/" ? "/" : p.href),
     lastModified: now,
     changeFrequency: p.changeFrequency,
     priority: p.priority,
@@ -14,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Category hub pages (/plumbing, /water-heater, /water-quality)
   const categoryHubs: MetadataRoute.Sitemap = siteConfig.serviceCategories.map((c) => ({
-    url: `${base}${c.hubHref}`,
+    url: canonicalUrl(c.hubHref),
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.9,
@@ -32,21 +35,53 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const serviceRoutes: MetadataRoute.Sitemap = allServices
     .filter((s) => !hubHrefs.has(s.href))
     .map((s) => ({
-      url: `${base}${s.href}`,
+      url: canonicalUrl(s.href),
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     }))
 
-  // City pages: /areas-served/[slug] — only emitted once cityPagesLive is true
-  const cityRoutes: MetadataRoute.Sitemap = siteConfig.cityPagesLive
-    ? siteConfig.serviceArea.map((city) => ({
-        url: `${base}/areas-served/${city.slug}`,
-        lastModified: now,
-        changeFrequency: "monthly" as const,
-        priority: 0.85,
-      }))
-    : []
+  // City pages: /areas-served/[slug]
+  // Driven by builtCities aggregator — independent of siteConfig.cityPagesLive.
+  // Only cities with a real config file produce routes; all 47 unbuilt slugs 404.
+  const cityRoutes: MetadataRoute.Sitemap = builtCities.map((cfg) => ({
+    url: canonicalUrl(cfg.href),
+    lastModified: new Date(cfg.lastUpdated),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }))
 
-  return [...staticRoutes, ...categoryHubs, ...serviceRoutes, ...cityRoutes]
+  // Built service pages from servicesConfig — these have real content and get
+  // priority 0.85; they also appear in serviceRoutes above (via siteConfig) but
+  // the sitemap de-duplicates by URL in practice; we use the higher priority entry.
+  const builtServiceRoutes: MetadataRoute.Sitemap = builtServices.map((cfg) => ({
+    url: canonicalUrl(cfg.href),
+    lastModified: new Date(cfg.lastUpdated),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }))
+
+  // Merge: built service pages take precedence over the stub entries from siteConfig.
+  // Compare via canonicalUrl(href) so the suffix matches whatever the helper produces.
+  const builtUrlSet = new Set(builtServices.map((cfg) => canonicalUrl(cfg.href)))
+  const filteredServiceRoutes = serviceRoutes.filter(
+    (r) => !builtUrlSet.has(r.url as string)
+  )
+
+  // Blog posts: /blog/[slug]
+  const blogPostRoutes: MetadataRoute.Sitemap = allBlogPosts.map((post) => ({
+    url: canonicalUrl(`/blog/${post.slug}`),
+    lastModified: new Date(post.lastUpdated ?? post.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))
+
+  return [
+    ...staticRoutes,
+    ...categoryHubs,
+    ...filteredServiceRoutes,
+    ...builtServiceRoutes,
+    ...cityRoutes,
+    ...blogPostRoutes,
+  ]
 }

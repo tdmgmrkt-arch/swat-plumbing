@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>S.W.A.T. Plumbing — Hero Image Prompt Library</title>
+<style>
+  :root {
+    --bg: #080a0c;
+    --bg-2: #0e1012;
+    --bg-3: #13181c;
+    --bg-4: #0a0c0e;
+    --border: rgba(255,255,255,0.10);
+    --border-hover: rgba(220,38,38,0.55);
+    --text: #ffffff;
+    --text-2: rgba(255,255,255,0.72);
+    --text-3: rgba(255,255,255,0.48);
+    --text-4: rgba(255,255,255,0.32);
+    --red: #dc2626;
+    --red-light: #ef4444;
+    --red-300: #fca5a5;
+    --red-400: #f87171;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse 60% 60% at 20% 0%, rgba(220,38,38,0.06), transparent 60%),
+      linear-gradient(to bottom, var(--bg) 0%, var(--bg) 100%);
+    min-height: 100vh;
+  }
+  /* tactical grid overlay */
+  .grid-bg {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+  }
+  .stripe { position: fixed; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); z-index: 1; }
+
+  .container { position: relative; max-width: 1280px; margin: 0 auto; padding: 48px 32px 80px; z-index: 2; }
+  header { margin-bottom: 40px; }
+  .label {
+    display: inline-block; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--red-light);
+    font-weight: 700; margin-bottom: 8px;
+  }
+  .accent-line { width: 40px; height: 2px; background: var(--red); margin-bottom: 20px; }
+  h1 { font-size: clamp(32px, 4vw, 48px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 12px; }
+  h1 .accent { color: var(--red-light); }
+  .lede { color: var(--text-2); font-size: 16px; line-height: 1.6; max-width: 720px; margin: 0; }
+
+  /* Stats bar */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px; background: var(--border); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden; margin: 28px 0 40px;
+  }
+  .stat { background: var(--bg-4); padding: 14px 18px; }
+  .stat-num { font-family: var(--mono); font-size: 22px; font-weight: 900; }
+  .stat-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); font-weight: 600; margin-top: 4px; }
+  .stat .accent { color: var(--red-light); }
+
+  /* Filter / toolbar */
+  .toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    margin-bottom: 24px;
+    padding: 12px;
+    background: var(--bg-2); border: 1px solid var(--border); border-radius: 4px;
+    position: sticky; top: 12px; z-index: 10;
+    backdrop-filter: blur(8px);
+  }
+  .toolbar-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--text-3); font-weight: 700; margin-right: 4px;
+  }
+  .chip {
+    appearance: none; cursor: pointer; font: inherit;
+    background: var(--bg-4); color: var(--text-2);
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 8px 14px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.05em; transition: all 0.15s;
+  }
+  .chip:hover { border-color: rgba(220,38,38,0.5); color: var(--text); }
+  .chip.active { background: rgba(220,38,38,0.15); border-color: rgba(220,38,38,0.6); color: var(--red-300); }
+  .chip-count {
+    display: inline-block; margin-left: 6px; padding: 1px 6px;
+    background: rgba(255,255,255,0.06); border-radius: 2px;
+    font-family: var(--mono); font-size: 10px; color: var(--text-3);
+  }
+  .chip.active .chip-count { background: rgba(220,38,38,0.2); color: var(--red-300); }
+  .search {
+    flex: 1; min-width: 200px;
+    background: var(--bg-4); color: var(--text);
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 9px 14px; font-size: 13px; font-family: var(--sans);
+    outline: none; transition: border-color 0.15s;
+  }
+  .search:focus { border-color: rgba(220,38,38,0.6); }
+  .search::placeholder { color: var(--text-4); }
+
+  .copy-all {
+    appearance: none; cursor: pointer; font: inherit;
+    background: var(--red); color: white;
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+    padding: 9px 16px; font-size: 11px; font-weight: 800;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: background 0.15s;
+  }
+  .copy-all:hover { background: #b91c1c; }
+
+  /* Cards */
+  .grid { display: flex; flex-direction: column; gap: 14px; }
+  .card {
+    background: var(--bg-2); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .card:hover { border-color: rgba(220,38,38,0.35); }
+  .card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border);
+    background: linear-gradient(to right, rgba(220,38,38,0.06), transparent 60%);
+    flex-wrap: wrap;
+  }
+  .card-head-l { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; min-width: 0; }
+  .cat-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; font-weight: 700;
+    padding: 4px 10px; border-radius: 2px;
+    background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.35);
+    color: var(--red-300);
+  }
+  .cat-badge.hub { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.18); color: var(--text-2); }
+  .title { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.2; min-width: 0; }
+  .href {
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    letter-spacing: 0.05em;
+  }
+  .status-dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-4); margin-right: 6px;
+  }
+  .status-dot.built { background: var(--red); box-shadow: 0 0 6px rgba(220,38,38,0.6); }
+
+  .card-body { padding: 0; }
+  .row {
+    display: grid; grid-template-columns: 180px 1fr auto;
+    align-items: stretch; gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .row:last-child { border-bottom: none; }
+  .row-label {
+    padding: 14px 18px; border-right: 1px solid var(--border);
+    background: var(--bg-4);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-3); font-weight: 700;
+    display: flex; align-items: center;
+  }
+  .row-value {
+    padding: 14px 18px; min-width: 0; display: flex; align-items: center;
+  }
+  .row-value.prompt-value {
+    align-items: flex-start;
+    color: var(--text-2); font-size: 13px; line-height: 1.65;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .row-value .filename {
+    font-family: var(--mono); font-size: 13px; color: var(--text);
+    background: rgba(220,38,38,0.08); padding: 3px 8px; border-radius: 2px;
+    border: 1px solid rgba(220,38,38,0.25);
+  }
+  .row-action { padding: 14px 14px; display: flex; align-items: center; border-left: 1px solid var(--border); }
+  .copy {
+    appearance: none; cursor: pointer; font: inherit;
+    background: var(--bg-4); color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 7px 12px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    font-family: var(--mono);
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .copy:hover { border-color: rgba(220,38,38,0.55); color: var(--red-300); }
+  .copy.copied { background: rgba(220,38,38,0.18); border-color: rgba(220,38,38,0.6); color: var(--red-300); }
+
+  /* Empty state */
+  .empty {
+    text-align: center; padding: 60px 24px; color: var(--text-3);
+    background: var(--bg-2); border: 1px dashed var(--border); border-radius: 4px;
+  }
+  .empty-title { color: var(--text); font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--bg-3); color: var(--text);
+    border: 1px solid rgba(220,38,38,0.5); border-radius: 4px;
+    padding: 12px 20px; font-size: 13px; font-weight: 600;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    opacity: 0; pointer-events: none; transition: all 0.2s;
+    z-index: 100;
+    font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 1fr; }
+    .row-label { border-right: none; border-bottom: 1px solid var(--border); padding: 10px 18px; }
+    .row-action { border-left: none; border-top: 1px solid var(--border); padding: 10px 18px; }
+    .container { padding: 24px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="stripe"></div>
+  <div class="container">
+    <header>
+      <div class="label">Internal Tool</div>
+      <div class="accent-line"></div>
+      <h1>S.W.A.T. Plumbing — <span class="accent">Hero Image Prompt Library.</span></h1>
+      <p class="lede">
+        One-click copy of the filename and the Gemini / Midjourney / Flux prompt for every service page hero.
+        Save each generated image with the listed filename, drop the batch into <code style="font-family:var(--mono);font-size:13px;color:var(--red-300);">/public/</code>, and the dark-overlay hero on each service page will light up.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total Heroes</div></div>
+        <div class="stat"><div class="stat-num accent" id="stat-built">0</div><div class="stat-label">Built · Live</div></div>
+        <div class="stat"><div class="stat-num" id="stat-pending">0</div><div class="stat-label">Pages Pending</div></div>
+        <div class="stat"><div class="stat-num" id="stat-cats">0</div><div class="stat-label">Categories</div></div>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <span class="toolbar-label">Filter</span>
+      <button class="chip active" data-filter="all">All <span class="chip-count" id="count-all">0</span></button>
+      <button class="chip" data-filter="hub">Hubs <span class="chip-count" id="count-hub">0</span></button>
+      <button class="chip" data-filter="plumbing">Plumbing <span class="chip-count" id="count-plumbing">0</span></button>
+      <button class="chip" data-filter="water-heater">Water Heater <span class="chip-count" id="count-water-heater">0</span></button>
+      <button class="chip" data-filter="water-quality">Water Quality <span class="chip-count" id="count-water-quality">0</span></button>
+      <input type="search" class="search" id="search" placeholder="Search by slug, title, or prompt…" />
+      <button class="copy-all" id="copy-all-filenames">Copy All Filenames</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div id="empty" class="empty" style="display:none;">
+      <div class="empty-title">No matches</div>
+      <div>Adjust the filter or search query above.</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied</div>
+
+  <script>
+    /* ============================================================== */
+    /* DATA — every service hero, prompt, and filename                */
+    /* ============================================================== */
+    // Aspect-ratio + style guide baked into every prompt so generated
+    // images consistently support a dark left-weighted overlay with red accent.
+    const STYLE_SUFFIX = " REFERENCE CONSISTENCY — When a reference image of the SWAT Plumbing technician and/or the SWAT Plumbing service van is attached alongside this prompt, the subject MUST be drawn from the reference image exactly — same face, same skin tone, same build, same hair, same beard (if any), same uniform color, same embroidered chest patches and badge placement, same shirt style, same work pants, same boots, same work gloves. When the service van appears in any scene, match the reference van exactly — same color, same body style and model year, same window placement, same decal layout, same logo placement, same lettering, same trim, same wheels. Treat the reference as canonical: do not invent a new face, new uniform branding, or new van branding. Every hero image across the entire website must show the same trusted person and the same trusted van for brand consistency. STYLE — Professional editorial documentary photography, magazine-assignment quality, shot on location like a real Texas Monthly / This Old House feature. Captured on a Canon EOS R5 with a 35mm prime at f/4, ISO 400, natural color science, true-to-life skin tones, very subtle organic film grain. Lighting is natural and honest — daylight through windows, warm interior ambient, open-garage-door sunlight, normal overhead bulbs. No theatrical key light, no haze, no atmospheric fog, no colored practical lights. Even, well-exposed, slightly contrasty in a real-world way. CANDID composition — the subject is mid-task, unaware of the camera, never looking at the lens, never posing. SETTING — real North Texas suburban residential context: tan or red brick ranch / brick-and-board homes, asphalt-shingle rooflines, Bermuda grass lawns, oak trees and crepe myrtles, slab-on-grade foundations (no basements — Texas homes use attics and garages for utility space), wide hazy Texas sky on exteriors. Interiors are normal middle-class North Texas suburban homes — tile / LVP / hardwood floors, painted drywall, wood or white cabinets, granite or quartz countertops. SUBJECT — when the technician appears, use the reference photo as the canonical source for face, build, uniform, and styling. He is a real local tradesman, not a model — never posing, never looking at the camera, mid-task. ONLY the tools genuinely required for the depicted task are in frame — no tool-roll explosions, no excessive equipment, no staged prop spreads. Wide 16:9 horizontal composition with deliberate negative space on the LEFT 40% of the frame — a quiet area (wall, floor, lawn, sky, blurred interior) where a dark overlay and headline copy will sit cleanly in post. NEGATIVES — strictly avoid: AI-typical artifacts (extra fingers, warped hands, melting faces, plastic glossy skin, garbled text on signs/screens/labels, distorted tools), AI-invented logos or branding (any text/logos on the uniform or van must match the reference photo exactly — do not invent new ones, do not garble or scramble existing ones), on-image headline text or watermarks added by the generator, posed stock-photo gestures (thumbs up, hand on hip, big toothy smiles, looking directly at camera, arms crossed hero pose), theatrical cinematic lighting, atmospheric haze, fog, smoke, red/amber/blue colored practical light gels, lens flares, anamorphic stretch, shallow dreamy bokeh, basements / cellars / sump pits (Texas homes are slab-on-grade), palm trees, Southern California stucco or Spanish-tile architecture, snow, mountains, overcrowded tool spreads, melodramatic shadows, movie-poster aesthetic, AI-painterly textures, HDR oversaturation, neon colors, fake-looking equipment, oversized commercial gear in residential settings. ULTRA-WIDE aspect ratio 16:9 horizontal.";
+
+    const services = [
+      // ---- HUBS ----
+      {
+        cat: "hub", catLabel: "Plumbing Hub", slug: "plumbing", href: "/plumbing",
+        title: "Plumbing Services Hub", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, hair, beard, skin tone, uniform, embroidered patches, and boots exactly) kneeling on a clean small canvas drop cloth on a tile kitchen floor inside a real North Texas suburban home, mid-task replacing a chrome angle-stop shut-off valve under the sink. The cabinet door is open, exposing the under-sink area — braided supply line in his hand, basin wrench resting on his thigh. Natural daylight pours in through a window above the sink at right; warm under-cabinet glow from inside the cabinet. Real kitchen — light wood shaker cabinets, granite countertop above, normal tile flooring. His face is turned toward the work, not the camera. Only tools in frame: basin wrench, the new valve in its small plastic bag, a single shop towel. Left side of frame: clean tile floor and the side of the cabinet kick-plate — empty quiet space."
+      },
+      {
+        cat: "hub", catLabel: "Water Heater Hub", slug: "water-heater", href: "/water-heater",
+        title: "Water Heater Services Hub", built: false,
+        prompt: "A wall-mounted residential tankless water heater freshly installed on the white drywall of a real North Texas suburban garage utility wall — clean copper supply lines in and out, a black iron gas line dropping from above, a small condensate drain, the digital control panel showing a normal reading. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and gloves exactly) stands a relaxed step back from the unit, gloved hand resting on its side, glancing at the display. The garage door is open at right — bright midday natural daylight floods in across the concrete floor. The only tools in frame: a small adjustable wrench resting on top of a closed gray tool case beside him. Clean concrete floor, normal garage interior — a hint of a homeowner's bicycle and a tidy shelf softly out of focus in the far background. Left side: empty garage wall and clean concrete floor."
+      },
+      {
+        cat: "hub", catLabel: "Water Quality Hub", slug: "water-quality", href: "/water-quality",
+        title: "Water Quality Services Hub", built: false,
+        prompt: "A clear glass pitcher and a single drinking glass of filtered water sitting on a quartz kitchen countertop in a real North Texas suburban home. Natural daylight from a window at right catches the surface of the water honestly — no theatrical glow, no harsh rim light. A whole-house carbon filter housing is softly visible through an open utility-closet door deep in the background, well out of focus. Editorial home-feature photography — calm, clean, true-to-life. Normal kitchen — light wood cabinets, granite or quartz counter, neutral wall paint. Left side: clean counter surface and the warm wood face of a kitchen cabinet."
+      },
+
+      // ---- PLUMBING SUB-SERVICES ----
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "emergency-plumbers", href: "/plumbing/emergency-plumbers",
+        title: "Emergency Plumbers", built: true,
+        prompt: "The SWAT Plumbing service van from the reference photo (match its exact color, body style, model year, window placement, decal layout, logo placement, lettering, trim, and wheels exactly) parked in the concrete driveway of a tan brick North Texas suburban ranch home at early evening blue hour — just past sunset, sky still soft blue-violet, warm yellow porch light glowing at the front door. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) walks calmly from the van toward the home carrying a single mid-size toolbag in one hand. The homeowner has cracked the front door open, faint warm interior light spilling onto the porch. No emergency-light flash, no red gels, no haze — just a real after-hours service call. Real suburban scene: oak tree at the curb, Bermuda grass lawn, neighbor's home softly visible down the street. Left side: open driveway and lawn under the calm twilight sky."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "commercial-plumbers", href: "/plumbing/commercial-plumbers",
+        title: "Commercial Plumbers", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) inspecting an overhead copper and black-iron pipe manifold in the back-of-house mechanical area of a small North Texas commercial building — think strip-center restaurant or small office utility room. Honest even fluorescent overhead lighting, normal exposure, no dramatic blue cast. He stands with a small tablet held at chest height, head tilted up reading a pressure gauge on the manifold. A normal tool belt at his waist with only a tape measure, a pen, and a pair of channel-locks visible — nothing excessive. Painted concrete floor, painted block wall behind him, a wall-mounted backflow preventer softly visible at the right edge of frame. Left side: blank painted wall and clean floor."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "plumbing-fixtures", href: "/plumbing/plumbing-fixtures",
+        title: "Plumbing Fixtures", built: false,
+        prompt: "A freshly installed brushed-nickel single-handle bathroom faucet on a white quartz vanity in a real North Texas suburban bathroom remodel. Faucet is dry — recently completed install, polished, not running. Natural daylight from a side window provides honest fill, normal warm vanity light overhead. A pair of work gloves and a single small basin wrench resting on a folded shop towel at the right edge of frame — the only tools shown. Soft white subway tile backsplash and a framed mirror softly out of focus behind. Editorial home-improvement-magazine feel — clean, real, true-to-life. Left side: clean quartz vanity surface."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "gas-line-repair", href: "/plumbing/gas-line-repair",
+        title: "Gas Line Repair", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his uniform sleeves, work gloves, and skin tone exactly) — close-in view of his gloved hands threading a yellow flexible CSST gas connector onto a black iron tee fitting behind a residential gas range that has been pulled out from the kitchen wall in a real North Texas suburban home. Soap-test solution bubbling lightly on a joint. Natural daylight from the kitchen window plus normal overhead kitchen lighting — honest exposure, no theatrical light. Only tools in frame: a 14-inch pipe wrench, an adjustable wrench, a small spray bottle of leak-test solution, and a small handheld gas leak detector on the tile floor beside him. Real kitchen — tile floor, white drywall, the side of a gas range visible at right. Left side: clean tile floor and baseboard."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "plumbing-leak-repairs", href: "/plumbing/plumbing-leak-repairs",
+        title: "Leak Detection & Repair", built: false,
+        prompt: "A close-up of the SWAT Plumbing technician's hands (match his uniform sleeves, work gloves, and skin tone from the reference photo exactly) repairing a small leak at a copper pipe joint under a residential bathroom vanity in a real North Texas suburban home. The vanity cabinet door is open, exposing the supply lines and P-trap. Honest light from the open cabinet plus a small clip-on LED work light on the cabinet edge — normal exposure, no atmospheric haze. A folded shop towel beneath the joint catches a small dribble that revealed the leak. Only tools in frame: a small propane torch, a flux brush, a copper pipe brush, a small roll of lead-free solder, a pair of channel-locks. Real wood vanity cabinet interior, normal residential plumbing. Left side: clean cabinet interior wall."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "water-line-repairs", href: "/plumbing/water-line-repairs",
+        title: "Water Line Repairs", built: false,
+        prompt: "A neat open trench dug across a section of Bermuda-grass front lawn at a tan brick North Texas ranch home, exposing a freshly repaired section of copper or PEX residential water line. Mid-morning warm natural daylight, normal exposure. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneels at the edge of the trench, gloved hand on a pipe wrench, examining the completed coupling. Only tools in frame: a single pipe wrench, a small coil of new PEX pipe, a small parts bag with a brass fitting, a pair of work gloves. No work lights — clean midday light is plenty. The tan brick home and a mature oak tree soft in the background. Left side: open green lawn and a quiet residential street."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "residential-plumbing", href: "/plumbing/residential-plumbing",
+        title: "Residential Plumbing", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneeling on a clean small canvas drop cloth inside a real North Texas suburban home, working on a chrome P-trap and braided supply lines under a bathroom vanity. The vanity cabinet door is open exposing the work area. Natural daylight from a hallway window plus warm overhead vanity light — honest exposure. Only tools in frame: a basin wrench, an adjustable wrench, a replacement P-trap kit in its box, a single shop towel. Real wood vanity cabinet, tile flooring. His face is turned toward the work, not the camera. Left side: clean tile floor and the side of the cabinet."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "sewer-cleaning", href: "/plumbing/sewer-cleaning",
+        title: "Sewer Line Cleaning", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) operating a residential sectional drain-cleaning machine at the side-yard cleanout of a tan brick North Texas suburban home. Mid-afternoon natural daylight, normal exposure — no dramatic lighting. The cable feeds from the machine into the white PVC sewer cleanout in the ground. His gloved hands rest on the machine's feed controls, focused on the work. Bermuda grass lawn, brick wall, downspout in the background. Only equipment in frame: the sectional machine, a single empty cable section, a bucket. No van, no clutter. Left side: brick wall and lawn area."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "running-water", href: "/running-water",
+        title: "Running Water (root URL)", built: false,
+        prompt: "A normal residential kitchen faucet running a steady clean stream of water into a stainless steel sink basin in a real North Texas suburban home. Honest natural daylight pours in from a window above the sink — even exposure, no dramatic side-light, no deep shadows. The water stream is sharp and true-to-life. Faucet in clear focus, the kitchen behind softly out of focus — light wood cabinets, granite countertop, a normal kitchen background. Editorial home-feature photography, calm and real. Left side: clean countertop and the side of the sink."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "slab-leak", href: "/plumbing/slab-leak",
+        title: "Slab Leak", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneels on a tile or LVP floor in a real North Texas suburban home where a small section of flooring has been pulled up to expose the concrete slab — a faint hairline crack visible, a small damp shadow on the concrete. He holds a small handheld acoustic leak-detection sensor flat against the slab, head tilted listening, headphones over his ears. Natural daylight from a nearby window — honest exposure, no theatrical mood. Only tools in frame: the acoustic sensor, a small notebook with a few handwritten readings, a flashlight on the floor. Real residential interior — baseboard, painted wall, a corner of furniture softly out of frame. Left side: clean exposed slab surface."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "trenchless-repair", href: "/plumbing/trenchless-repair",
+        title: "Trenchless Repair", built: false,
+        prompt: "Two compact rectangular entry pits dug in the Bermuda-grass front lawn of a tan brick North Texas suburban ranch home, a compact pipe-bursting setup positioned at one pit pulling a length of new black HDPE pipe through the ground. Mid-afternoon natural daylight, normal exposure — no dramatic shadows. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) stands at the equipment, gloved hand on the hydraulic control lever, watching the pull. Only equipment in frame: the bursting head, the small hydraulic unit, and a coil of new HDPE pipe. Bermuda lawn intact around the pits — clearly minimal disruption. Brick home and oak tree soft in background. Left side: open green lawn and quiet residential street."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "plumbing-pumps", href: "/plumbing/plumbing-pumps",
+        title: "Plumbing Pumps", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) crouched in the utility corner of a clean North Texas suburban garage, installing a small residential condensate or laundry pump beside a tankless water heater and a laundry standpipe (Texas homes are slab-on-grade — no basements, no sump pits). Natural daylight from the open garage door at right. Only tools in frame: a small adjustable wrench, a fresh PVC elbow, a small can of PVC primer and cement, a short length of clear discharge tubing. Clean concrete floor, white drywall, the side of a washing machine softly out of focus behind. Left side: empty garage wall and clean floor."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "clogged-drain", href: "/plumbing/clogged-drain",
+        title: "Clogged Drain", built: false,
+        prompt: "Close-in view of the SWAT Plumbing technician's gloved hands (match his uniform sleeves, work gloves, and skin tone from the reference photo exactly) feeding a small handheld drum auger cable into a residential bathtub drain in a real North Texas suburban bathroom — the overflow plate has been removed and set neatly to the side. Natural daylight from a small bathroom window plus warm overhead vanity light, honest exposure. Only tools in frame: the handheld drum auger, the cable feeding into the drain, a single shop towel laid over the tub edge to protect the porcelain. Real residential bathroom — clean tile surround, normal tub, white wall. Calm methodical work. Left side: clean tile floor and the side of the tub."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "garbage-disposals", href: "/plumbing/garbage-disposals",
+        title: "Garbage Disposals", built: false,
+        prompt: "An under-kitchen-sink view in a real North Texas suburban home — the SWAT Plumbing technician from the reference photo (match his uniform sleeves, work gloves, and skin tone exactly) lifting a brand-new residential garbage disposal up under the sink, twisting it onto the mounting ring. The cabinet doors are open exposing the work area. Natural daylight pours into the cabinet from the open doors plus normal warm kitchen light from above — honest exposure. Only tools in frame: a single Phillips screwdriver and a pair of channel-lock pliers resting on a small folded shop towel. Drain tailpiece and supply lines visible above. Real wood kitchen cabinet interior, clean and normal. Left side: empty cabinet interior wall."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "hydro-jetting", href: "/plumbing/hydro-jetting",
+        title: "Hydro-Jetting", built: false,
+        prompt: "A compact residential hydro-jetting trailer rig parked at the curb of a tan brick North Texas suburban ranch home, the high-pressure hose snaking neatly across the driveway and into a side-yard sewer cleanout. Mid-afternoon natural daylight, normal exposure — no dramatic backlight. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) stands at the rig's control panel, gloved hand resting on the pressure valve. Only equipment in frame: the jetter unit on its small trailer, the hose reel, the line running to the cleanout. Bermuda lawn, downspout, brick wall in the background. Left side: open driveway and quiet residential street."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "main-water-line-repair", href: "/plumbing/main-water-line-repair",
+        title: "Main Water Line Repair", built: false,
+        prompt: "A short clean trench cut between the curb and the lawn of a tan brick North Texas suburban ranch home, exposing a section of copper or PEX main water line being repaired. Mid-morning warm natural daylight, normal exposure — no dramatic backlight, no work-light glare. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneels at the edge of the trench, gloved hand on a brass compression coupling, mid-task. A single reflective orange safety cone at the curb. The SWAT Plumbing service van from the reference photo (match its exact color, body style, decals, logo placement, lettering, trim, and wheels exactly) parked along the curb in the soft background — only partially visible at the edge of frame. Only tools in frame: a pipe wrench, a tubing cutter, a small parts tray with brass fittings. Bermuda grass lawn, oak tree, brick home in the soft background. Left side: quiet lawn and curb."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "whole-house-repiping", href: "/plumbing/whole-house-repiping",
+        title: "Whole-House Repiping", built: false,
+        prompt: "A wide-angle view inside the attic of a North Texas suburban home — Texas homes use the attic for whole-house repipes since slab-on-grade construction has no basements. Fresh red and blue PEX supply lines neatly run through wooden roof trusses, recently completed. Honest daylight filters in through a small attic vent at one end; a clip-on LED work light at the opposite end provides natural fill — even exposure, no theatrical beams. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneels at the central PEX manifold making a final connection. Only tools in frame: a PEX crimping tool, a small handful of brass crimp fittings, a tubing cutter. Clean fresh installation — no debris, no old pipe clutter. Left side: open attic floor decking and trusses."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "sewer-camera-inspections", href: "/plumbing/sewer-camera-inspections",
+        title: "Sewer Camera Inspections", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneeling at a side-yard sewer cleanout of a tan brick North Texas suburban ranch home, feeding a small sewer-camera reel cable into the white PVC cleanout. A compact inspection monitor on a small tripod beside him shows a clear honest interior pipe view — clean pipe, normal lighting on the screen, no exaggerated root horror imagery, no garbled on-screen text. Mid-afternoon natural daylight, normal exposure. Only equipment in frame: the camera reel, the small tripod monitor, a small notebook. Bermuda grass lawn, brick siding, downspout in the background. Left side: lawn and brick siding."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "plumbing-maintenance", href: "/plumbing/plumbing-maintenance",
+        title: "Plumbing Maintenance", built: false,
+        prompt: "The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneeling on a clean small canvas drop cloth on the kitchen floor of a real North Texas suburban home, checking a chrome angle-stop shut-off valve under the sink with a small flashlight. A printed maintenance checklist clipped to a clipboard rests on the floor beside him. Natural daylight pours in from a kitchen window above the sink — honest exposure, no theatrical mood. Only tools in frame: the flashlight, the clipboard, a small adjustable wrench. Real residential kitchen — light wood cabinets, granite countertop, normal tile flooring. Calm methodical preventive service. Left side: clean tile floor and the side of the cabinet."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "sewer-line-repairs", href: "/plumbing/sewer-line-repairs",
+        title: "Sewer Line Repairs", built: false,
+        prompt: "A neat backyard excavation in the side yard of a tan brick North Texas suburban ranch home, exposing a section of white PVC residential sewer line under repair. Two fresh PVC pipe sections and a pair of couplings laid neatly beside the trench. Mid-afternoon natural daylight, normal exposure — no work lights, no dusk drama. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneels at the edge of the trench, gloved hand on the freshly seated coupling. Only tools in frame: a pipe wrench, a hacksaw, a small can of PVC primer and cement, a single shop towel. Bermuda lawn, brick home and a mature oak tree soft in the background. Left side: open green lawn area."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "toilet-repair", href: "/plumbing/toilet-repair",
+        title: "Toilet Repair", built: false,
+        prompt: "A real North Texas suburban residential bathroom mid-task — a standard white toilet has been lifted off the flange and set carefully on a folded shop towel to the side. A fresh wax ring sits on the exposed closet flange in the center of the tile floor, ready to be set. Natural daylight from a small bathroom window plus warm overhead vanity light — honest exposure. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneels beside the flange, gloved hand reaching for the new wax ring. Only tools in frame: a single adjustable wrench, the new wax ring in its packaging, a new pair of closet bolt caps. Real bathroom — clean tile floor, white wainscot, a normal vanity at the edge of frame. Left side: clean tile floor."
+      },
+      {
+        cat: "plumbing", catLabel: "Plumbing", slug: "plumbing-tunneling", href: "/plumbing/plumbing-tunneling",
+        title: "Plumbing Tunneling", built: false,
+        prompt: "A small specialty tunneling excavation at the side of a tan brick North Texas suburban ranch home — a neat access opening cut at the base of the slab foundation, shored dirt sides visible, a small mound of removed dirt set aside on a tarp. Mid-morning natural daylight, normal exposure — no dramatic interior glow. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) stands beside the access opening holding a small printed sketch of the under-slab plumbing layout in one hand, gloved hand at his side. Only equipment in frame: a long-handled shovel, a small pry bar, the printed sketch. Bermuda lawn, brick foundation wall, downspout. Left side: lawn and base of home."
+      },
+
+      // ---- WATER HEATER SUB-SERVICES ----
+      {
+        cat: "water-heater", catLabel: "Water Heater", slug: "tankless-water-heaters", href: "/water-heater/tankless-water-heaters",
+        title: "Tankless Water Heaters", built: false,
+        prompt: "A residential tankless water heater freshly installed on the white drywall of a real North Texas suburban garage utility wall. Clean copper supply lines in and out, a black iron gas line dropping from above, a small PVC condensate drain, the digital control display showing a normal honest reading (no garbled fake text). The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and gloves exactly) stands beside the unit, gloved hand resting near the pressure relief valve, checking the install. Natural daylight from the open garage door at right — honest exposure, no theatrical spotlight, no cool blue cast. Only tools in frame: a single adjustable wrench and a clipboard with the install paperwork. Clean concrete garage floor. Left side: empty drywall and clean concrete floor."
+      },
+      {
+        cat: "water-heater", catLabel: "Water Heater", slug: "tank-heater-installation", href: "/water-heater/tank-heater-installation",
+        title: "Tank Water Heater Installation", built: false,
+        prompt: "A traditional 50-gallon residential tank water heater freshly installed in a North Texas suburban garage utility corner (Texas homes use garages or interior utility closets — never basements). Clean copper flex supply lines connecting to the top, a properly installed T&P drain line to a drip pan, a small expansion tank visible on the cold line. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and boots exactly) kneels at the base making a final connection at a brass fitting. Natural daylight from the open garage door — honest exposure, no theatrical glow. Only tools in frame: a pipe wrench, an adjustable wrench, a small tube of thread sealant. Clean concrete floor, white drywall. Left side: empty drywall and clean concrete floor."
+      },
+
+      // ---- WATER QUALITY SUB-SERVICES ----
+      {
+        cat: "water-quality", catLabel: "Water Quality", slug: "water-filtration", href: "/water-quality/water-filtration",
+        title: "Water Filtration", built: false,
+        prompt: "A residential whole-house water filtration setup mounted on the white drywall of a real North Texas suburban garage utility area — twin blue filter housings on a clean wall-mount bracket, polished copper bypass piping, a small pressure gauge. Close-in view of the SWAT Plumbing technician's gloved hands (match his uniform sleeves, work gloves, and skin tone from the reference photo exactly) turning a filter wrench to open the housing for a cartridge change. Natural daylight from the open garage door — honest exposure, no cool fluorescent cast, no theatrical shadows. Only tools in frame: the filter wrench, a fresh filter cartridge in its plastic wrap, a small bucket positioned below to catch drips. Clean concrete floor. Left side: empty drywall and concrete floor."
+      },
+      {
+        cat: "water-quality", catLabel: "Water Quality", slug: "residential-water-treatment", href: "/water-quality/residential-water-treatment",
+        title: "Residential Water Treatment", built: false,
+        prompt: "Two cylindrical residential water-treatment tanks (a carbon filter and a salt-based softener) installed side by side against the white drywall of a real North Texas suburban garage. Brand-new polished copper bypass valves and supply lines neatly routed between them. A brine tank with a closed lid sits beside the softener; a partial bag of softener salt rests on the floor at its base. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and gloves exactly) stands at the digital control head, gloved finger pressing a button to program the cycle (display shows a normal honest readout, no garbled text). Natural daylight from the open garage door — honest exposure. Only tools in frame: a small adjustable wrench, a clipboard with the start-up paperwork. Clean concrete floor. Left side: empty drywall and concrete floor."
+      },
+      {
+        cat: "water-quality", catLabel: "Water Quality", slug: "water-softener", href: "/water-quality/water-softener",
+        title: "Water Softener", built: false,
+        prompt: "A residential ion-exchange water softener freshly installed on a clean white drip pan in the corner of a real North Texas suburban garage, its closed-lid salt brine tank standing beside it. Polished brass bypass valve, clean copper supply lines neatly routed up the white drywall. A partial bag of softener salt rests on the concrete floor beside the brine tank. The SWAT Plumbing technician from the reference photo (match his face, build, uniform, embroidered patches, and gloves exactly) stands at the unit, gloved hand turning the bypass lever into service. Natural daylight from the open garage door — honest exposure, no theatrical side-light. Only tools in frame: a small adjustable wrench, a clipboard with the start-up paperwork. Left side: empty drywall and concrete floor."
+      },
+      {
+        cat: "water-quality", catLabel: "Water Quality", slug: "reverse-osmosis", href: "/water-quality/reverse-osmosis",
+        title: "Reverse Osmosis", built: false,
+        prompt: "An under-kitchen-sink view in a real North Texas suburban home — a brand-new 4-stage residential reverse-osmosis system mounted to the inside wall of the cabinet, clean white filter housings, color-coded tubing routed neatly, a small bladder storage tank set on the cabinet floor. A polished chrome dedicated RO faucet visible passing up through the granite countertop above. The cabinet doors are open. Natural daylight pours into the cabinet from the open doors — honest exposure, no theatrical glow. A single clear drinking glass of filtered water sits on the counter above, calmly lit by window daylight. Only tools in frame: a small adjustable wrench resting on a folded shop towel. Real wood kitchen cabinet interior. Left side: clean cabinet interior wall."
+      },
+    ];
+
+    /* ============================================================== */
+    /* RENDER                                                          */
+    /* ============================================================== */
+    const grid = document.getElementById("grid");
+    const emptyEl = document.getElementById("empty");
+    const searchEl = document.getElementById("search");
+    const chips = document.querySelectorAll(".chip");
+    let activeFilter = "all";
+    let activeQuery = "";
+
+    function filename(s) { return `hero-${s.slug}.webp`; }
+    function fullPrompt(s) { return `${s.prompt}${STYLE_SUFFIX}`; }
+
+    function render() {
+      const q = activeQuery.toLowerCase().trim();
+      const filtered = services.filter(s => {
+        if (activeFilter !== "all" && s.cat !== activeFilter) return false;
+        if (!q) return true;
+        return (
+          s.slug.toLowerCase().includes(q) ||
+          s.title.toLowerCase().includes(q) ||
+          s.prompt.toLowerCase().includes(q) ||
+          s.href.toLowerCase().includes(q)
+        );
+      });
+
+      grid.innerHTML = "";
+      if (filtered.length === 0) { emptyEl.style.display = ""; return; }
+      emptyEl.style.display = "none";
+
+      for (const s of filtered) {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-head">
+            <div class="card-head-l">
+              <span class="cat-badge ${s.cat === 'hub' ? 'hub' : ''}">${s.catLabel}</span>
+              <div class="title">${s.title}</div>
+            </div>
+            <div class="href"><span class="status-dot ${s.built ? 'built' : ''}" title="${s.built ? 'Page built' : 'Page pending'}"></span>${s.href}</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="row-label">Filename</div>
+              <div class="row-value"><code class="filename">${filename(s)}</code></div>
+              <div class="row-action">
+                <button class="copy" data-copy="filename" data-slug="${s.slug}">Copy</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="row-label">Image Prompt</div>
+              <div class="row-value prompt-value">${escapeHtml(fullPrompt(s))}</div>
+              <div class="row-action">
+                <button class="copy" data-copy="prompt" data-slug="${s.slug}">Copy</button>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
+
+    /* ============================================================== */
+    /* COPY HANDLERS                                                   */
+    /* ============================================================== */
+    const toast = document.getElementById("toast");
+    let toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
+    }
+
+    async function copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Fallback for non-secure contexts
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); document.body.removeChild(ta); return true; }
+        catch { document.body.removeChild(ta); return false; }
+      }
+    }
+
+    grid.addEventListener("click", async (e) => {
+      const btn = e.target.closest(".copy");
+      if (!btn) return;
+      const slug = btn.dataset.slug;
+      const kind = btn.dataset.copy;
+      const svc = services.find(s => s.slug === slug);
+      if (!svc) return;
+
+      const text = kind === "filename" ? filename(svc) : fullPrompt(svc);
+      const ok = await copyToClipboard(text);
+      if (ok) {
+        btn.classList.add("copied");
+        const original = btn.textContent;
+        btn.textContent = "Copied ✓";
+        setTimeout(() => { btn.classList.remove("copied"); btn.textContent = original; }, 1400);
+        showToast(kind === "filename" ? "Filename copied" : "Prompt copied");
+      } else {
+        showToast("Copy failed — select and copy manually");
+      }
+    });
+
+    document.getElementById("copy-all-filenames").addEventListener("click", async () => {
+      const q = activeQuery.toLowerCase().trim();
+      const filtered = services.filter(s => {
+        if (activeFilter !== "all" && s.cat !== activeFilter) return false;
+        if (!q) return true;
+        return (
+          s.slug.toLowerCase().includes(q) ||
+          s.title.toLowerCase().includes(q) ||
+          s.prompt.toLowerCase().includes(q)
+        );
+      });
+      const list = filtered.map(filename).join("\n");
+      const ok = await copyToClipboard(list);
+      showToast(ok ? `Copied ${filtered.length} filenames` : "Copy failed");
+    });
+
+    /* ============================================================== */
+    /* FILTERS + SEARCH                                                */
+    /* ============================================================== */
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        chips.forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        activeFilter = chip.dataset.filter;
+        render();
+      });
+    });
+
+    searchEl.addEventListener("input", (e) => {
+      activeQuery = e.target.value;
+      render();
+    });
+
+    /* ============================================================== */
+    /* STATS                                                            */
+    /* ============================================================== */
+    function setStats() {
+      const total = services.length;
+      const built = services.filter(s => s.built).length;
+      const pending = total - built;
+      const cats = new Set(services.map(s => s.cat)).size;
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-built").textContent = built;
+      document.getElementById("stat-pending").textContent = pending;
+      document.getElementById("stat-cats").textContent = cats;
+
+      const counts = { all: total, hub: 0, plumbing: 0, "water-heater": 0, "water-quality": 0 };
+      services.forEach(s => { counts[s.cat] = (counts[s.cat] || 0) + 1; });
+      document.getElementById("count-all").textContent = counts.all;
+      document.getElementById("count-hub").textContent = counts.hub;
+      document.getElementById("count-plumbing").textContent = counts.plumbing;
+      document.getElementById("count-water-heater").textContent = counts["water-heater"];
+      document.getElementById("count-water-quality").textContent = counts["water-quality"];
+    }
+
+    setStats();
+    render();
+  </script>
+</body>
+</html>

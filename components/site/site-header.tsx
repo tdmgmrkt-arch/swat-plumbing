@@ -13,6 +13,10 @@ import {
   ChevronDown,
   Check,
   X,
+  Users,
+  Briefcase,
+  Newspaper,
+  CreditCard,
 } from "lucide-react"
 import {
   Sheet,
@@ -137,6 +141,29 @@ const emergencyByMenu: Record<string, EmergencyContent> = {
       icon: "map",
     },
   },
+  company: {
+    label: "About S.W.A.T.",
+    headline: "Local, licensed, and built on referrals.",
+    subline: "Family-run since 2013 — serving North Texas with master-plumber-led crews.",
+    signals: [
+      "Master-plumber owned",
+      "Licensed + insured",
+      "Built on word of mouth",
+    ],
+    data: {
+      label: "By the Numbers",
+      items: [
+        "49 Communities served",
+        "2 Response hubs · 24/7",
+        "1,700+ Google reviews",
+      ],
+    },
+    cta: {
+      label: "Get in Touch",
+      href: "/contact-us",
+      icon: "phone",
+    },
+  },
 }
 
 const DEFAULT_EMERGENCY: EmergencyContent = emergencyByMenu.plumbing
@@ -255,7 +282,7 @@ export default function SiteHeader() {
           onMouseEnter={scheduleClose}
         >
           <Image
-            src="/swatdevlogo.svg"
+            src="/swatdevlogo.webp"
             alt="S.W.A.T. Plumbing LLC"
             width={375}
             height={322}
@@ -390,6 +417,7 @@ export default function SiteHeader() {
               />
             )}
             {openMega === "areas" && <AreasMegaMenu onNavigate={closeNow} />}
+            {openMega === "company" && <CompanyMegaMenu onNavigate={closeNow} />}
           </div>
         </div>
       </div>
@@ -632,6 +660,91 @@ function AreasMegaMenu({ onNavigate }: { onNavigate: () => void }) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Desktop: Company Mega Menu                                           */
+/*   Card grid of About / Financing / Areas / Careers / Blog            */
+/* ------------------------------------------------------------------ */
+const companyIconMap = {
+  Users,
+  MapPin,
+  Briefcase,
+  Newspaper,
+  CreditCard,
+} as const
+
+type CompanyIcon = keyof typeof companyIconMap
+
+function CompanyMegaMenu({ onNavigate }: { onNavigate: () => void }) {
+  const links = siteConfig.companyLinks
+  const emergency = emergencyByMenu.company ?? DEFAULT_EMERGENCY
+
+  return (
+    <div className="grid grid-cols-[1fr_320px]">
+      <div className="p-8 border-r border-white/8 flex flex-col">
+        {/* Briefing panel */}
+        <div className="relative bg-white/3 border border-white/10 mb-6 overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-600" aria-hidden="true" />
+          <div className="absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-red-600/60" aria-hidden="true" />
+
+          <div className="flex items-end justify-between gap-6 pl-6 pr-5 py-5">
+            <div className="max-w-2xl">
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/60">
+                Company
+              </p>
+              <p className="text-white/65 text-xs mt-2.5 leading-relaxed">
+                Who we are
+                <span className="text-red-500/70 mx-2" aria-hidden="true">•</span>
+                Where we work
+                <span className="text-red-500/70 mx-2" aria-hidden="true">•</span>
+                What we&apos;re building
+              </p>
+            </div>
+            <Link
+              href="/about-us"
+              onClick={onNavigate}
+              className="inline-flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 font-medium transition-colors shrink-0"
+            >
+              About S.W.A.T.
+              <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Card grid — 3 cols (lays out 5 items as 3+2 for the Company menu) */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5">
+          {links.map((link) => {
+            const Icon = companyIconMap[link.icon as CompanyIcon]
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={onNavigate}
+                className={cn(
+                  "group flex items-start gap-3 p-4 rounded-md transition-all",
+                  "border border-white/8 hover:border-red-600/40 bg-white/2 hover:bg-white/5"
+                )}
+              >
+                <div className="w-9 h-9 flex items-center justify-center shrink-0 bg-red-600/10 border border-red-600/30 rounded-sm group-hover:bg-red-600/15 group-hover:border-red-600/50 transition-colors">
+                  <Icon className="h-4 w-4 text-red-400" aria-hidden="true" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-white/90 group-hover:text-white leading-tight">
+                    {link.title}
+                  </p>
+                  <p className="text-xs text-white/55 leading-snug mt-1">
+                    {link.description}
+                  </p>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+      <EmergencyPanel content={emergency} />
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /* Shared: Emergency Panel (right column of mega menus)                */
 /* ------------------------------------------------------------------ */
 const ctaIconMap = {
@@ -746,7 +859,7 @@ function MobileNav({ onClose }: { onClose: () => void }) {
       <SheetHeader className="px-5 py-4 border-b border-white/10 flex flex-row items-center justify-between">
         <SheetTitle className="flex items-center text-white">
           <Image
-            src="/swatdevlogo.svg"
+            src="/swatdevlogo.webp"
             alt="S.W.A.T. Plumbing LLC"
             width={375}
             height={322}
@@ -840,6 +953,31 @@ function MobileNav({ onClose }: { onClose: () => void }) {
                     )
                   })}
                 </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* Company accordion */}
+          <AccordionItem value="company" className="border-b border-white/8">
+            <AccordionTrigger className="text-white/80 hover:text-white text-sm font-medium py-3 hover:no-underline">
+              Company
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="pb-2 space-y-0.5">
+                {siteConfig.companyLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={onClose}
+                    className="flex items-center gap-2 px-2 py-2.5 rounded text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors min-h-11"
+                  >
+                    <ChevronRight
+                      className="h-3 w-3 text-red-500/70 shrink-0"
+                      aria-hidden="true"
+                    />
+                    {link.title}
+                  </Link>
+                ))}
               </div>
             </AccordionContent>
           </AccordionItem>

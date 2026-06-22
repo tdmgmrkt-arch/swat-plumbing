@@ -34,25 +34,43 @@ function GoogleGMark({ className = "h-4 w-4" }: { className?: string }) {
 }
 
 /**
- * One featured review + two supporting. Jennifer's is the featured —
- * longest, most specific, strongest story (10 PM emergency, slab leak,
- * within the hour). Reinforces the "Deployed Fast" brand thread.
+ * Display shape used by both the featured curated review and the live
+ * Google reviews pulled in via the Places API.
  */
-const testimonials = [
-  {
-    quote:
-      "Called at 10 PM on a Saturday — water was coming through my kitchen ceiling. They were at my door within the hour. Identified a slab leak, explained everything clearly, and got us stabilized that night. Scheduled the repair for Monday. Exactly what you want from an emergency call.",
-    author: "Jennifer R.",
-    city: "Fort Worth",
-    stars: 5,
-    featured: true,
-  },
+type DisplayReview = {
+  quote: string
+  author: string
+  /** Curated reviews use city, Google reviews use relativeDate. */
+  city?: string
+  relativeDate?: string
+  stars: number
+  source: "curated" | "google"
+}
+
+/**
+ * Featured curated review (Jennifer R. — 10 PM Saturday slab leak story).
+ * Stays as the featured slot because it's the strongest brand thread on
+ * the site. Live Google reviews fill the two supporting slots, with the
+ * remaining curated reviews acting as fallback if the API returns fewer
+ * than 2 five-star reviews.
+ */
+const featuredCurated: DisplayReview = {
+  quote:
+    "Called at 10 PM on a Saturday — water was coming through my kitchen ceiling. They were at my door within the hour. Identified a slab leak, explained everything clearly, and got us stabilized that night. Scheduled the repair for Monday. Exactly what you want from an emergency call.",
+  author: "Jennifer R.",
+  city: "Fort Worth",
+  stars: 5,
+  source: "curated",
+}
+
+const supportingCuratedFallback: readonly DisplayReview[] = [
   {
     quote:
       "Tech showed up on time, walked me through what was wrong, gave me a flat price before he started, and had my leak fixed in under an hour. Courteous, clean, no surprises.",
     author: "Marcus T.",
     city: "Aledo",
     stars: 5,
+    source: "curated",
   },
   {
     quote:
@@ -60,6 +78,7 @@ const testimonials = [
     author: "Dale K.",
     city: "Benbrook",
     stars: 5,
+    source: "curated",
   },
 ] as const
 
@@ -79,7 +98,8 @@ function StarRow({ count, size = "sm" }: { count: number; size?: "sm" | "lg" }) 
 }
 
 export default async function Testimonials() {
-  // Pull live Google data for the trust caption. Falls back to siteConfig.
+  // Pull live Google data for the trust caption + supporting cards.
+  // Falls back to siteConfig + curated reviews on API failure.
   const data = await getGoogleReviews()
   const rating =
     formatRating(data.rating) ??
@@ -88,8 +108,27 @@ export default async function Testimonials() {
     formatReviewCount(data.userRatingCount) ??
     formatReviewCount(siteConfig.googleRatingFallback.count)
 
-  const featured = testimonials.find((t) => "featured" in t && t.featured)!
-  const supporting = testimonials.filter((t) => !("featured" in t && t.featured))
+  // Featured slot — always the curated Jennifer R. story (strongest piece
+  // of social proof; not subject to API churn).
+  const featured = featuredCurated
+
+  // Supporting slots — pull the 2 most recent 5-star Google reviews. Fill
+  // remaining slots from curated fallback if fewer than 2 returned.
+  const liveFiveStar: DisplayReview[] = data.reviews
+    .filter((r) => r.rating === 5 && r.text.trim().length > 0)
+    .slice(0, 2)
+    .map((r) => ({
+      quote: r.text.trim(),
+      author: r.authorName,
+      relativeDate: r.relativePublishTime,
+      stars: 5,
+      source: "google" as const,
+    }))
+
+  const supporting: DisplayReview[] = [
+    ...liveFiveStar,
+    ...supportingCuratedFallback.slice(0, 2 - liveFiveStar.length),
+  ]
 
   return (
     <section
@@ -128,32 +167,33 @@ export default async function Testimonials() {
               href={siteConfig.social.google}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-stretch bg-white rounded-md shadow-[0_4px_20px_-4px_rgba(0,0,0,0.6)] overflow-hidden transition-transform hover:-translate-y-0.5"
+              className="group inline-flex items-stretch bg-white/5 border border-white/10 backdrop-blur-sm rounded-md overflow-hidden transition-colors hover:bg-white/8 hover:border-white/20"
               aria-label={
                 rating && reviewCount
                   ? `Rated ${rating} out of 5 from ${reviewCount} Google reviews`
                   : "View S.W.A.T. Plumbing on Google"
               }
             >
-              {/* Left cell: Google G mark on white — matches real Google widgets */}
-              <span className="flex items-center justify-center px-3 bg-white">
+              {/* Left cell: Google G mark on transparent backdrop */}
+              <span className="flex items-center justify-center px-3">
                 <GoogleGMark className="h-6 w-6" />
               </span>
+              <span className="w-px bg-white/10" aria-hidden="true" />
               {/* Right cell: data */}
-              <span className="flex items-center gap-2 pl-2.5 pr-3.5 py-2 bg-white">
+              <span className="flex items-center gap-2 pl-3 pr-3.5 py-2">
                 <span className="flex flex-col leading-none">
-                  <span className="text-gray-900 text-[10px] font-bold tracking-[0.12em] uppercase">
+                  <span className="text-white/65 text-[10px] font-bold tracking-[0.12em] uppercase">
                     Google
                   </span>
                   <span className="mt-1 inline-flex items-center gap-1.5">
                     {rating && (
-                      <span className="text-gray-900 text-base font-black font-mono leading-none">
+                      <span className="text-white text-base font-black font-mono leading-none">
                         {rating}
                       </span>
                     )}
                     <StarRow count={5} />
                     {reviewCount && (
-                      <span className="text-gray-500 text-xs font-medium leading-none">
+                      <span className="text-white/55 text-xs font-medium leading-none">
                         ({reviewCount})
                       </span>
                     )}
@@ -240,9 +280,9 @@ export default async function Testimonials() {
 
           {/* Supporting reviews — stack in third column on lg+ */}
           <div className="flex flex-col gap-5 lg:gap-6">
-            {supporting.map((t) => (
+            {supporting.map((t, i) => (
               <blockquote
-                key={t.author}
+                key={`${t.source}-${t.author}-${i}`}
                 className="relative bg-white/4 border border-white/8 rounded-sm p-6 lg:p-7 flex flex-col gap-4 hover:border-white/15 hover:bg-white/6 transition-colors flex-1"
               >
                 <Quote
@@ -250,9 +290,20 @@ export default async function Testimonials() {
                   aria-hidden="true"
                 />
 
-                <StarRow count={t.stars} />
+                <div className="flex items-center justify-between gap-3">
+                  <StarRow count={t.stars} />
+                  {t.source === "google" && (
+                    <span
+                      className="inline-flex items-center gap-1 text-[9px] font-mono tracking-[0.18em] uppercase text-white/40 font-semibold"
+                      title="Pulled live from Google reviews via Places API"
+                    >
+                      <GoogleGMark className="h-3 w-3" />
+                      Verified
+                    </span>
+                  )}
+                </div>
 
-                <p className="text-white/75 text-base leading-relaxed flex-1">
+                <p className="text-white/75 text-base leading-relaxed flex-1 line-clamp-6">
                   &ldquo;{t.quote}&rdquo;
                 </p>
 
@@ -267,7 +318,11 @@ export default async function Testimonials() {
                     <div className="text-white text-sm font-semibold">
                       {t.author}
                     </div>
-                    <div className="text-white/40 text-xs">{t.city}, TX</div>
+                    <div className="text-white/40 text-xs">
+                      {t.source === "google"
+                        ? `via Google${t.relativeDate ? ` · ${t.relativeDate}` : ""}`
+                        : `${t.city}, TX`}
+                    </div>
                   </div>
                 </footer>
               </blockquote>

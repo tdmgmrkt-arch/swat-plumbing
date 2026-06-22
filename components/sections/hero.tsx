@@ -11,38 +11,44 @@ const trustBadges = [
   { icon: MapPin, label: "Aledo & Fort Worth" },
 ]
 
-const HERO_VIDEO_ID = "6tibvDHmuhw"
-const heroVideoSrc =
-  `https://www.youtube-nocookie.com/embed/${HERO_VIDEO_ID}` +
-  `?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO_ID}` +
-  `&controls=0&showinfo=0&rel=0&modestbranding=1` +
-  `&iv_load_policy=3&disablekb=1&fs=0&playsinline=1`
-
 export default async function Hero() {
   return (
-    <section
-      className="relative min-h-[70vh] flex flex-col justify-end lg:justify-center overflow-hidden bg-[#080a0c]"
-      aria-label="Hero"
-    >
-      {/* Background video — full-bleed, cover-scaled */}
-      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <iframe
-          src={heroVideoSrc}
-          title="S.W.A.T. Plumbing background reel"
-          tabIndex={-1}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          className="absolute pointer-events-none border-0"
-          style={{
-            top: "50%",
-            left: "50%",
-            width: "100vw",
-            height: "56.25vw", // 16:9 of viewport width
-            minHeight: "100%",
-            minWidth: "177.78vh", // 16:9 of viewport height
-            transform: "translate(-50%, -50%)",
-          }}
-        />
-      </div>
+    <>
+      {/*
+        Preload the hero poster at high priority — Next.js hoists this
+        <link> tag into the document head. Browser starts fetching the
+        poster alongside the HTML download instead of after parse, which
+        shaves ~500-1000ms off LCP. fetchPriority="high" tells the
+        browser this is more important than other below-fold assets.
+      */}
+      <link
+        rel="preload"
+        as="image"
+        href="/hero-poster.webp"
+        type="image/webp"
+        fetchPriority="high"
+      />
+
+      <section
+        className="relative min-h-[70vh] flex flex-col justify-end lg:justify-center overflow-hidden bg-[#080a0c]"
+        aria-label="Hero"
+      >
+      {/* Background video — self-hosted, full-bleed, cover-scaled.
+          Poster paints instantly (104 KB WebP) so LCP fires on the poster,
+          not the video. preload="none" prevents aggressive video prefetch on
+          mobile/cellular; the browser starts downloading when autoplay kicks in. */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="none"
+        poster="/hero-poster.webp"
+        aria-hidden="true"
+      >
+        <source src="/montage.webm" type="video/webm" />
+      </video>
 
       {/* Dark overlay — keeps headline legible, lets video show on the right.
           Left third runs nearly opaque so the red headline dominates over the
@@ -159,6 +165,7 @@ export default async function Hero() {
         className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[#080a0c] to-transparent z-10"
         aria-hidden="true"
       />
-    </section>
+      </section>
+    </>
   )
 }

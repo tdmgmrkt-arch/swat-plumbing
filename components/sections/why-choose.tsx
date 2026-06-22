@@ -66,7 +66,7 @@ export default function WhyChoose() {
           </h2>
           <p className="mt-4 text-white/50 text-base leading-relaxed">
             Local plumbers are everywhere. A plumber you can trust with your home,
-            at any hour, with a price you agreed to — that's a different standard.
+            at any hour, with a price you agreed to — that&apos;s a different standard.
           </p>
         </div>
 

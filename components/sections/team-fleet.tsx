@@ -47,7 +47,7 @@ const slots: PhotoSlot[] = [
     aspect: "16/9",
     span: "lg:col-span-2",
     featured: true,
-    img: "/team.jpg",
+    img: "/teamphoto.webp",
     alt: "S.W.A.T. Plumbing technicians in branded uniforms standing in front of a service truck.",
   },
   {
@@ -60,7 +60,7 @@ const slots: PhotoSlot[] = [
       "Cinematic photograph of a black plumbing service truck with red accent stripes and minimal SWAT-style branding, parked in a Texas driveway at blue hour, headlights on, low three-quarter angle, moody automotive photography style, sharp detail, photorealistic, no AI artifacts.",
     aspect: "4/5",
     span: "lg:col-span-1",
-    img: "/swatvandriveway.jpeg",
+    img: "/fleet.webp",
     alt: "S.W.A.T. Plumbing service van parked in a residential driveway.",
   },
   {
@@ -73,7 +73,7 @@ const slots: PhotoSlot[] = [
       "Documentary photograph of a plumber kneeling on a tiled residential floor, using handheld electronic leak detection equipment, hands and tool sharp in focus, dark uniform sleeve with subtle red trim visible at edge of frame, warm indoor lighting, shallow depth of field, photojournalism aesthetic, photorealistic, no AI artifacts.",
     aspect: "4/5",
     span: "lg:col-span-1",
-    img: "/atwork.jpeg",
+    img: "/atwork.webp",
     alt: "S.W.A.T. Plumbing technician on a residential job.",
   },
   {
@@ -86,7 +86,7 @@ const slots: PhotoSlot[] = [
       "Wide editorial photograph of a small plumbing-company dispatch center, two monitors with map software visible, a dispatcher wearing a dark polo with subtle red branding, warm ambient lighting with subtle red screen glow, modern industrial office aesthetic, shallow depth of field, photorealistic, professional documentary style.",
     aspect: "16/9",
     span: "lg:col-span-2",
-    img: "/dispatch.jpeg",
+    img: "/dispatch.webp",
     alt: "S.W.A.T. Plumbing dispatch center routing service calls.",
   },
 ]
@@ -165,7 +165,10 @@ function PlaceholderCard({ slot }: { slot: PhotoSlot }) {
             alt={slot.alt ?? slot.label}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
+            className={cn(
+              "object-cover",
+              slot.img === "/fleet.webp" && "scale-[1.12]"
+            )}
             priority={slot.featured}
           />
         ) : (

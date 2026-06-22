@@ -42,10 +42,12 @@ export const siteConfig = {
     },
   ],
 
-  // Flip to true once individual /areas-served/[slug] pages are built.
-  // While false: city names render as plain text (no <a> tags), and city URLs
-  // are excluded from the sitemap. Schema.org areaServed still lists all cities.
-  cityPagesLive: false,
+  // 2026-06-16 — flipped to true. All 49 city configs ship in `lib/cities/`, the
+  // dynamic route at `app/areas-served/[slug]/page.tsx` resolves every slug,
+  // and the sitemap emits all 49 city URLs via the `builtCities` aggregator.
+  // City names render as clickable links across the header mega-menu, mobile
+  // accordion, footer, and the index-hub all-cities grid.
+  cityPagesLive: true,
 
   // City slugs include the "-tx" suffix to match the legacy URL pattern
   // /areas-served/[slug]/  →  e.g. /areas-served/aledo-tx/
@@ -124,7 +126,7 @@ export const siteConfig = {
         { title: "Water Line Repairs", href: "/plumbing/water-line-repairs" },
         { title: "Residential Plumbing", href: "/plumbing/residential-plumbing" },
         { title: "Sewer Line Cleaning", href: "/plumbing/sewer-cleaning" },
-        { title: "Running Water", href: "/running-water" },
+        { title: "Running Water", href: "/plumbing/running-water" },
         { title: "Slab Leak", href: "/plumbing/slab-leak" },
         { title: "Trenchless Repair", href: "/plumbing/trenchless-repair" },
         { title: "Plumbing Pumps", href: "/plumbing/plumbing-pumps" },
@@ -221,7 +223,7 @@ export const siteConfig = {
   // Top-level navigation. Mega-menu items are wired by category slug.
   nav: [
     {
-      label: "Services",
+      label: "Plumbing",
       href: "/plumbing",
       hasMega: true,
       megaCategory: "plumbing",
@@ -250,9 +252,49 @@ export const siteConfig = {
       hasMega: false,
     },
     {
+      label: "Company",
+      href: "/about-us",
+      hasMega: true,
+      megaCategory: "company",
+    },
+    {
       label: "Contact",
       href: "/contact-us",
       hasMega: false,
+    },
+  ],
+
+  // Company / About sub-pages — wired into the Company mega menu.
+  companyLinks: [
+    {
+      title: "About Us",
+      href: "/about-us",
+      description: "Our story, leadership, and the crew behind the SWAT name.",
+      icon: "Users",
+    },
+    {
+      title: "Financing",
+      href: "/financing",
+      description: "GreenSky home improvement financing — prequalify with no credit impact.",
+      icon: "CreditCard",
+    },
+    {
+      title: "Areas Served",
+      href: "/areas-served",
+      description: "49 communities across Tarrant, Parker, Denton, and Johnson counties.",
+      icon: "MapPin",
+    },
+    {
+      title: "Careers",
+      href: "/careers",
+      description: "Join the team — licensed plumbers, apprentices, and office roles.",
+      icon: "Briefcase",
+    },
+    {
+      title: "Blog",
+      href: "/blog",
+      description: "Plumbing tips, project breakdowns, and seasonal homeowner guides.",
+      icon: "Newspaper",
     },
   ],
 
@@ -267,10 +309,14 @@ export const siteConfig = {
     { href: "/careers", priority: 0.5, changeFrequency: "monthly" as const },
     { href: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
     { href: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" as const },
+    { href: "/terms-of-service", priority: 0.3, changeFrequency: "yearly" as const },
   ],
 
   social: {
-    facebook: "https://www.facebook.com/swatplumbing",
+    facebook: "https://www.facebook.com/SWATplumbingllc",
+    instagram: "https://www.instagram.com/s.w.a.t._plumbing_llc/",
+    twitter: "https://x.com/SWATPlumb",
+    youtube: "https://www.youtube.com/@swatplumbingllc618",
     google: "https://g.page/swatplumbing",
   },
 
