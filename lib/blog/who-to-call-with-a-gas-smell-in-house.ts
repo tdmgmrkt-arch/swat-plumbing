@@ -178,7 +178,7 @@ export const whoToCallWithAGasSmellInHouse: BlogPost = {
       type: "outbound",
       text: "For additional home gas safety guidance, the",
       linkText: "National Fire Protection Association Gas Safety Guide",
-      href: "https://www.nfpa.org/education-and-research/home-fire-safety/natural-gas-safety",
+      href: "https://www.nfpa.org/news-blogs-and-articles/blogs/2025/02/13/residential-fuel-gas-alarms-and-nfpa-715",
     },
     { type: "heading", text: "Gas Appliance Problems and Leak Risks" },
     {

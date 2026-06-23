@@ -27,10 +27,11 @@
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="padding:20px 28px;">
-                    <p style="margin:0;font-size:10px;font-family:'Courier New',Courier,monospace;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);font-weight:bold;">
-                      S.W.A.T. Plumbing LLC
-                    </p>
-                    <h1 style="margin:6px 0 0;font-size:22px;font-weight:900;color:#ffffff;letter-spacing:-0.3px;">
+                    <img src="https://assets.cdn.filesafe.space/fXx1wB9OY4aKNgN5l38L/media/6a34613b6a6dd1b69a12fa4f.png"
+                         alt="S.W.A.T. Plumbing LLC"
+                         width="140"
+                         style="display:block;border:0;margin-bottom:12px;" />
+                    <h1 style="margin:0;font-size:22px;font-weight:900;color:#ffffff;letter-spacing:-0.3px;">
                       New Career Application
                     </h1>
                   </td>
@@ -107,7 +108,7 @@
                     <p style="margin:0;font-size:10px;font-family:'Courier New',Courier,monospace;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:bold;">Resume</p>
                   </td>
                   <td style="padding:10px 0 10px 16px;vertical-align:top;">
-                    <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.7);">{{contact.resume_filename}}</p>
+                    <a href="{{contact.resume_url}}" style="font-size:14px;font-weight:600;color:#f87171;text-decoration:underline;">{{contact.resume_filename}}</a>
                   </td>
                 </tr>
 
@@ -138,10 +139,16 @@
                       Call Applicant
                     </a>
                   </td>
-                  <td>
+                  <td style="padding-right:12px;">
                     <a href="mailto:{{contact.email}}"
                        style="display:inline-block;background-color:transparent;color:#ffffff;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;padding:12px 22px;border-radius:3px;border:1px solid rgba(255,255,255,0.25);">
                       Send Email
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{contact.resume_url}}"
+                       style="display:inline-block;background-color:transparent;color:#f87171;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;padding:12px 22px;border-radius:3px;border:1px solid rgba(248,113,113,0.35);">
+                      Download Resume
                     </a>
                   </td>
                 </tr>
