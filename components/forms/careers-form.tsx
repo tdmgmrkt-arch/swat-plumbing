@@ -22,6 +22,8 @@ import {
   RESUME_ACCEPT_ATTR,
 } from "@/lib/careers-schema"
 import { POSITION_OPTIONS } from "@/lib/careers-data"
+import { executeRecaptcha } from "@/lib/recaptcha-client"
+import { RecaptchaScript } from "@/components/recaptcha/recaptcha-script"
 import { siteConfig } from "@/lib/site-config"
 
 type SubmitState = "idle" | "loading" | "success" | "error"
@@ -89,6 +91,9 @@ export function CareersForm({
     fd.append("additional_info", values.additional_info ?? "")
     fd.append("website", values.website ?? "")
     if (resumeFile) fd.append("resume", resumeFile)
+
+    const recaptchaToken = await executeRecaptcha("careers")
+    if (recaptchaToken) fd.append("recaptcha_token", recaptchaToken)
 
     try {
       const res = await fetch("/api/careers", { method: "POST", body: fd })
@@ -175,6 +180,8 @@ export function CareersForm({
       encType="multipart/form-data"
       className="bg-[#13181c] border border-white/12 border-t-0 rounded-b-sm p-6 lg:p-8"
     >
+      <RecaptchaScript />
+
       {/* Honeypot */}
       <input
         type="text"
@@ -432,6 +439,27 @@ export function CareersForm({
               Terms of Service
             </Link>{" "}
             for details on how we handle your information.
+          </p>
+          <p className="text-white/30 text-[10px] mt-2 leading-relaxed">
+            This site is protected by reCAPTCHA and the Google{" "}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://policies.google.com/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Terms of Service
+            </a>{" "}
+            apply.
           </p>
         </div>
       </div>

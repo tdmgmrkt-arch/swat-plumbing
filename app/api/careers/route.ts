@@ -5,6 +5,7 @@ import {
   RESUME_MAX_BYTES,
   RESUME_ACCEPTED_TYPES,
 } from "@/lib/careers-schema"
+import { verifyRecaptcha } from "@/lib/recaptcha-verify"
 
 // Bodies can include a resume up to 5 MB
 export const runtime = "nodejs"
@@ -32,6 +33,14 @@ export async function POST(req: NextRequest) {
     position: (formData.get("position") ?? "").toString(),
     additional_info: (formData.get("additional_info") ?? "").toString(),
     website: (formData.get("website") ?? "").toString(),
+  }
+
+  const recaptchaToken = (formData.get("recaptcha_token") ?? "").toString() || null
+  const recaptcha = await verifyRecaptcha(recaptchaToken, "careers")
+  if (!recaptcha.ok) {
+    console.warn(`[careers/route] reCAPTCHA blocked submission: ${recaptcha.reason}`)
+    // Silently accept to avoid tipping off bots; application is dropped.
+    return NextResponse.json({ ok: true })
   }
 
   const parsed = careersSchema.safeParse(fields)

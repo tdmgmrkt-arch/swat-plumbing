@@ -15,6 +15,8 @@ import {
   URGENCY_OPTIONS,
   PREFERRED_CONTACT_OPTIONS,
 } from "@/lib/contact-schema"
+import { executeRecaptcha } from "@/lib/recaptcha-client"
+import { RecaptchaScript } from "@/components/recaptcha/recaptcha-script"
 import { siteConfig } from "@/lib/site-config"
 
 type SubmitState = "idle" | "loading" | "success" | "error"
@@ -60,10 +62,11 @@ export function ContactForm() {
   async function onSubmit(data: ContactFormValues) {
     setSubmitState("loading")
     try {
+      const recaptchaToken = await executeRecaptcha("contact")
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, recaptcha_token: recaptchaToken }),
       })
       const json = await res.json()
       if (json.ok) {
@@ -145,6 +148,8 @@ export function ContactForm() {
       noValidate
       className="bg-[#13181c] border border-white/12 border-t-0 rounded-b-sm p-6 lg:p-8"
     >
+      <RecaptchaScript />
+
       {/* Honeypot — hidden from real users, bots will fill it */}
       <input
         type="text"
@@ -508,6 +513,27 @@ export function ContactForm() {
               Terms of Service
             </Link>{" "}
             for details on how we handle your information.
+          </p>
+          <p className="text-white/30 text-[10px] mt-2 leading-relaxed">
+            This site is protected by reCAPTCHA and the Google{" "}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://policies.google.com/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/60 underline underline-offset-2 transition-colors"
+            >
+              Terms of Service
+            </a>{" "}
+            apply.
           </p>
         </div>
       </div>
