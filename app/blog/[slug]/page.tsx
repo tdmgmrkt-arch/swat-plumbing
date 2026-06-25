@@ -167,61 +167,60 @@ export default async function BlogPostPage({
         </nav>
 
         {/* ============================================================== */}
-        {/* HERO                                                            */}
+        {/* HERO — image as backdrop with title overlaid                    */}
         {/* ============================================================== */}
         <section
-          className="relative isolate bg-[#080a0c] overflow-hidden"
+          className="relative isolate flex items-end overflow-hidden min-h-[520px] sm:min-h-[600px] lg:min-h-[680px] bg-[#080a0c]"
           aria-labelledby="post-heading"
         >
-          {/* Hero image — large header treatment */}
-          <div className="relative h-[280px] sm:h-[360px] lg:h-[440px] w-full">
-            <Image
-              src={post.heroImage}
-              alt={post.heroAlt}
-              fill
-              sizes="100vw"
-              priority
-              className="object-cover"
-            />
-            {/* Stacked overlay — keep image visible but bias toward dark at bottom */}
-            <div
-              className="absolute inset-0 bg-linear-to-t from-[#080a0c] via-[#080a0c]/40 to-[#080a0c]/10"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0 bg-linear-to-r from-[#080a0c]/60 via-transparent to-transparent"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0 tactical-grid opacity-15"
-              aria-hidden="true"
-            />
-            {/* Red left stripe */}
-            <div
-              className="absolute left-0 inset-y-0 w-1 bg-red-600"
-              aria-hidden="true"
-            />
-          </div>
+          {/* Background image */}
+          <Image
+            src={post.heroImage}
+            alt={post.heroAlt}
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover -z-10"
+          />
+          {/* Heavy bottom-up gradient so the title sits on a dark base for
+              legibility, fading to a soft tint at the top so the image's
+              top portion stays visible. */}
+          <div
+            className="absolute inset-0 -z-10 bg-linear-to-t from-[#080a0c] via-[#080a0c]/85 via-40% to-[#080a0c]/15"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 -z-10 bg-linear-to-r from-[#080a0c]/70 via-[#080a0c]/20 to-transparent"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 -z-10 tactical-grid opacity-20"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute left-0 inset-y-0 w-1 bg-red-600"
+            aria-hidden="true"
+          />
 
-          {/* Title block — sits below hero image */}
-          <div className="relative max-w-7xl mx-auto px-5 sm:px-6 py-10 lg:py-14">
+          {/* Title block — anchored to bottom of the hero */}
+          <div className="relative w-full max-w-7xl mx-auto px-5 sm:px-6 py-10 lg:py-14">
             <div className="max-w-4xl">
               <div className="flex flex-wrap items-center gap-2.5 mb-5">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-red-600/15 border border-red-600/40">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-red-600/90 backdrop-blur-sm">
                   <BookOpen
-                    className="h-3 w-3 text-red-400"
+                    className="h-3 w-3 text-white"
                     aria-hidden="true"
                   />
-                  <span className="text-[10px] font-mono tracking-[0.22em] uppercase text-red-300 font-bold">
+                  <span className="text-[10px] font-mono tracking-[0.22em] uppercase text-white font-bold">
                     {post.category}
                   </span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white/5 border border-white/15 rounded-sm">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-black/50 backdrop-blur-sm border border-white/20 rounded-sm">
                   <MapPin
                     className="h-3 w-3 text-red-400"
                     aria-hidden="true"
                   />
-                  <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/65 font-semibold">
+                  <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/80 font-semibold">
                     {post.city}, TX
                   </span>
                 </span>
@@ -232,37 +231,39 @@ export default async function BlogPostPage({
 
               <h1
                 id="post-heading"
-                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white tracking-tight leading-[1.07] mb-5"
+                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white tracking-tight leading-[1.07] mb-5 [text-shadow:0_2px_24px_rgba(0,0,0,0.6)]"
               >
                 {post.title}
               </h1>
 
-              <p className="text-white/65 text-base sm:text-lg leading-relaxed max-w-2xl mb-6">
-                {post.excerpt}
-              </p>
+              {post.excerpt && (
+                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-2xl mb-6 [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]">
+                  {post.excerpt}
+                </p>
+              )}
 
               {/* Byline strip */}
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
                 <Link
                   href="/about-us#leadership-heading"
-                  className="inline-flex items-center gap-1.5 text-white/80 hover:text-red-400 transition-colors group"
+                  className="inline-flex items-center gap-1.5 text-white/90 hover:text-red-400 transition-colors group"
                 >
                   <User
                     className="h-3.5 w-3.5 text-red-400"
                     aria-hidden="true"
                   />
                   <span className="font-semibold">Dillon Patterson</span>
-                  <span className="text-white/40 font-mono">
+                  <span className="text-white/55 font-mono">
                     · Master Plumber
                   </span>
                 </Link>
-                <span className="inline-flex items-center gap-1.5 text-white/55">
+                <span className="inline-flex items-center gap-1.5 text-white/70">
                   <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
                   <time dateTime={post.date} className="font-mono">
                     {formatBlogDate(post.date)}
                   </time>
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-white/55">
+                <span className="inline-flex items-center gap-1.5 text-white/70">
                   <Clock className="h-3.5 w-3.5" aria-hidden="true" />
                   <span className="font-mono">
                     {post.readMinutes} min read
@@ -286,17 +287,58 @@ export default async function BlogPostPage({
           />
 
           <div className="relative max-w-7xl mx-auto px-5 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 lg:gap-14">
-              {/* Main column */}
-              <article className="min-w-0">
-                <div className="space-y-5 max-w-3xl">
-                  {post.body.map((block, idx) => (
-                    <BlockRenderer key={idx} block={block} />
-                  ))}
-                </div>
+            <article className="max-w-4xl">
+              <div className="space-y-5">
+                {(() => {
+                  // Pre-walk once to compute per-block metadata:
+                  // - lede paragraph (first paragraph) gets larger lead-in
+                  //   treatment
+                  // - each heading gets its sequential number for location
+                  //   tracking ("02 / 08")
+                  // - headings with fewer than 2 content blocks between them
+                  //   and the next heading render with a softer style so the
+                  //   heavy heading treatment doesn't oversell a one-liner
+                  const firstParaIdx = post.body.findIndex(
+                    (b) => b.type === "paragraph"
+                  )
+                  const totalHeadings = post.body.filter(
+                    (b) => b.type === "heading"
+                  ).length
+                  let runningHeadingIdx = 0
+                  return post.body.map((block, idx) => {
+                    if (block.type !== "heading") {
+                      return (
+                        <BlockRenderer
+                          key={idx}
+                          block={block}
+                          isLede={idx === firstParaIdx}
+                        />
+                      )
+                    }
+                    runningHeadingIdx++
+                    let contentCount = 0
+                    for (let j = idx + 1; j < post.body.length; j++) {
+                      if (post.body[j].type === "heading") break
+                      contentCount++
+                    }
+                    return (
+                      <BlockRenderer
+                        key={idx}
+                        block={block}
+                        headingNumber={runningHeadingIdx}
+                        totalHeadings={totalHeadings}
+                        isShortSection={contentCount < 2}
+                      />
+                    )
+                  })
+                })()}
+              </div>
 
-                {/* End-of-article CTA */}
-                <div className="mt-12 relative bg-[#0a0c0e] border border-white/12 rounded-sm overflow-hidden">
+              {/* About the author — E-E-A-T signal tied to the article */}
+              <AuthorBio />
+
+              {/* End-of-article CTA */}
+              <div className="mt-10 relative bg-[#0a0c0e] border border-white/12 rounded-sm overflow-hidden">
                   <div
                     className="absolute left-0 top-0 bottom-0 w-1 bg-red-600"
                     aria-hidden="true"
@@ -349,86 +391,7 @@ export default async function BlogPostPage({
                     </div>
                   </div>
                 </div>
-              </article>
-
-              {/* Sidebar */}
-              <aside className="lg:sticky lg:top-24 self-start space-y-5">
-                <div className="relative bg-[#0a0c0e] border border-white/10 rounded-sm overflow-hidden">
-                  <div
-                    className="absolute left-0 top-0 bottom-0 w-0.75 bg-red-600"
-                    aria-hidden="true"
-                  />
-                  <div className="p-5 pl-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <User
-                        className="h-3.5 w-3.5 text-red-400"
-                        aria-hidden="true"
-                      />
-                      <span className="text-[10px] font-mono tracking-[0.22em] uppercase text-red-400 font-bold">
-                        Written By
-                      </span>
-                    </div>
-                    <p className="text-white font-black text-base tracking-tight leading-tight">
-                      Dillon Patterson
-                    </p>
-                    <p className="text-white/55 text-xs leading-relaxed mt-1.5">
-                      Owner & Principal Master Plumber, S.W.A.T. Plumbing LLC ·
-                      Texas Master License{" "}
-                      <span className="text-white/80 font-mono">#M-39596</span>
-                    </p>
-                    <Link
-                      href="/about-us#leadership-heading"
-                      className="mt-3 inline-flex items-center gap-1.5 text-red-400 hover:text-red-300 text-xs font-semibold uppercase tracking-wider transition-colors"
-                    >
-                      View Bio
-                      <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative bg-[#0a0c0e] border border-white/10 rounded-sm overflow-hidden">
-                  <div
-                    className="absolute left-0 top-0 bottom-0 w-0.75 bg-red-600"
-                    aria-hidden="true"
-                  />
-                  <div className="p-5 pl-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Phone
-                        className="h-3.5 w-3.5 text-red-400"
-                        aria-hidden="true"
-                      />
-                      <span className="text-[10px] font-mono tracking-[0.22em] uppercase text-red-400 font-bold">
-                        24/7 Dispatch
-                      </span>
-                    </div>
-                    <div className="space-y-3">
-                      <Link
-                        href={siteConfig.phone.aled_tel}
-                        className="block group"
-                      >
-                        <p className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/45 font-semibold mb-0.5">
-                          Aledo
-                        </p>
-                        <p className="text-white group-hover:text-red-400 font-bold text-base font-mono tracking-tight transition-colors">
-                          {siteConfig.phone.aledo}
-                        </p>
-                      </Link>
-                      <Link
-                        href={siteConfig.phone.fw_tel}
-                        className="block group"
-                      >
-                        <p className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/45 font-semibold mb-0.5">
-                          Fort Worth
-                        </p>
-                        <p className="text-white group-hover:text-red-400 font-bold text-base font-mono tracking-tight transition-colors">
-                          {siteConfig.phone.fortWorth}
-                        </p>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </aside>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -485,12 +448,80 @@ export default async function BlogPostPage({
 }
 
 /* ------------------------------------------------------------------ */
-/* Block renderer — discriminates on `type` to render each ContentBlock */
+/* AuthorBio — E-E-A-T card placed after body, before end-of-article CTA */
 /* ------------------------------------------------------------------ */
-function BlockRenderer({ block }: { block: ContentBlock }) {
+function AuthorBio() {
+  return (
+    <aside
+      aria-label="About the author"
+      className="mt-12 relative bg-[#0a0c0e] border border-white/12 rounded-sm overflow-hidden"
+    >
+      <div
+        className="absolute left-0 top-0 bottom-0 w-1 bg-red-600"
+        aria-hidden="true"
+      />
+      <div className="p-6 lg:p-7 pl-7 lg:pl-8 flex flex-col sm:flex-row gap-5 items-start">
+        <div
+          className="shrink-0 w-16 h-16 rounded-sm bg-red-600/15 border border-red-600/40 flex items-center justify-center"
+          aria-hidden="true"
+        >
+          <User className="h-7 w-7 text-red-400" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <span className="text-[10px] font-mono tracking-[0.22em] uppercase text-red-400 font-bold">
+            About the Author
+          </span>
+          <h3 className="text-xl font-black text-white tracking-tight mt-2 mb-1">
+            Dillon Patterson
+          </h3>
+          <p className="text-white/55 text-xs font-mono tracking-wide mb-3 uppercase">
+            Owner &amp; Principal Master Plumber · TX License #M-39596
+          </p>
+          <p className="text-white/75 text-sm sm:text-base leading-relaxed mb-4">
+            S.W.A.T. Plumbing LLC is a licensed Texas plumbing company
+            dispatching from Aledo and Fort Worth — 24/7 emergency response,
+            slab leaks, sewer line work, water heaters, and gas safety across
+            North Texas. Every post on this blog is written from the field —
+            real jobs, real callbacks, real decisions homeowners face.
+          </p>
+          <Link
+            href="/about-us#leadership-heading"
+            className="inline-flex items-center gap-1.5 text-red-400 hover:text-red-300 text-xs font-bold uppercase tracking-wider transition-colors"
+          >
+            Read full bio
+            <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </aside>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Block renderer — discriminates on `type` to render each ContentBlock */
+/* `isLede` styles the first paragraph as a larger lead-in.            */
+/* `headingNumber`/`totalHeadings` drive the section-number eyebrow.    */
+/* `isShortSection` softens the heading style for thin-content sections. */
+/* ------------------------------------------------------------------ */
+function BlockRenderer({
+  block,
+  isLede = false,
+  headingNumber,
+  totalHeadings,
+  isShortSection = false,
+}: {
+  block: ContentBlock
+  isLede?: boolean
+  headingNumber?: number
+  totalHeadings?: number
+  isShortSection?: boolean
+}) {
   if (block.type === "paragraph") {
+    const paraClass = isLede
+      ? "text-white text-xl sm:text-2xl leading-relaxed font-light border-l-2 border-red-600/70 pl-5 sm:pl-6 my-2"
+      : "text-white/75 text-base sm:text-lg leading-relaxed"
     return (
-      <p className="text-white/75 text-base sm:text-lg leading-relaxed">
+      <p className={paraClass}>
         {typeof block.content === "string"
           ? block.content
           : block.content.map((token, i) => {
@@ -520,17 +551,40 @@ function BlockRenderer({ block }: { block: ContentBlock }) {
 
   if (block.type === "heading") {
     const id = block.id ?? slugify(block.text)
+    const num = String(headingNumber ?? 1).padStart(2, "0")
+    const total = String(totalHeadings ?? 1).padStart(2, "0")
+    const label = (
+      <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-red-400 font-bold">
+        {num} <span className="text-red-400/40">/</span> {total}
+      </span>
+    )
+
+    if (isShortSection) {
+      return (
+        <div className="pt-6">
+          <div className="flex items-center gap-2.5 mb-2.5">
+            <span className="h-px w-6 bg-red-600/70" aria-hidden="true" />
+            {label}
+          </div>
+          <h2
+            id={id}
+            className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight"
+          >
+            {block.text}
+          </h2>
+        </div>
+      )
+    }
+
     return (
-      <div className="pt-7 pb-1">
-        <div className="flex items-center gap-2.5 mb-3">
-          <span className="h-px w-6 bg-red-600" aria-hidden="true" />
-          <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-red-400 font-bold">
-            Section
-          </span>
+      <div className="pt-10 lg:pt-12 mt-6 border-t border-white/10">
+        <div className="flex items-center gap-2.5 mb-4">
+          <span className="h-1 w-10 bg-red-600" aria-hidden="true" />
+          {label}
         </div>
         <h2
           id={id}
-          className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight"
+          className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-[1.1]"
         >
           {block.text}
         </h2>
@@ -540,20 +594,20 @@ function BlockRenderer({ block }: { block: ContentBlock }) {
 
   if (block.type === "list") {
     return (
-      <div className="space-y-3">
+      <div className="relative my-3 bg-white/3 border-l-2 border-red-600/60 rounded-r-sm p-5 sm:p-6">
         {block.intro && (
-          <p className="text-white/75 text-base sm:text-lg leading-relaxed">
+          <p className="text-white text-base sm:text-lg leading-relaxed font-semibold mb-4">
             {block.intro}
           </p>
         )}
-        <ul role="list" className="space-y-2.5">
+        <ul role="list" className="space-y-3">
           {block.items.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-3 text-white/75 text-base leading-relaxed"
+              className="flex items-start gap-3 text-white/85 text-base leading-relaxed"
             >
-              <span
-                className="mt-2 h-1 w-1 rounded-full bg-red-500 shrink-0"
+              <ChevronRight
+                className="h-4 w-4 text-red-500 mt-1 shrink-0"
                 aria-hidden="true"
               />
               <span>{item}</span>
