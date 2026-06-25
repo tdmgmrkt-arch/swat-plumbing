@@ -169,6 +169,17 @@ const emergencyByMenu: Record<string, EmergencyContent> = {
 const DEFAULT_EMERGENCY: EmergencyContent = emergencyByMenu.plumbing
 
 /* ------------------------------------------------------------------ */
+/* Background image per mega menu — faint blueprint/schematic textures */
+/* ------------------------------------------------------------------ */
+const bgByMenu: Record<string, string> = {
+  plumbing: "/megamenubackground-plumbing.webp",
+  "water-heater": "/megamenubackground-waterheaters.webp",
+  "water-quality": "/megamenubackground-waterquality.webp",
+  areas: "/megamenubackground-areasserved.webp",
+  company: "/megamenubackground-about.webp",
+}
+
+/* ------------------------------------------------------------------ */
 /* Compressed header content for each category mega menu               */
 /*   `points`: inline selling points rendered with red `•` separators   */
 /* ------------------------------------------------------------------ */
@@ -402,14 +413,25 @@ export default function SiteHeader() {
       >
         <div
           className={cn(
-            "bg-[#0e1012] border-b border-white/10 shadow-2xl shadow-black/50 origin-top transition-[opacity,transform] duration-200 ease-out",
+            "relative overflow-hidden bg-[#0e1012] border-b border-white/10 shadow-2xl shadow-black/50 origin-top transition-[opacity,transform] duration-200 ease-out",
             openMega
               ? "opacity-100 translate-y-0"
               : "opacity-0 -translate-y-1 invisible"
           )}
           aria-hidden={!openMega}
         >
-          <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          {openMega && bgByMenu[openMega] && (
+            <Image
+              src={bgByMenu[openMega]}
+              alt=""
+              fill
+              priority={false}
+              sizes="100vw"
+              className="object-cover opacity-[0.04] pointer-events-none select-none"
+              aria-hidden="true"
+            />
+          )}
+          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6">
             {activeCategory && (
               <CategoryMegaMenu
                 category={activeCategory}
