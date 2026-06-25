@@ -38,9 +38,30 @@ export function getBlogPost(slug: string): BlogPost | null {
   return blogPosts[slug] ?? null
 }
 
-/** Pick N most recent posts excluding a given slug (for "Related Reading" lists). */
+/**
+ * Pick N "related" posts for the Related Reading rail.
+ *
+ * Strategy: same-category siblings first (sorted newest-first), then
+ * backfill with the most recent posts from other categories so the list
+ * always reaches `count` items even for sparse categories. Topical
+ * relevance wins over pure recency — a Sewer & Drains post shouldn't
+ * recommend Water Heater posts just because they're more recent.
+ */
 export function getRelatedPosts(currentSlug: string, count = 3): BlogPost[] {
-  return allBlogPosts.filter((p) => p.slug !== currentSlug).slice(0, count)
+  const current = blogPosts[currentSlug]
+  if (!current) {
+    return allBlogPosts.filter((p) => p.slug !== currentSlug).slice(0, count)
+  }
+  const sameCategory = allBlogPosts.filter(
+    (p) => p.slug !== currentSlug && p.category === current.category
+  )
+  if (sameCategory.length >= count) return sameCategory.slice(0, count)
+  const pickedSlugs = new Set<string>([
+    currentSlug,
+    ...sameCategory.map((p) => p.slug),
+  ])
+  const backfill = allBlogPosts.filter((p) => !pickedSlugs.has(p.slug))
+  return [...sameCategory, ...backfill].slice(0, count)
 }
 
 /** Format an ISO date (YYYY-MM-DD) as "Month D, YYYY" for display. */
