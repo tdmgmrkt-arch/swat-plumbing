@@ -118,7 +118,7 @@ export default async function Hero() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
             <Link
-              href="/schedule"
+              href="/contact-us"
               className={cn(
                 "inline-flex items-center justify-center gap-2",
                 "bg-red-600 hover:bg-red-700 text-white font-bold",

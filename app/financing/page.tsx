@@ -21,6 +21,7 @@ import {
 
 import { siteConfig } from "@/lib/site-config"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 
 import UtilityBar from "@/components/site/utility-bar"
@@ -47,12 +48,14 @@ export const metadata: Metadata = {
     description:
       "Plumbing repairs and upgrades shouldn't wait for payday. GreenSky financing available — no impact to your credit to prequalify.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Financing — S.W.A.T. Plumbing | GreenSky",
     description:
       "Get the work done. Pay over time. GreenSky financing for plumbing repairs and upgrades.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -671,7 +674,7 @@ export default function FinancingPage() {
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   <Link
-                    href="/schedule"
+                    href="/contact-us"
                     className={cn(
                       "inline-flex items-center justify-center gap-2",
                       "border border-white/25 text-white bg-transparent hover:bg-white/8 hover:border-white/40",

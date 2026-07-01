@@ -13,6 +13,7 @@ import { siteConfig } from "@/lib/site-config"
 import { areasServedPageSchema, areasServedBreadcrumbSchema } from "@/lib/schema"
 import { builtCitySlugs } from "@/lib/cities-config"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 
 import UtilityBar from "@/components/site/utility-bar"
@@ -38,12 +39,14 @@ export const metadata: Metadata = {
     description:
       "S.W.A.T. Plumbing covers 49 communities across Tarrant, Parker, Denton & Johnson counties. Aledo and Fort Worth response hubs. 24/7 emergency dispatch.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "49 Communities Served — S.W.A.T. Plumbing | Aledo & Fort Worth, TX",
     description:
       "24/7 plumbing coverage across 49 North Texas communities. Two response hubs, four counties.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -161,7 +164,7 @@ export default function AreasServedPage() {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                href="/schedule"
+                href="/contact-us"
                 className={cn(
                   "inline-flex items-center justify-center gap-2",
                   "bg-red-600 hover:bg-red-700 text-white font-bold",

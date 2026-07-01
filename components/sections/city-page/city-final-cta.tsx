@@ -83,7 +83,7 @@ export default function CityFinalCta({ cfg }: { cfg: CityConfig }) {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            href="/schedule"
+            href="/contact-us"
             className={cn(
               "bg-red-600 hover:bg-red-700 text-white font-bold text-base border border-red-500/40",
               "min-h-13 px-8 py-4 h-auto w-full sm:w-auto min-w-50",

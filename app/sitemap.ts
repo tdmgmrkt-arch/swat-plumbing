@@ -69,12 +69,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   )
 
   // Blog posts: /blog/[slug]
-  const blogPostRoutes: MetadataRoute.Sitemap = allBlogPosts.map((post) => ({
-    url: canonicalUrl(`/blog/${post.slug}`),
-    lastModified: new Date(post.lastUpdated ?? post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }))
+  // Skip posts with a canonicalOverride — their authority intentionally
+  // consolidates to a service page, so listing them here sends a conflicting
+  // signal and Google may drop the post from the index entirely.
+  const blogPostRoutes: MetadataRoute.Sitemap = allBlogPosts
+    .filter((post) => !post.canonicalOverride)
+    .map((post) => ({
+      url: canonicalUrl(`/blog/${post.slug}`),
+      lastModified: new Date(post.lastUpdated ?? post.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))
 
   return [
     ...staticRoutes,

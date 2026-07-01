@@ -16,6 +16,7 @@ import {
 
 import { siteConfig } from "@/lib/site-config"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 import { servicesConfig } from "@/lib/services-config"
 import { categoryHubSchema, hubBreadcrumbSchema } from "@/lib/schema"
@@ -33,7 +34,7 @@ const HUB_HREF = "/water-heater"
 const CANONICAL = canonicalUrl(HUB_HREF)
 
 export const metadata: Metadata = {
-  title: "Water Heater Services — Aledo & Fort Worth, TX | S.W.A.T. Plumbing",
+  title: "Water Heater Services — Aledo & Fort Worth, TX",
   description:
     "Tank and tankless water heater installation, repair, and replacement across Aledo & Fort Worth. Permits pulled, brand-agnostic, code-compliant. Same-day swaps available.",
   alternates: { canonical: CANONICAL },
@@ -44,12 +45,14 @@ export const metadata: Metadata = {
     description:
       "Tank and tankless water heater installation, repair, and replacement across Aledo & Fort Worth.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Water Heater Services — Aledo & Fort Worth, TX",
     description:
       "Tank and tankless install + replacement. Brand-agnostic, permitted, same-day swaps available.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -271,7 +274,7 @@ export default function WaterHeaterHubPage() {
 
             <div className="flex flex-col sm:flex-row gap-3 mb-9">
               <Link
-                href="/schedule"
+                href="/contact-us"
                 className={cn(
                   "inline-flex items-center justify-center gap-2",
                   "bg-red-600 hover:bg-red-700 text-white font-bold text-sm tracking-wide uppercase",

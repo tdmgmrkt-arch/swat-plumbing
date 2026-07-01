@@ -7,6 +7,7 @@ import { siteConfig } from "@/lib/site-config"
 import { offers } from "@/lib/coupons"
 import { couponCatalogSchema, couponBreadcrumbSchema } from "@/lib/schema"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 
 import UtilityBar from "@/components/site/utility-bar"
@@ -30,12 +31,14 @@ export const metadata: Metadata = {
     description:
       "Current plumbing coupons from S.W.A.T. Plumbing — save on water heaters, leak checks, drains, toilets, and more.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Plumbing Coupons & Rebates",
     description:
       "Current plumbing coupons from S.W.A.T. Plumbing — save on water heaters, leak checks, drains, toilets, and more.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -153,7 +156,7 @@ export default function CouponsRebatesPage() {
             {/* CTA cluster */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                href="/schedule"
+                href="/contact-us"
                 className={cn(
                   "inline-flex items-center justify-center gap-2",
                   "bg-red-600 hover:bg-red-700 text-white font-bold",

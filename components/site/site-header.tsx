@@ -352,7 +352,7 @@ export default function SiteHeader() {
             Call Now
           </Link>
           <Link
-            href="/schedule"
+            href="/contact-us"
             className={cn(
               "inline-flex items-center gap-1.5 h-9 px-4 text-sm font-semibold",
               "bg-red-600 hover:bg-red-700 text-white rounded-lg",
@@ -1033,7 +1033,7 @@ function MobileNav({ onClose }: { onClose: () => void }) {
           Call {siteConfig.phone.primary}
         </Link>
         <Link
-          href="/schedule"
+          href="/contact-us"
           onClick={onClose}
           className="flex items-center justify-center gap-2 w-full border border-white/20 text-white text-sm font-medium py-3.5 rounded-md hover:bg-white/5 transition-colors min-h-11"
         >

@@ -20,6 +20,7 @@ import { siteConfig } from "@/lib/site-config"
 import { positions } from "@/lib/careers-data"
 import { jobPostingSchema } from "@/lib/schema"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 import {
   Accordion,
@@ -49,12 +50,14 @@ export const metadata: Metadata = {
     description:
       "Open roles at S.W.A.T. Plumbing — Journeyman Plumber, Office Lead, Plumber Apprentice. DFW Metroplex.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Careers — S.W.A.T. Plumbing",
     description:
       "Join the crew. Open roles in Aledo & Fort Worth — company truck, full benefits, family culture.",
+    images: defaultTwitterImages,
   },
 }
 

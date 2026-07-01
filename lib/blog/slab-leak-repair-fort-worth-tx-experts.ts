@@ -17,9 +17,6 @@ export const slabLeakRepairFortWorthTxExperts: BlogPost = {
     "S.W.A.T. Plumbing master plumber performing slab leak detection on a Fort Worth, Texas home",
   city: "Fort Worth",
   readMinutes: 7,
-  // Targets the same transactional intent as /plumbing/slab-leak — point
-  // canonical at the service page so authority consolidates there.
-  canonicalOverride: "https://www.swatplumbing.com/plumbing/slab-leak/",
   body: [
     {
       type: "paragraph",

@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google"
 import "./globals.css"
 import { siteConfig } from "@/lib/site-config"
 import { canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { AccessibilityWidget } from "@/components/site/accessibility-widget"
 
 /**
@@ -52,11 +53,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Precision Plumbing in Aledo & Fort Worth, TX`,
     description: siteConfig.description,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | Precision Plumbing in Aledo & Fort Worth, TX`,
     description: siteConfig.description,
+    images: defaultTwitterImages,
   },
   robots: {
     index: true,

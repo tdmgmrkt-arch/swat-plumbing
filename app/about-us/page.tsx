@@ -26,6 +26,7 @@ import {
   dillonPersonSchema,
 } from "@/lib/schema"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 
 import UtilityBar from "@/components/site/utility-bar"
@@ -51,12 +52,14 @@ export const metadata: Metadata = {
     description:
       "Sewer, Water, Anytime Team. Meet the family-owned plumbing crew serving Fort Worth, Aledo, and surrounding North Texas communities.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "About S.W.A.T. Plumbing — Family-Owned, 24/7, North Texas",
     description:
       "Sewer, Water, Anytime Team. Meet the licensed crew serving Aledo, Fort Worth & 49+ North Texas communities.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -297,7 +300,7 @@ export default function AboutPage() {
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
-                    href="/schedule"
+                    href="/contact-us"
                     className={cn(
                       "inline-flex items-center justify-center gap-2",
                       "bg-red-600 hover:bg-red-700 text-white font-bold text-sm tracking-wide uppercase",

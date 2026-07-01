@@ -23,7 +23,7 @@ export default function MobileCtaBar() {
           Call Now
         </Link>
         <Link
-          href="/schedule"
+          href="/contact-us"
           className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-sm py-4 min-h-[56px] transition-colors"
           aria-label="Schedule service online"
         >

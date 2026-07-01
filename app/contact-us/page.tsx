@@ -16,6 +16,7 @@ import { siteConfig } from "@/lib/site-config"
 import { Suspense } from "react"
 import { contactPageSchema, contactBreadcrumbSchema } from "@/lib/schema"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 import { ContactForm } from "@/components/forms/contact-form"
 
@@ -40,12 +41,14 @@ export const metadata: Metadata = {
     description:
       "Two locations serving Aledo and Fort Worth. Direct phone lines, business hours, emergency dispatch, and maps for both S.W.A.T. Plumbing service hubs.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact S.W.A.T. Plumbing — Aledo & Fort Worth, TX",
     description:
       "Two locations serving Aledo and Fort Worth. Direct phone lines, business hours, emergency dispatch, and maps for both S.W.A.T. Plumbing service hubs.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -173,7 +176,7 @@ export default function ContactPage() {
 
                 {/* Schedule button — secondary action */}
                 <Link
-                  href="/schedule"
+                  href="/contact-us"
                   className={cn(
                     "inline-flex items-center justify-center gap-2",
                     "bg-red-600 hover:bg-red-700 text-white font-bold text-sm tracking-wide uppercase",

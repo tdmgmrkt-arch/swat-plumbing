@@ -17,9 +17,6 @@ export const twentyFourHourPlumberFortWorthTxFastResponse: BlogPost = {
     "S.W.A.T. Plumbing emergency service van responding to a late-night call in Fort Worth, Texas",
   city: "Fort Worth",
   readMinutes: 8,
-  // Targets the same transactional intent as /plumbing/emergency-plumbers —
-  // point canonical at the service page so authority consolidates there.
-  canonicalOverride: "https://www.swatplumbing.com/plumbing/emergency-plumbers/",
   body: [
     {
       type: "paragraph",

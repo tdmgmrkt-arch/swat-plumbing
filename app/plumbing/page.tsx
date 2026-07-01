@@ -15,6 +15,7 @@ import {
 
 import { siteConfig } from "@/lib/site-config"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 import { servicesConfig } from "@/lib/services-config"
 import { categoryHubSchema, hubBreadcrumbSchema } from "@/lib/schema"
@@ -32,7 +33,7 @@ const HUB_HREF = "/plumbing"
 const CANONICAL = canonicalUrl(HUB_HREF)
 
 export const metadata: Metadata = {
-  title: "Plumbing Services — Aledo & Fort Worth, TX | S.W.A.T. Plumbing",
+  title: "Plumbing Services — Aledo & Fort Worth, TX",
   description:
     "Full-scope plumbing services across Aledo, Fort Worth, and 49 North Texas communities. Emergency, drain & sewer, repairs, installations, and maintenance. Licensed, insured, 24/7.",
   alternates: { canonical: CANONICAL },
@@ -43,12 +44,14 @@ export const metadata: Metadata = {
     description:
       "Full-scope plumbing services across Aledo & Fort Worth. Emergency, drain & sewer, repairs, installations, maintenance.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Plumbing Services — Aledo & Fort Worth, TX",
     description:
       "Full-scope plumbing across 49 North Texas communities. Licensed, insured, 24/7.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -283,7 +286,7 @@ export default function PlumbingHubPage() {
 
             <div className="flex flex-col sm:flex-row gap-3 mb-9">
               <Link
-                href="/schedule"
+                href="/contact-us"
                 className={cn(
                   "inline-flex items-center justify-center gap-2",
                   "bg-red-600 hover:bg-red-700 text-white font-bold text-sm tracking-wide uppercase",

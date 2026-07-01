@@ -2,7 +2,10 @@
  * Server-side Google Places API (New) integration.
  *
  * Fetches live rating, review count, and up to 5 reviews from S.W.A.T.
- * Plumbing's Google Business Profile. Cached for 24h via Next.js ISR.
+ * Plumbing's Google Business Profile. Cached for 24h via unstable_cache,
+ * which decouples the caching layer from the raw fetch() call so the
+ * Next.js ISR workStore context is not required during parallel static
+ * generation of city pages.
  *
  * Env vars (server-side only — never exposed to the browser):
  *   GOOGLE_PLACES_API_KEY  — Google Cloud API key with Places API (New) enabled
@@ -12,6 +15,8 @@
  * non-live fallback. The UI may render its own static fallback (rating
  * and count from siteConfig) so the badge still appears in dev.
  */
+
+import { unstable_cache } from "next/cache"
 
 export type GoogleReview = {
   authorName: string
@@ -38,7 +43,13 @@ const FALLBACK: GoogleReviewData = {
 
 const REVALIDATE_SECONDS = 60 * 60 * 24 // 24h
 
-export async function getGoogleReviews(): Promise<GoogleReviewData> {
+/**
+ * Inner fetch — plain HTTP, no next: { revalidate } on the fetch itself.
+ * Caching is handled entirely by the unstable_cache wrapper below, which
+ * operates outside the per-page ISR workStore context and is therefore
+ * safe during parallel generateStaticParams rendering.
+ */
+async function fetchGoogleReviews(): Promise<GoogleReviewData> {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY
   const placeId = process.env.GOOGLE_PLACE_ID
 
@@ -58,7 +69,6 @@ export async function getGoogleReviews(): Promise<GoogleReviewData> {
         "X-Goog-Api-Key": apiKey,
         "X-Goog-FieldMask": "id,displayName,rating,userRatingCount,reviews",
       },
-      next: { revalidate: REVALIDATE_SECONDS },
     })
 
     if (!res.ok) {
@@ -103,6 +113,28 @@ export async function getGoogleReviews(): Promise<GoogleReviewData> {
     return FALLBACK
   }
 }
+
+/**
+ * Public API — wraps the inner fetch with unstable_cache.
+ *
+ * All 49 city pages call this function during static generation. Because
+ * the cache entry is keyed and resolved at the unstable_cache layer (not
+ * inside a per-page ISR worker), there is no dependency on workStore
+ * context. The first worker to render resolves the entry; subsequent
+ * workers hit the cache without touching the network.
+ *
+ * Revalidation: 24h time-based (matches the previous next: { revalidate }
+ * behaviour). The "google-reviews" tag enables on-demand purging via
+ * revalidateTag("google-reviews") from a route handler or server action.
+ */
+export const getGoogleReviews = unstable_cache(
+  fetchGoogleReviews,
+  ["google-reviews"],
+  {
+    tags: ["google-reviews"],
+    revalidate: REVALIDATE_SECONDS,
+  }
+)
 
 /** Format the review count for display: 247 → "247", 1247 → "1,247". */
 export function formatReviewCount(n: number | null | undefined): string | null {

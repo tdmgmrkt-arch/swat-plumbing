@@ -21,6 +21,7 @@ import {
 
 import { siteConfig } from "@/lib/site-config"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 
 import UtilityBar from "@/components/site/utility-bar"
@@ -45,6 +46,14 @@ export const metadata: Metadata = {
     description:
       "Terms governing use of the S.W.A.T. Plumbing website and service inquiries.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service — S.W.A.T. Plumbing LLC",
+    description:
+      "Terms governing use of the S.W.A.T. Plumbing website and service inquiries.",
+    images: defaultTwitterImages,
   },
 }
 

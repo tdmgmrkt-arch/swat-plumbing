@@ -15,6 +15,7 @@ import { blogPageSchema, blogBreadcrumbSchema } from "@/lib/schema"
 import { allBlogPosts, formatBlogDate } from "@/lib/blog-posts-config"
 import type { BlogPost } from "@/lib/blog-posts-config"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 
 import UtilityBar from "@/components/site/utility-bar"
@@ -38,12 +39,14 @@ export const metadata: Metadata = {
     description:
       "Practical plumbing knowledge from licensed pros in Aledo and Fort Worth — slab leaks, water heaters, drains, gas safety, and emergency response.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Field Notes — S.W.A.T. Plumbing Blog",
     description:
       "Plumbing tips, project breakdowns, and seasonal homeowner guides from the SWAT crew.",
+    images: defaultTwitterImages,
   },
 }
 

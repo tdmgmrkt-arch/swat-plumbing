@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { siteConfig } from "@/lib/site-config"
 import { canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import {
   builtCities,
   getCityConfig,
@@ -65,11 +66,13 @@ export async function generateMetadata({
       title: cfg.metaTitle,
       description: cfg.metaDescription,
       siteName: siteConfig.name,
+      images: defaultOgImages,
     },
     twitter: {
       card: "summary_large_image",
       title: cfg.metaTitle,
       description: cfg.metaDescription,
+      images: defaultTwitterImages,
     },
   }
 }

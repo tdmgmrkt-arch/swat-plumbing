@@ -16,6 +16,7 @@ import {
 
 import { siteConfig } from "@/lib/site-config"
 import { cn, canonicalUrl } from "@/lib/utils"
+import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
 import { servicesConfig } from "@/lib/services-config"
 import { categoryHubSchema, hubBreadcrumbSchema } from "@/lib/schema"
@@ -33,7 +34,7 @@ const HUB_HREF = "/water-quality"
 const CANONICAL = canonicalUrl(HUB_HREF)
 
 export const metadata: Metadata = {
-  title: "Water Quality Services — Aledo & Fort Worth, TX | S.W.A.T. Plumbing",
+  title: "Water Quality Services — Aledo & Fort Worth, TX",
   description:
     "Whole-house water filtration, softening, reverse osmosis, and treatment across Aledo & Fort Worth. Free in-home water testing, designed against your actual results.",
   alternates: { canonical: CANONICAL },
@@ -44,12 +45,14 @@ export const metadata: Metadata = {
     description:
       "Whole-house filtration, softening, RO, and treatment across Aledo & Fort Worth. Free in-home water testing.",
     siteName: siteConfig.name,
+    images: defaultOgImages,
   },
   twitter: {
     card: "summary_large_image",
     title: "Water Quality Services — Aledo & Fort Worth, TX",
     description:
       "Filtration, softening, RO, treatment. Free in-home water testing. Designed for your actual water.",
+    images: defaultTwitterImages,
   },
 }
 
@@ -253,7 +256,7 @@ export default function WaterQualityHubPage() {
 
             <div className="flex flex-col sm:flex-row gap-3 mb-9">
               <Link
-                href="/schedule"
+                href="/contact-us"
                 className={cn(
                   "inline-flex items-center justify-center gap-2",
                   "bg-red-600 hover:bg-red-700 text-white font-bold text-sm tracking-wide uppercase",
