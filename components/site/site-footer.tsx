@@ -440,6 +440,21 @@ export default function SiteFooter() {
           </div>
         </div>
       </div>
+
+      {/* Attribution */}
+      <div className="border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 py-3 text-center text-[11px] text-white/20">
+          Designed &amp; Developed by{" "}
+          <a
+            href="https://tdmarketinggroup.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/40 transition-colors"
+          >
+            TD Marketing Group
+          </a>
+        </div>
+      </div>
     </footer>
   )
 }
