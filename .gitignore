@@ -51,3 +51,6 @@ next-env.d.ts
 /*.jpeg
 /*.jpg
 /*.png
+
+# other-client assets accidentally dropped into this repo
+/public/ga-tucker/

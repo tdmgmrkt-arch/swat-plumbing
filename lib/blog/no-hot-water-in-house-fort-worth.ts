@@ -220,8 +220,8 @@ export const noHotWaterInHouseFortWorth: BlogPost = {
     {
       type: "outbound",
       text: "For energy-efficiency guidance on water heaters, the",
-      linkText: "U.S. Department of Energy Water Heating Guide",
-      href: "https://www.energy.gov/energysaver/water-heating",
+      linkText: "ENERGY STAR Water Heater Guide",
+      href: "https://www.energystar.gov/products/water_heaters",
     },
     { type: "heading", text: "For More Support With No Hot Water in House Fort Worth" },
     {

@@ -220,8 +220,8 @@ export const noHotWaterRepairAledoTxPlumber: BlogPost = {
     {
       type: "outbound",
       text: "For additional water heater efficiency guidance, the",
-      linkText: "U.S. Department of Energy Water Heating Guide",
-      href: "https://www.energy.gov/energysaver/water-heating",
+      linkText: "ENERGY STAR Water Heater Guide",
+      href: "https://www.energystar.gov/products/water_heaters",
     },
     { type: "heading", text: "What Happens During a No Hot Water Repair Visit?" },
     {
