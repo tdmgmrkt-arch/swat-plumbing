@@ -1,22 +1,23 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
-import {
-  CalendarDays,
-  Clock,
-  MapPin,
-  ArrowRight,
-  Tag,
-  BookOpen,
-} from "lucide-react"
+import { Tag } from "lucide-react"
 
 import { siteConfig } from "@/lib/site-config"
 import { blogPageSchema, blogBreadcrumbSchema } from "@/lib/schema"
-import { allBlogPosts, formatBlogDate } from "@/lib/blog-posts-config"
-import type { BlogPost } from "@/lib/blog-posts-config"
-import { cn, canonicalUrl } from "@/lib/utils"
+import {
+  allBlogPosts,
+  formatBlogDate,
+  getPostsForPage,
+  TOTAL_BLOG_PAGES,
+} from "@/lib/blog-posts-config"
+import { canonicalUrl } from "@/lib/utils"
 import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
+import {
+  FeaturedCard,
+  PostCard,
+  PaginationNav,
+} from "@/components/blog-hub/blog-cards"
 
 import UtilityBar from "@/components/site/utility-bar"
 import SiteHeader from "@/components/site/site-header"
@@ -51,7 +52,8 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
-  const [featured, second, ...rest] = allBlogPosts
+  const pagePosts = getPostsForPage(1)
+  const [featured, second, ...rest] = pagePosts
   const totalPosts = allBlogPosts.length
   const lastUpdated = formatBlogDate(allBlogPosts[0].date)
 
@@ -258,6 +260,8 @@ export default function BlogPage() {
                 ))}
               </ul>
             )}
+
+            <PaginationNav currentPage={1} totalPages={TOTAL_BLOG_PAGES} />
           </div>
         </section>
 
@@ -284,142 +288,5 @@ export default function BlogPage() {
       <MobileCtaBar />
       <div className="h-14 lg:hidden" aria-hidden="true" />
     </>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* FeaturedCard — large featured post (latest)                          */
-/* ------------------------------------------------------------------ */
-function FeaturedCard({ post }: { post: BlogPost }) {
-  return (
-    <Link
-      href={`/blog/${post.slug}`}
-      className="group block relative bg-[#0a0c0e] border border-white/12 hover:border-red-600/50 rounded-sm overflow-hidden transition-colors"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-        <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[360px] bg-[#080a0c] overflow-hidden">
-          <Image
-            src={post.heroImage}
-            alt={post.heroAlt}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            priority
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-          />
-          <div
-            className="absolute inset-0 bg-linear-to-t lg:bg-linear-to-r from-[#0a0c0e]/85 via-[#0a0c0e]/20 to-transparent"
-            aria-hidden="true"
-          />
-          <span className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 bg-red-600/90 backdrop-blur-sm rounded-sm">
-            <BookOpen className="h-3 w-3 text-white" aria-hidden="true" />
-            <span className="text-[10px] font-mono tracking-[0.22em] uppercase text-white font-bold">
-              {post.category}
-            </span>
-          </span>
-        </div>
-
-        <div className="p-7 lg:p-10 flex flex-col justify-center">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-mono tracking-[0.18em] uppercase text-white/45 mb-4">
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarDays className="h-3 w-3" aria-hidden="true" />
-              {formatBlogDate(post.date)}
-            </span>
-            <span aria-hidden="true">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <Clock className="h-3 w-3" aria-hidden="true" />
-              {post.readMinutes} min read
-            </span>
-            <span aria-hidden="true">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-3 w-3" aria-hidden="true" />
-              {post.city}, TX
-            </span>
-          </div>
-
-          <h3 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.1] group-hover:text-red-400 transition-colors mb-4">
-            {post.title}
-          </h3>
-
-          <div className="h-0.5 w-10 bg-red-600 mb-5" aria-hidden="true" />
-
-          <p className="text-white/65 text-base leading-relaxed mb-6">
-            {post.excerpt}
-          </p>
-
-          <div
-            className={cn(
-              "inline-flex items-center gap-2 text-red-400 group-hover:text-red-300 font-bold uppercase tracking-wider text-sm transition-colors",
-              "self-start"
-            )}
-          >
-            Read the full post
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </div>
-        </div>
-      </div>
-    </Link>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* PostCard — standard listing card                                     */
-/* ------------------------------------------------------------------ */
-function PostCard({ post }: { post: BlogPost }) {
-  return (
-    <Link
-      href={`/blog/${post.slug}`}
-      className="group block relative bg-[#0e1012] border border-white/10 hover:border-red-600/40 rounded-sm overflow-hidden transition-colors h-full flex flex-col"
-    >
-      <div className="relative aspect-[16/9] bg-[#0a0c0e] overflow-hidden">
-        <Image
-          src={post.heroImage}
-          alt={post.heroAlt}
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-        />
-        <div
-          className="absolute inset-0 bg-linear-to-t from-[#0e1012]/85 via-transparent to-transparent"
-          aria-hidden="true"
-        />
-        <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2 py-1 bg-red-600/85 backdrop-blur-sm rounded-sm">
-          <span className="text-[9px] font-mono tracking-[0.18em] uppercase text-white font-bold">
-            {post.category}
-          </span>
-        </span>
-      </div>
-      <div className="p-5 sm:p-6 flex-1 flex flex-col">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[10px] font-mono tracking-[0.15em] uppercase text-white/45 mb-2.5">
-          <span className="inline-flex items-center gap-1">
-            <CalendarDays className="h-3 w-3" aria-hidden="true" />
-            {formatBlogDate(post.date)}
-          </span>
-          <span aria-hidden="true">·</span>
-          <span className="inline-flex items-center gap-1">
-            <Clock className="h-3 w-3" aria-hidden="true" />
-            {post.readMinutes} min
-          </span>
-        </div>
-        <h3 className="text-white text-lg font-black tracking-tight leading-tight group-hover:text-red-400 transition-colors mb-2.5">
-          {post.title}
-        </h3>
-        <p className="text-white/55 text-sm leading-relaxed line-clamp-3 flex-1">
-          {post.excerpt}
-        </p>
-        <div className="mt-5 pt-4 border-t border-white/8 flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-[0.18em] uppercase text-white/45">
-            <MapPin
-              className="h-3 w-3 text-red-400"
-              aria-hidden="true"
-            />
-            {post.city}, TX
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-red-400 group-hover:text-red-300 text-xs font-bold uppercase tracking-wider transition-colors">
-            Read post
-            <ArrowRight className="h-3 w-3" aria-hidden="true" />
-          </span>
-        </div>
-      </div>
-    </Link>
   )
 }

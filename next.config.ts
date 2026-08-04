@@ -34,6 +34,13 @@ const nextConfig: NextConfig = {
         destination: "/areas-served/:citySlug/",
         permanent: true,
       },
+      // /blog/page/1/ is duplicate content of /blog/ — collapse to the
+      // canonical page-1 URL so it never ends up indexed separately.
+      {
+        source: "/blog/page/1",
+        destination: "/blog/",
+        permanent: true,
+      },
     ]
   },
 }
