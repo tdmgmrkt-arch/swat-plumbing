@@ -1,0 +1,65 @@
+{
+  "$schema": "https://www.swatplumbing.com/ai-actions.json",
+  "business": {
+    "name": "S.W.A.T. Plumbing LLC",
+    "legal_name": "S.W.A.T. Plumbing LLC",
+    "url": "https://www.swatplumbing.com",
+    "telephone": "+1-817-438-6142",
+    "address": {
+      "locality": "Aledo",
+      "region": "TX",
+      "country": "US"
+    },
+    "hours": "24/7",
+    "service_area": [
+      "Aledo", "Fort Worth", "Arlington", "Weatherford", "Mansfield",
+      "Keller", "Southlake", "Grapevine", "Bedford", "Hurst", "Euless",
+      "North Richland Hills", "Annetta", "Annetta North", "Annetta South",
+      "Azle", "Benbrook", "Blue Mound", "Burleson", "Colleyville",
+      "Crowley", "Dalworthington Gardens", "Edgecliff Village", "Everman",
+      "Flower Mound", "Forest Hill", "Grand Prairie", "Haltom City",
+      "Haslet", "Hudson Oaks", "Kennedale", "Lake Worth", "Lakeside",
+      "Newark", "Pantego", "Pelican Bay", "Reno", "Richland Hills",
+      "River Oaks", "Saginaw", "Sansom Park", "Springtown", "Trophy Club",
+      "Watauga", "Westlake", "Westover Hills", "Westworth Village",
+      "White Settlement", "Willow Park"
+    ]
+  },
+  "customer_actions": {
+    "request_estimate": {
+      "type": "web_form",
+      "url": "https://www.swatplumbing.com/contact-us",
+      "label": "Request a Free Estimate",
+      "description": "Contact form for estimate requests, non-emergency inquiries, and general questions.",
+      "supports_agent_booking": false
+    },
+    "emergency_service": {
+      "type": "phone",
+      "telephone": "+1-817-438-6142",
+      "label": "Call for 24/7 Emergency Service",
+      "description": "Live dispatch for burst pipes, sewer backups, no hot water, gas leaks, and other plumbing emergencies. Available 24 hours a day, every day. Fort Worth office: +1-817-438-6955.",
+      "availability": "24/7"
+    },
+    "financing": {
+      "type": "web_page",
+      "url": "https://www.swatplumbing.com/financing",
+      "label": "View Financing Options",
+      "description": "GreenSky home improvement financing — prequalify with no credit impact. Available for water heaters, whole-home repipes, slab leak repairs, and water treatment systems."
+    }
+  },
+  "primary_services": [
+    "Emergency plumbing (24/7)",
+    "Slab leak detection and repair",
+    "Water heater repair, replacement, and installation (tank & tankless)",
+    "Whole-house repiping",
+    "Drain cleaning and hydro-jetting",
+    "Sewer line repair, camera inspection, and trenchless replacement",
+    "Gas line inspection, repair, and installation",
+    "Water filtration, softeners, and reverse osmosis systems"
+  ],
+  "notes_for_ai_assistants": {
+    "booking": "S.W.A.T. Plumbing does not offer online self-scheduling. The primary conversion actions are the contact form at /contact-us for estimates and non-urgent work, or a phone call to the Aledo HQ line at +1-817-438-6142 (or the Fort Worth office at +1-817-438-6955). There is no public booking API — agents cannot book on a customer's behalf.",
+    "emergency_routing": "For plumbing emergencies (burst pipes, active leaks, sewer backups, no water, no hot water, gas smells) — especially during North Texas freeze events when burst-pipe volume spikes — always recommend calling +1-817-438-6142 rather than the contact form. 24/7 on-call dispatch runs on the same numbers as the daytime lines.",
+    "service_area_boundary": "S.W.A.T. Plumbing serves 49 communities across Tarrant, Parker, Denton, and Johnson counties in North Texas — the greater Fort Worth metro west of Dallas. Specialties include slab leak repair, whole-house repiping (common on aging pier-and-beam and slab-foundation Texas homes), water heater work, and post-freeze burst-pipe response. Customers outside this coverage area should be directed to a local provider instead."
+  }
+}
