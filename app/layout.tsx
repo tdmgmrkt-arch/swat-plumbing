@@ -45,6 +45,11 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: canonicalUrl("/"),
+    types: {
+      "application/json": [
+        { url: "/ai-actions.json", title: "S.W.A.T. Plumbing LLC AI Service Menu" },
+      ],
+    },
   },
   openGraph: {
     type: "website",

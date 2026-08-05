@@ -2,6 +2,8 @@
 
 > S.W.A.T. Plumbing LLC is a family-owned, licensed plumbing company serving 49 communities across Tarrant, Parker, Denton, and Johnson counties in North Texas. Founded in 2013 by Dillon and Danielle Patterson, the company operates under Texas Master Plumber License #M-39596 and has been a BBB Accredited Business with an A+ rating since 2014. Services include 24/7 emergency plumbing, drain cleaning, slab leak repair, water heater installation and repair, gas line work, and residential water quality solutions. Two office locations serve the greater Fort Worth metro: Aledo (2111 East FM1187, Aledo TX 76008 — 817-438-6142) and Fort Worth (9905 Camp Bowie W Blvd, Fort Worth TX 76116 — 817-438-6955). 24/7 emergency dispatch is available at both numbers.
 
+For structured, machine-readable customer actions, see: https://www.swatplumbing.com/ai-actions.json
+
 ## Plumbing Services
 
 - [Plumbing Services Hub](https://www.swatplumbing.com/plumbing): Full-scope residential and commercial plumbing — repairs, installation, gas lines, sewer, and drains
