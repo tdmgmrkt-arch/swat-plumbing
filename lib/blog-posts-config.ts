@@ -14,6 +14,14 @@ import { highWaterPressurePrvAledoTx } from "./blog/high-water-pressure-prv-aled
 import { summerPlumbingProblemsNorthTexas } from "./blog/summer-plumbing-problems-north-texas"
 import { outdoorGasLineLeakAledoTx } from "./blog/outdoor-gas-line-leak-aledo-tx"
 import { hydroJettingVsSnakingFortWorth } from "./blog/hydro-jetting-vs-snaking-fort-worth"
+import { waterHeaterMakingNoiseFortWorth } from "./blog/water-heater-making-noise-fort-worth"
+import { wholeHouseRepipingSignsAledoTx } from "./blog/whole-house-repiping-signs-aledo-tx"
+import { lowWaterPressureFortWorth } from "./blog/low-water-pressure-fort-worth"
+import { garbageDisposalHummingNotSpinningAledoTx } from "./blog/garbage-disposal-humming-not-spinning-aledo-tx"
+import { pinholeLeaksCopperPipesFortWorth } from "./blog/pinhole-leaks-copper-pipes-fort-worth"
+import { trenchlessSewerRepairAledoTx } from "./blog/trenchless-sewer-repair-aledo-tx"
+import { mainWaterShutoffValveFortWorth } from "./blog/main-water-shutoff-valve-fort-worth"
+import { smellGasNearStoveAledoTx } from "./blog/smell-gas-near-stove-aledo-tx"
 
 export type { BlogPost, BlogCategory, ContentBlock } from "./blog/_types"
 export { BLOG_CATEGORIES } from "./blog/_types"
@@ -43,6 +51,15 @@ export const blogPosts: Record<string, BlogPost> = {
   [summerPlumbingProblemsNorthTexas.slug]: summerPlumbingProblemsNorthTexas,
   [outdoorGasLineLeakAledoTx.slug]: outdoorGasLineLeakAledoTx,
   [hydroJettingVsSnakingFortWorth.slug]: hydroJettingVsSnakingFortWorth,
+  [waterHeaterMakingNoiseFortWorth.slug]: waterHeaterMakingNoiseFortWorth,
+  [wholeHouseRepipingSignsAledoTx.slug]: wholeHouseRepipingSignsAledoTx,
+  [lowWaterPressureFortWorth.slug]: lowWaterPressureFortWorth,
+  [garbageDisposalHummingNotSpinningAledoTx.slug]:
+    garbageDisposalHummingNotSpinningAledoTx,
+  [pinholeLeaksCopperPipesFortWorth.slug]: pinholeLeaksCopperPipesFortWorth,
+  [trenchlessSewerRepairAledoTx.slug]: trenchlessSewerRepairAledoTx,
+  [mainWaterShutoffValveFortWorth.slug]: mainWaterShutoffValveFortWorth,
+  [smellGasNearStoveAledoTx.slug]: smellGasNearStoveAledoTx,
 }
 
 /** All posts, sorted newest-first by `date`. */
