@@ -40,7 +40,7 @@ export async function generateMetadata({
     return {}
   }
   const canonical = canonicalUrl(`/blog/page/${pageNum}`)
-  const title = `Field Notes — Page ${pageNum} of ${TOTAL_BLOG_PAGES}`
+  const title = `Plumbing Guides for North Texas — Page ${pageNum} of ${TOTAL_BLOG_PAGES}`
   const description = `Plumbing field notes from S.W.A.T. Plumbing — page ${pageNum} of ${TOTAL_BLOG_PAGES}. Slab leaks, water heaters, gas safety, sewer diagnostics, and emergency response for Aledo and Fort Worth homeowners.`
   return {
     title,

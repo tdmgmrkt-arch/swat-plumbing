@@ -29,14 +29,14 @@ import FinalCta from "@/components/sections/final-cta"
 const CANONICAL = canonicalUrl("/blog")
 
 export const metadata: Metadata = {
-  title: "Field Notes — Plumbing Tips & Guides | S.W.A.T. Plumbing Blog",
+  title: "Plumbing Guides for North Texas Homeowners",
   description:
     "Practical plumbing knowledge from licensed Texas Master Plumbers in Aledo and Fort Worth — emergency response, slab leaks, water heaters, gas safety, and more.",
   alternates: { canonical: CANONICAL },
   openGraph: {
     type: "website",
     url: CANONICAL,
-    title: "Field Notes — S.W.A.T. Plumbing Blog | Plumbing Tips & Guides",
+    title: "Plumbing Guides for North Texas Homeowners | S.W.A.T. Plumbing",
     description:
       "Practical plumbing knowledge from licensed pros in Aledo and Fort Worth — slab leaks, water heaters, drains, gas safety, and emergency response.",
     siteName: siteConfig.name,
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Field Notes — S.W.A.T. Plumbing Blog",
+    title: "Plumbing Guides for North Texas Homeowners",
     description:
-      "Plumbing tips, project breakdowns, and seasonal homeowner guides from the SWAT crew.",
+      "Plumbing tips, project breakdowns, and seasonal guides for North Texas homeowners.",
     images: defaultTwitterImages,
   },
 }
@@ -141,9 +141,9 @@ export default function BlogPage() {
               id="blog-hero-heading"
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.05] mb-5"
             >
-              From the Crew.
+              Know Before We Roll.
               <br />
-              <span className="text-red-500">Not a content farm.</span>
+              <span className="text-red-500">Plumbing Guides for North Texas.</span>
             </h1>
 
             <p className="text-white/65 text-base sm:text-lg leading-relaxed max-w-2xl mb-3">
