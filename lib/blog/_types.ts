@@ -114,6 +114,7 @@ export const BLOG_CATEGORIES = [
   "Leak Detection",
   "Sewer & Drains",
   "Gas Safety",
+  "Water Quality",
 ] as const
 
 export type BlogCategory = (typeof BLOG_CATEGORIES)[number]

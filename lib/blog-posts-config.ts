@@ -22,6 +22,20 @@ import { pinholeLeaksCopperPipesFortWorth } from "./blog/pinhole-leaks-copper-pi
 import { trenchlessSewerRepairAledoTx } from "./blog/trenchless-sewer-repair-aledo-tx"
 import { mainWaterShutoffValveFortWorth } from "./blog/main-water-shutoff-valve-fort-worth"
 import { smellGasNearStoveAledoTx } from "./blog/smell-gas-near-stove-aledo-tx"
+import { waterHeaterLeakingFromBottomFortWorth } from "./blog/water-heater-leaking-from-bottom-fort-worth"
+import { hardWaterSignsAledoTx } from "./blog/hard-water-signs-aledo-tx"
+import { treeRootsInSewerLineFortWorth } from "./blog/tree-roots-in-sewer-line-fort-worth"
+import { foundationWateringPlumbingLeaksAledoTx } from "./blog/foundation-watering-plumbing-leaks-aledo-tx"
+import { washingMachineHoseBurstFortWorth } from "./blog/washing-machine-hose-burst-fort-worth"
+import { howToFlushWaterHeaterAledoTx } from "./blog/how-to-flush-water-heater-aledo-tx"
+import { highWaterBillHiddenLeakFortWorth } from "./blog/high-water-bill-hidden-leak-fort-worth"
+import { sewerGasSmellInHouseAledoTx } from "./blog/sewer-gas-smell-in-house-aledo-tx"
+import { gasLineSafetyBeforeHeatingSeasonFortWorth } from "./blog/gas-line-safety-before-heating-season-fort-worth"
+import { hoseBibWinterizationAledoTx } from "./blog/hose-bib-winterization-aledo-tx"
+import { waterHeaterWinterPrepFortWorth } from "./blog/water-heater-winter-prep-fort-worth"
+import { waterSoftenerWorthItAledoTx } from "./blog/water-softener-worth-it-aledo-tx"
+import { holidayKitchenDrainPrepFortWorth } from "./blog/holiday-kitchen-drain-prep-fort-worth"
+import { waterPoolingInYardAledoTx } from "./blog/water-pooling-in-yard-aledo-tx"
 
 export type { BlogPost, BlogCategory, ContentBlock } from "./blog/_types"
 export { BLOG_CATEGORIES } from "./blog/_types"
@@ -60,6 +74,23 @@ export const blogPosts: Record<string, BlogPost> = {
   [trenchlessSewerRepairAledoTx.slug]: trenchlessSewerRepairAledoTx,
   [mainWaterShutoffValveFortWorth.slug]: mainWaterShutoffValveFortWorth,
   [smellGasNearStoveAledoTx.slug]: smellGasNearStoveAledoTx,
+  [waterHeaterLeakingFromBottomFortWorth.slug]:
+    waterHeaterLeakingFromBottomFortWorth,
+  [hardWaterSignsAledoTx.slug]: hardWaterSignsAledoTx,
+  [treeRootsInSewerLineFortWorth.slug]: treeRootsInSewerLineFortWorth,
+  [foundationWateringPlumbingLeaksAledoTx.slug]:
+    foundationWateringPlumbingLeaksAledoTx,
+  [washingMachineHoseBurstFortWorth.slug]: washingMachineHoseBurstFortWorth,
+  [howToFlushWaterHeaterAledoTx.slug]: howToFlushWaterHeaterAledoTx,
+  [highWaterBillHiddenLeakFortWorth.slug]: highWaterBillHiddenLeakFortWorth,
+  [sewerGasSmellInHouseAledoTx.slug]: sewerGasSmellInHouseAledoTx,
+  [gasLineSafetyBeforeHeatingSeasonFortWorth.slug]:
+    gasLineSafetyBeforeHeatingSeasonFortWorth,
+  [hoseBibWinterizationAledoTx.slug]: hoseBibWinterizationAledoTx,
+  [waterHeaterWinterPrepFortWorth.slug]: waterHeaterWinterPrepFortWorth,
+  [waterSoftenerWorthItAledoTx.slug]: waterSoftenerWorthItAledoTx,
+  [holidayKitchenDrainPrepFortWorth.slug]: holidayKitchenDrainPrepFortWorth,
+  [waterPoolingInYardAledoTx.slug]: waterPoolingInYardAledoTx,
 }
 
 /** All posts, sorted newest-first by `date`. */
