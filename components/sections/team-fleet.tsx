@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { Image as ImageIcon } from "lucide-react"
+import Link from "next/link"
+import { Image as ImageIcon, ArrowRight } from "lucide-react"
 import { AccentLine, TacticalLabel } from "@/components/ui/tactical-panel"
 import { cn } from "@/lib/utils"
 
@@ -132,6 +133,25 @@ export default function TeamFleet() {
           {slots.map((slot) => (
             <PlaceholderCard key={slot.label} slot={slot} />
           ))}
+        </div>
+
+        {/* Bridge to /about-us — names, bios, credentials, code of ethics */}
+        <div className="mt-10 lg:mt-12 flex justify-center">
+          <Link
+            href="/about-us#team-heading"
+            className={cn(
+              "group inline-flex items-center gap-2.5",
+              "px-6 py-3 rounded-sm border border-gray-950/15 bg-white",
+              "hover:border-red-600/60 hover:bg-red-600/5 transition-colors",
+              "text-gray-950 text-sm font-bold tracking-wide uppercase"
+            )}
+          >
+            Meet the full crew
+            <ArrowRight
+              className="h-4 w-4 text-red-600 group-hover:translate-x-0.5 transition-transform"
+              aria-hidden="true"
+            />
+          </Link>
         </div>
 
       </div>
