@@ -54,3 +54,7 @@ next-env.d.ts
 
 # other-client assets accidentally dropped into this repo
 /public/ga-tucker/
+
+# GBP auto-poster image library (71 MB) — belongs to the Railway
+# auto-poster service, not to this website. Never served by the site.
+/public/GBP/
