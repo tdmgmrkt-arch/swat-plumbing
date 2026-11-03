@@ -36,6 +36,10 @@ import { waterHeaterWinterPrepFortWorth } from "./blog/water-heater-winter-prep-
 import { waterSoftenerWorthItAledoTx } from "./blog/water-softener-worth-it-aledo-tx"
 import { holidayKitchenDrainPrepFortWorth } from "./blog/holiday-kitchen-drain-prep-fort-worth"
 import { waterPoolingInYardAledoTx } from "./blog/water-pooling-in-yard-aledo-tx"
+import { waterHeaterCantKeepUpHolidaysFortWorth } from "./blog/water-heater-cant-keep-up-holidays-fort-worth"
+import { frozenPipesAtticPlumbingFortWorth } from "./blog/frozen-pipes-attic-plumbing-fort-worth"
+import { castIronSewerLineFailingFortWorth } from "./blog/cast-iron-sewer-line-failing-fort-worth"
+import { irrigationBackflowPreventerFreezeAledoTx } from "./blog/irrigation-backflow-preventer-freeze-aledo-tx"
 
 export type { BlogPost, BlogCategory, ContentBlock } from "./blog/_types"
 export { BLOG_CATEGORIES } from "./blog/_types"
@@ -91,6 +95,10 @@ export const blogPosts: Record<string, BlogPost> = {
   [waterSoftenerWorthItAledoTx.slug]: waterSoftenerWorthItAledoTx,
   [holidayKitchenDrainPrepFortWorth.slug]: holidayKitchenDrainPrepFortWorth,
   [waterPoolingInYardAledoTx.slug]: waterPoolingInYardAledoTx,
+  [waterHeaterCantKeepUpHolidaysFortWorth.slug]: waterHeaterCantKeepUpHolidaysFortWorth,
+  [frozenPipesAtticPlumbingFortWorth.slug]: frozenPipesAtticPlumbingFortWorth,
+  [castIronSewerLineFailingFortWorth.slug]: castIronSewerLineFailingFortWorth,
+  [irrigationBackflowPreventerFreezeAledoTx.slug]: irrigationBackflowPreventerFreezeAledoTx,
 }
 
 /** All posts, sorted newest-first by `date`. */
