@@ -18,6 +18,7 @@ import {
 } from "lucide-react"
 
 import { siteConfig } from "@/lib/site-config"
+import { SMS_DATA_SHARING_DISCLOSURE } from "@/lib/sms-consent"
 import { cn, canonicalUrl } from "@/lib/utils"
 import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { TacticalLabel, AccentLine } from "@/components/ui/tactical-panel"
@@ -29,7 +30,7 @@ import SiteFooter from "@/components/site/site-footer"
 import MobileCtaBar from "@/components/site/mobile-cta-bar"
 
 const CANONICAL = canonicalUrl("/privacy-policy")
-const EFFECTIVE_DATE = "June 17, 2026"
+const EFFECTIVE_DATE = "November 2, 2026"
 
 export const metadata: Metadata = {
   title: "Privacy Policy — S.W.A.T. Plumbing LLC",
@@ -312,10 +313,19 @@ export default function PrivacyPolicyPage() {
                 <div className="border-t border-white/10 pt-4">
                   <p className="text-white/65 text-sm leading-relaxed">
                     <span className="text-white font-semibold">
-                      We do not share, sell, or rent your phone number or SMS
-                      consent
+                      We do not sell or rent your phone number, and we never
+                      share your SMS opt-in or consent status with third
+                      parties or affiliates for marketing purposes.
                     </span>{" "}
-                    with third parties or affiliates for marketing purposes.
+                    The only parties who ever see it are the vendors that
+                    deliver the messages on our behalf — see{" "}
+                    <Link
+                      href="#section-section-04"
+                      className="text-white/85 hover:text-red-400 underline underline-offset-2 transition-colors"
+                    >
+                      How We Share Your Information
+                    </Link>{" "}
+                    below.
                   </p>
                 </div>
               </div>
@@ -332,6 +342,7 @@ export default function PrivacyPolicyPage() {
                 "Protect our business, customers, or legal rights",
               ]}
               outro="All partners and service providers are required to keep your information confidential."
+              verbatim={SMS_DATA_SHARING_DISCLOSURE}
             />
 
             <PolicySection
@@ -524,6 +535,11 @@ type PolicySectionProps = {
   outro?: string
   outroBullets?: readonly string[]
   paragraphs?: readonly string[]
+  /**
+   * Carrier-mandated verbatim text, rendered last in an emphasized block so a
+   * 10DLC reviewer can find it without hunting. Never reword what's passed in.
+   */
+  verbatim?: string
 }
 
 function PolicySection({
@@ -535,6 +551,7 @@ function PolicySection({
   outro,
   outroBullets,
   paragraphs,
+  verbatim,
 }: PolicySectionProps) {
   return (
     <article
@@ -612,6 +629,24 @@ function PolicySection({
             </li>
           ))}
         </ul>
+      )}
+
+      {verbatim && (
+        <div className="relative mt-5 bg-[#0e1012] border border-white/12 rounded-sm p-5 lg:p-6 overflow-hidden">
+          <div
+            className="absolute left-0 top-0 bottom-0 w-0.75 bg-red-600"
+            aria-hidden="true"
+          />
+          <div className="pl-2.5">
+            <p className="flex items-center gap-1.5 text-[10px] font-mono tracking-[0.22em] uppercase text-red-400 font-bold mb-2.5">
+              <MessageSquare className="h-3.5 w-3.5" aria-hidden="true" />
+              SMS Opt-In Data
+            </p>
+            <p className="text-white/75 text-sm sm:text-[15px] leading-relaxed">
+              {verbatim}
+            </p>
+          </div>
+        </div>
       )}
     </article>
   )

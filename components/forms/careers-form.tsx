@@ -24,6 +24,7 @@ import {
 import { POSITION_OPTIONS } from "@/lib/careers-data"
 import { executeRecaptcha } from "@/lib/recaptcha-client"
 import { RecaptchaScript } from "@/components/recaptcha/recaptcha-script"
+import { SmsConsentCheckbox } from "@/components/forms/sms-consent-checkbox"
 import { siteConfig } from "@/lib/site-config"
 
 type SubmitState = "idle" | "loading" | "success" | "error"
@@ -45,7 +46,10 @@ export function CareersForm({
     reset,
   } = useForm<CareersFormValues>({
     resolver: zodResolver(careersSchema),
-    defaultValues: defaultPosition ? { position: defaultPosition } : undefined,
+    defaultValues: {
+      sms_consent: false,
+      ...(defaultPosition ? { position: defaultPosition } : {}),
+    },
   })
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -89,6 +93,7 @@ export function CareersForm({
     fd.append("email", values.email)
     fd.append("position", values.position)
     fd.append("additional_info", values.additional_info ?? "")
+    fd.append("sms_consent", String(values.sms_consent ?? false))
     fd.append("website", values.website ?? "")
     if (resumeFile) fd.append("resume", resumeFile)
 
@@ -395,6 +400,14 @@ export function CareersForm({
           )}
         </div>
 
+        {/* SMS consent — 10DLC carrier requirement */}
+        <div className="lg:col-span-2">
+          <SmsConsentCheckbox
+            id="careers-sms-consent"
+            {...register("sms_consent")}
+          />
+        </div>
+
         {/* Submit */}
         <div className="lg:col-span-2">
           <button
@@ -422,9 +435,9 @@ export function CareersForm({
           </p>
           <p className="text-white/45 text-[11px] mt-3 leading-relaxed max-w-2xl">
             By submitting this application, you agree to be contacted by
-            S.W.A.T. Plumbing LLC by phone, text, or email regarding your
-            application. Message and data rates may apply; reply STOP to opt
-            out. See our{" "}
+            S.W.A.T. Plumbing LLC by phone or email regarding your application.
+            Text messages are sent only if you check the opt-in box above. See
+            our{" "}
             <Link
               href="/privacy-policy"
               className="text-white/70 hover:text-red-400 underline underline-offset-2 transition-colors"

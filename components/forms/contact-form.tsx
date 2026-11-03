@@ -17,6 +17,7 @@ import {
 } from "@/lib/contact-schema"
 import { executeRecaptcha } from "@/lib/recaptcha-client"
 import { RecaptchaScript } from "@/components/recaptcha/recaptcha-script"
+import { SmsConsentCheckbox } from "@/components/forms/sms-consent-checkbox"
 import { siteConfig } from "@/lib/site-config"
 
 type SubmitState = "idle" | "loading" | "success" | "error"
@@ -51,6 +52,7 @@ export function ContactForm() {
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
+      sms_consent: false,
       ...(preselectService ? { service_type: preselectService } : {}),
       ...(preselectMessage ? { message: preselectMessage } : {}),
     },
@@ -469,6 +471,14 @@ export function ContactForm() {
           />
         </div>
 
+        {/* SMS consent — 10DLC carrier requirement */}
+        <div className="lg:col-span-2">
+          <SmsConsentCheckbox
+            id="contact-sms-consent"
+            {...register("sms_consent")}
+          />
+        </div>
+
         {/* Submit */}
         <div className="lg:col-span-2">
           <button
@@ -496,9 +506,8 @@ export function ContactForm() {
           </p>
           <p className="text-white/45 text-[11px] mt-3 leading-relaxed max-w-2xl">
             By submitting this form, you agree to be contacted by S.W.A.T.
-            Plumbing LLC by phone, text, or email regarding your service
-            request. Message and data rates may apply; reply STOP to opt out.
-            See our{" "}
+            Plumbing LLC by phone or email regarding your service request. Text
+            messages are sent only if you check the opt-in box above. See our{" "}
             <Link
               href="/privacy-policy"
               className="text-white/70 hover:text-red-400 underline underline-offset-2 transition-colors"

@@ -13,6 +13,9 @@ export const careersSchema = z.object({
     error: "Select the position you're applying for",
   }),
   additional_info: z.string().optional(),
+  // 10DLC: affirmative SMS opt-in. Optional by design — consent must be
+  // voluntary and can never gate a job application. See lib/sms-consent.ts
+  sms_consent: z.boolean().optional(),
   website: z.string().optional(), // honeypot
 })
 

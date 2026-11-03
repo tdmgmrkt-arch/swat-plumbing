@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { contactSchema } from "@/lib/contact-schema"
+import { SMS_CONSENT_TEXT } from "@/lib/sms-consent"
 import { verifyRecaptcha } from "@/lib/recaptcha-verify"
 
 export async function POST(req: NextRequest) {
@@ -64,6 +65,10 @@ export async function POST(req: NextRequest) {
     urgency: data.urgency,
     preferred_contact: data.preferred_contact,
     message: data.message ?? "",
+    // 10DLC consent record — carriers audit this. GHL SMS workflows must be
+    // gated on sms_consent === true; never text a lead without it.
+    sms_consent: data.sms_consent === true,
+    sms_consent_text: data.sms_consent === true ? SMS_CONSENT_TEXT : "",
     source_page: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.swatplumbing.com"}/contact-us`,
     submitted_at: new Date().toISOString(),
   }

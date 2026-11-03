@@ -33,6 +33,9 @@ export const contactSchema = z.object({
     error: "Select a preferred contact method",
   }),
   message: z.string().optional(),
+  // 10DLC: affirmative SMS opt-in. Optional by design — consent must be
+  // voluntary, so an unchecked box still submits the lead. See lib/sms-consent.ts
+  sms_consent: z.boolean().optional(),
   website: z.string().optional(), // honeypot
 })
 

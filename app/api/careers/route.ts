@@ -6,6 +6,7 @@ import {
   RESUME_ACCEPTED_TYPES,
 } from "@/lib/careers-schema"
 import { verifyRecaptcha } from "@/lib/recaptcha-verify"
+import { SMS_CONSENT_TEXT } from "@/lib/sms-consent"
 
 // Bodies can include a resume up to 5 MB
 export const runtime = "nodejs"
@@ -32,6 +33,8 @@ export async function POST(req: NextRequest) {
     email: (formData.get("email") ?? "").toString(),
     position: (formData.get("position") ?? "").toString(),
     additional_info: (formData.get("additional_info") ?? "").toString(),
+    // multipart carries everything as a string — coerce back to boolean
+    sms_consent: (formData.get("sms_consent") ?? "").toString() === "true",
     website: (formData.get("website") ?? "").toString(),
   }
 
@@ -94,6 +97,10 @@ export async function POST(req: NextRequest) {
     email: data.email,
     position: data.position,
     additional_info: data.additional_info ?? "",
+    // 10DLC consent record — carriers audit this. GHL SMS workflows must be
+    // gated on sms_consent === true; never text an applicant without it.
+    sms_consent: data.sms_consent === true,
+    sms_consent_text: data.sms_consent === true ? SMS_CONSENT_TEXT : "",
     resume_filename: resumeMeta?.name ?? null,
     resume_url: resumeMeta?.url ?? null,
     source_page: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.swatplumbing.com"}/careers`,
