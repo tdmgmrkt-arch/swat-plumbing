@@ -30,7 +30,7 @@ import FinalCta from "@/components/sections/final-cta"
 const CANONICAL = canonicalUrl("/contact-us")
 
 export const metadata: Metadata = {
-  title: "Contact S.W.A.T. Plumbing — Aledo & Fort Worth, TX",
+  title: "Contact Us — Aledo & Fort Worth, TX",
   description:
     "Two locations serving Aledo and Fort Worth. Direct phone lines, business hours, emergency dispatch, and maps for both S.W.A.T. Plumbing service hubs.",
   alternates: { canonical: CANONICAL },

@@ -34,7 +34,7 @@ const CANONICAL = canonicalUrl("/terms-of-service")
 const EFFECTIVE_DATE = "June 17, 2026"
 
 export const metadata: Metadata = {
-  title: "Terms of Service — S.W.A.T. Plumbing LLC",
+  title: "Terms of Service",
   description:
     "Terms governing use of the S.W.A.T. Plumbing LLC website and service inquiries — including estimates, pricing, workmanship guarantee, and limitation of liability.",
   alternates: { canonical: CANONICAL },

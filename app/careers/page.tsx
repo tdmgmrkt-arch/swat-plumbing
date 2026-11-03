@@ -39,7 +39,7 @@ import MobileCtaBar from "@/components/site/mobile-cta-bar"
 const CANONICAL = canonicalUrl("/careers")
 
 export const metadata: Metadata = {
-  title: "Careers — S.W.A.T. Plumbing | DFW Plumber Jobs in Aledo & Fort Worth",
+  title: "Careers — Plumber Jobs in Aledo & Fort Worth",
   description:
     "Join one of the fastest-growing plumbing companies in DFW. Open roles: Journeyman Plumber, Office Lead, Plumber Apprentice. Company truck, full benefits, family-owned culture.",
   alternates: { canonical: CANONICAL },

@@ -27,7 +27,7 @@ const CANONICAL = canonicalUrl("/areas-served")
 
 export const metadata: Metadata = {
   title:
-    "Plumbing Service Areas — 49 Communities | Aledo & Fort Worth, TX | S.W.A.T. Plumbing",
+    "Service Areas — 49 North Texas Communities",
   description:
     "S.W.A.T. Plumbing serves 49 communities across Tarrant, Parker, Denton & Johnson counties from response hubs in Aledo and Fort Worth. 24/7 emergency coverage.",
   alternates: { canonical: CANONICAL },

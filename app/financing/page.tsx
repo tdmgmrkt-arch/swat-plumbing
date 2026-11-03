@@ -37,7 +37,7 @@ const GREENSKY_PREQUAL_URL =
 
 export const metadata: Metadata = {
   title:
-    "Financing — S.W.A.T. Plumbing | GreenSky Home Improvement Financing",
+    "Financing — GreenSky Home Improvement Plans",
   description:
     "Plumbing repairs and upgrades shouldn't wait for payday. S.W.A.T. Plumbing offers GreenSky financing for water heaters, repipes, slab leaks, and more — no impact to your credit to prequalify.",
   alternates: { canonical: CANONICAL },

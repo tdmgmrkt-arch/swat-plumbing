@@ -40,7 +40,7 @@ const CANONICAL = canonicalUrl("/about-us")
 
 export const metadata: Metadata = {
   title:
-    "About S.W.A.T. Plumbing — Family-Owned Plumbers in Aledo & Fort Worth, TX",
+    "Family-Owned Plumbers in Aledo & Fort Worth, TX",
   description:
     "Sewer, Water, Anytime Team — meet the family-owned plumbing crew serving Fort Worth, Aledo, and surrounding North Texas. Licensed techs, real dispatch, 24/7 response.",
   alternates: { canonical: CANONICAL },

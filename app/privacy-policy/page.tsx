@@ -33,7 +33,7 @@ const CANONICAL = canonicalUrl("/privacy-policy")
 const EFFECTIVE_DATE = "November 2, 2026"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — S.W.A.T. Plumbing LLC",
+  title: "Privacy Policy",
   description:
     "How S.W.A.T. Plumbing LLC collects, uses, and safeguards your personal information, including our SMS messaging policy and your privacy rights.",
   alternates: { canonical: CANONICAL },
