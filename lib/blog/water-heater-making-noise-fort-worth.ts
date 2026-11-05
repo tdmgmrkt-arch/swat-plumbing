@@ -125,8 +125,11 @@ export const waterHeaterMakingNoiseFortWorth: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "For Fort Worth homes ready to upgrade, this is also a good moment to consider whether tankless makes sense \u2014 a decision that depends on hot water usage, whether you have a water softener, and gas line sizing.",
+      content: [
+        { type: "text", text: "For Fort Worth homes ready to upgrade, this is also a good moment to consider whether " },
+        { type: "link", text: "tankless", href: "/plumbing/tankless-water-heaters" },
+        { type: "text", text: " makes sense \\u2014 a decision that depends on hot water usage, whether you have a water softener, and gas line sizing." },
+      ],
     },
     {
       type: "callout",

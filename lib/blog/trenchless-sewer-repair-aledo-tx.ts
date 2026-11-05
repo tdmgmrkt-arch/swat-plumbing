@@ -22,8 +22,11 @@ export const trenchlessSewerRepairAledoTx: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "Here\u2019s how trenchless sewer repair actually works, when it\u2019s the right choice, and where traditional excavation still wins.",
+      content: [
+        { type: "text", text: "Here\\u2019s how " },
+        { type: "link", text: "trenchless", href: "/plumbing/trenchless-repair" },
+        { type: "text", text: " sewer repair actually works, when it\\u2019s the right choice, and where traditional excavation still wins." },
+      ],
     },
     { type: "heading", text: "How Trenchless Actually Works" },
     {

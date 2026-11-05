@@ -17,8 +17,11 @@ export const mainWaterShutoffValveFortWorth: BlogPost = {
   body: [
     {
       type: "paragraph",
-      content:
-        "A washing machine hose bursts. A slab leak floods a bedroom. A pipe fails inside a wall and water starts pouring through a light fixture. In each of those scenarios, the difference between $400 of damage and $14,000 of damage is a single valve \u2014 and how fast you can close it.",
+      content: [
+        { type: "text", text: "A washing machine hose bursts. A " },
+        { type: "link", text: "slab leak", href: "/plumbing/slab-leak" },
+        { type: "text", text: " floods a bedroom. A pipe fails inside a wall and water starts pouring through a light fixture. In each of those scenarios, the difference between $400 of damage and $14,000 of damage is a single valve \\u2014 and how fast you can close it." },
+      ],
     },
     {
       type: "paragraph",

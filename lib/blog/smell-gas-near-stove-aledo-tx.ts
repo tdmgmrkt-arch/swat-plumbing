@@ -145,6 +145,12 @@ export const smellGasNearStoveAledoTx: BlogPost = {
         "Any gas smell inside your home \u2014 faint or strong \u2014 deserves professional confirmation. Detection is fast, the tools are calibrated, and once the source is identified the repair is usually straightforward and permanent.",
     },
     {
+      type: "callout",
+      text: "If the odor is outdoors near the meter or along the yard line instead, see",
+      linkText: "yard gas line leaks in Aledo",
+      href: "/blog/outdoor-gas-line-leak-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

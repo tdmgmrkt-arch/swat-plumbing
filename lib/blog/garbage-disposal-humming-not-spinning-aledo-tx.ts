@@ -149,6 +149,12 @@ export const garbageDisposalHummingNotSpinningAledoTx: BlogPost = {
         "If the four-step fix hasn\u2019t worked or the disposal is leaking, a professional visit settles the diagnosis fast. A jammed unit is a fifteen-minute fix. A failed motor or leaking housing is a same-visit replacement in most cases.",
     },
     {
+      type: "callout",
+      text: "If the sink is also draining slowly once the disposal is freed, the clog is further down. See",
+      linkText: "our 5-step fix for a kitchen sink that will not drain",
+      href: "/blog/kitchen-sink-wont-drain-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

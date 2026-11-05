@@ -151,6 +151,12 @@ export const sewerGasSmellInHouseAledoTx: BlogPost = {
         "If the easy checks come back clean, a technician can run a smoke test — introducing non-toxic smoke into the drain system and watching where it escapes. It finds cracked lines inside walls, failed wax rings, and bad vent connections in a single visit without opening anything up.",
     },
     {
+      type: "callout",
+      text: "A persistent odor with slow drains often traces to the line itself. See",
+      linkText: "tree roots in your sewer line",
+      href: "/blog/tree-roots-in-sewer-line-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

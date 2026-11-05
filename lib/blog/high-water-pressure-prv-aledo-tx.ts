@@ -28,8 +28,11 @@ export const highWaterPressurePrvAledoTx: BlogPost = {
     { type: "heading", text: "What a PRV Does and Why Yours Might Be Failing" },
     {
       type: "paragraph",
-      content:
-        "A pressure reducing valve is a bell-shaped brass fitting installed on the main water line where it enters your home, usually near the water meter or the exterior wall of the garage. Its job is to take incoming municipal pressure \u2014 which can range from 80 to over 150 psi depending on your elevation and the local pump station \u2014 and drop it to a safe residential level, typically 55 to 70 psi.",
+      content: [
+        { type: "text", text: "A pressure reducing valve is a bell-shaped brass fitting installed on the " },
+        { type: "link", text: "main water line", href: "/plumbing/main-water-line-repair" },
+        { type: "text", text: " where it enters your home, usually near the water meter or the exterior wall of the garage. Its job is to take incoming municipal pressure \\u2014 which can range from 80 to over 150 psi depending on your elevation and the local pump station \\u2014 and drop it to a safe residential level, typically 55 to 70 psi." },
+      ],
     },
     {
       type: "paragraph",

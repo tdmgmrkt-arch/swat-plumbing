@@ -17,8 +17,11 @@ export const tanklessVsTankWaterHeaterFortWorth: BlogPost = {
   body: [
     {
       type: "paragraph",
-      content:
-        "Every water heater eventually fails, and when yours does, the question isn\u2019t just what to replace it with \u2014 it\u2019s whether to switch systems entirely. In Fort Worth, that decision usually comes down to tankless versus traditional tank. Both have real advantages. Neither is the automatic right answer.",
+      content: [
+        { type: "text", text: "Every water heater eventually fails, and when yours does, the question isn\\u2019t just what to replace it with \\u2014 it\\u2019s whether to switch systems entirely. In Fort Worth, that decision usually comes down to " },
+        { type: "link", text: "tankless", href: "/plumbing/tankless-water-heaters" },
+        { type: "text", text: " versus traditional tank. Both have real advantages. Neither is the automatic right answer." },
+      ],
     },
     {
       type: "paragraph",

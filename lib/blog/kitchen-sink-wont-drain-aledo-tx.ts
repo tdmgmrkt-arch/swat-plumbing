@@ -132,8 +132,11 @@ export const kitchenSinkWontDrainAledoTx: BlogPost = {
     { type: "heading", text: "For More Help With a Clogged Kitchen Sink in Aledo" },
     {
       type: "paragraph",
-      content:
-        "Recurring kitchen sink clogs are usually the sign of a partially-blocked branch line that needs a real cleaning \u2014 not another chemical treatment. S.W.A.T. Plumbing\u2019s technicians run camera inspections and mechanical clearings from the same truck, so a single visit both clears the line and confirms what caused it.",
+      content: [
+        { type: "text", text: "Recurring kitchen sink clogs are usually the sign of a partially-blocked branch line that needs a real cleaning \\u2014 not another chemical treatment. S.W.A.T. Plumbing\\u2019s technicians run " },
+        { type: "link", text: "camera inspections", href: "/plumbing/sewer-camera-inspections" },
+        { type: "text", text: " and mechanical clearings from the same truck, so a single visit both clears the line and confirms what caused it." },
+      ],
     },
     {
       type: "paragraph",

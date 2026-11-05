@@ -28,8 +28,11 @@ export const summerPlumbingProblemsNorthTexas: BlogPost = {
     { type: "heading", text: "1. Slab Leaks From Foundation Movement" },
     {
       type: "paragraph",
-      content:
-        "The single most expensive summer plumbing failure in Fort Worth is a slab leak triggered by foundation shift. As clay soil dries and pulls away from the foundation, the slab settles unevenly. Copper and PEX lines running through the slab flex with that movement. Copper eventually cracks; older PEX fittings pull apart at the joints.",
+      content: [
+        { type: "text", text: "The single most expensive summer plumbing failure in Fort Worth is a " },
+        { type: "link", text: "slab leak", href: "/plumbing/slab-leak" },
+        { type: "text", text: " triggered by foundation shift. As clay soil dries and pulls away from the foundation, the slab settles unevenly. Copper and PEX lines running through the slab flex with that movement. Copper eventually cracks; older PEX fittings pull apart at the joints." },
+      ],
     },
     {
       type: "paragraph",

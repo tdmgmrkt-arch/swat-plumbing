@@ -17,8 +17,11 @@ export const waterHeaterCantKeepUpHolidaysFortWorth: BlogPost = {
   body: [
     {
       type: "paragraph",
-      content:
-        "Every year in the week after Thanksgiving we take the same call. The water heater is not broken. It did not leak, it is not making noise, and nothing has changed. It simply ran out of hot water on the fourth shower of the morning and never caught back up.",
+      content: [
+        { type: "text", text: "Every year in the week after Thanksgiving we take the same call. The " },
+        { type: "link", text: "water heater", href: "/plumbing/tank-heater-installation" },
+        { type: "text", text: " is not broken. It did not leak, it is not making noise, and nothing has changed. It simply ran out of hot water on the fourth shower of the morning and never caught back up." },
+      ],
     },
     {
       type: "paragraph",
@@ -133,6 +136,18 @@ export const waterHeaterCantKeepUpHolidaysFortWorth: BlogPost = {
       type: "paragraph",
       content:
         "If your heater has been slipping, the week before the house fills up is a far better time to deal with it than the morning of. A flush, an element check, or a mixing valve are all same-day work. A replacement is not something you want to be scheduling on a holiday weekend.",
+    },
+    {
+      type: "callout",
+      text: "Sediment is the most common reason a heater that used to keep up no longer does. See",
+      linkText: "how to flush a water heater in Aledo",
+      href: "/blog/how-to-flush-water-heater-aledo-tx",
+    },
+    {
+      type: "callout",
+      text: "If you are weighing a larger tank against going tankless, see",
+      linkText: "tankless vs. tank for a Fort Worth home",
+      href: "/blog/tankless-vs-tank-water-heater-fort-worth",
     },
     {
       type: "paragraph",

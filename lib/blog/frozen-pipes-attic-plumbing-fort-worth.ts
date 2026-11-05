@@ -134,14 +134,29 @@ export const frozenPipesAtticPlumbingFortWorth: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "Rerouting attic lines into conditioned space, or repiping in PEX — which tolerates a freeze cycle far better than rigid copper, though it is not freeze-proof — is the conversation worth having in spring rather than during the next cold snap.",
+      content: [
+        { type: "text", text: "Rerouting attic lines into conditioned space, or " },
+        { type: "link", text: "repiping", href: "/plumbing/whole-house-repiping" },
+        { type: "text", text: " in PEX — which tolerates a freeze cycle far better than rigid copper, though it is not freeze-proof — is the conversation worth having in spring rather than during the next cold snap." },
+      ],
     },
     { type: "heading", text: "Freeze Response in Fort Worth and Aledo" },
     {
       type: "paragraph",
       content:
         "Freeze events generate more simultaneous calls than anything else we deal with, and the honest advice is that prep beats response every time. Insulate the attic runs, know where your shut-off is, and drip properly.",
+    },
+    {
+      type: "callout",
+      text: "Outdoor faucets are the other common freeze break, and they are easier to prevent. See",
+      linkText: "winterizing hose bibs in Aledo",
+      href: "/blog/hose-bib-winterization-aledo-tx",
+    },
+    {
+      type: "callout",
+      text: "Before a freeze is forecast, make sure you can find and turn the valve. See",
+      linkText: "where your main water shut-off valve is",
+      href: "/blog/main-water-shutoff-valve-fort-worth",
     },
     {
       type: "paragraph",

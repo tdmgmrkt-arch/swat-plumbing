@@ -161,6 +161,12 @@ export const highWaterBillHiddenLeakFortWorth: BlogPost = {
         "If the meter indicator is moving and the toilet and irrigation checks come back clean, the next step is non-destructive detection: acoustic listening equipment, line isolation and pressure testing, and thermal imaging to pinpoint the location before anything is opened up.",
     },
     {
+      type: "callout",
+      text: "If the meter is moving and nothing indoors is wet, the leak is probably buried. See",
+      linkText: "water pooling in the yard with no rain",
+      href: "/blog/water-pooling-in-yard-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

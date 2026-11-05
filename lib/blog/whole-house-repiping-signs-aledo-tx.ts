@@ -40,8 +40,11 @@ export const wholeHouseRepipingSignsAledoTx: BlogPost = {
     { type: "heading", text: "3. Low Water Pressure at Every Fixture" },
     {
       type: "paragraph",
-      content:
-        "Not one weak faucet \u2014 all of them. When corrosion and scale narrow the interior diameter of supply lines uniformly, water pressure drops across the entire home. A pressure test at the main will confirm whether the issue is external (utility supply, PRV) or internal (constricted pipes). If external factors check out and pressure is still low, the pipes themselves are the restriction.",
+      content: [
+        { type: "text", text: "Not one weak faucet \\u2014 all of them. When corrosion and scale narrow the interior diameter of supply lines uniformly, " },
+        { type: "link", text: "water pressure", href: "/plumbing/running-water" },
+        { type: "text", text: " drops across the entire home. A pressure test at the main will confirm whether the issue is external (utility supply, PRV) or internal (constricted pipes). If external factors check out and pressure is still low, the pipes themselves are the restriction." },
+      ],
     },
     {
       type: "outbound",

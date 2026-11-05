@@ -85,8 +85,11 @@ export const toiletKeepsRunningFortWorth: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "Fort Worth\u2019s residential water pressure often runs at the high end of code, and older homes without a functioning PRV may see incoming pressure well above the 80 psi maximum most fixtures are rated for. That kind of pressure wears out toilet components, faucet cartridges, and water heater fittings simultaneously.",
+      content: [
+        { type: "text", text: "Fort Worth\\u2019s residential water pressure often runs at the high end of code, and older homes without a functioning PRV may see incoming pressure well above the 80 psi maximum most fixtures are rated for. That kind of pressure wears out toilet components, faucet cartridges, and " },
+        { type: "link", text: "water heater", href: "/plumbing/tank-heater-installation" },
+        { type: "text", text: " fittings simultaneously." },
+      ],
     },
     {
       type: "callout",

@@ -91,8 +91,11 @@ export const sewerCameraInspectionBeforeBuyingHomeFortWorth: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "If the inspection uncovers a failed line, you have three follow-up options: traditional excavation and replacement, trenchless pipe bursting, or spot repair. Which one makes sense depends on depth, length, and what the line runs under.",
+      content: [
+        { type: "text", text: "If the inspection uncovers a failed line, you have three follow-up options: traditional excavation and replacement, " },
+        { type: "link", text: "trenchless", href: "/plumbing/trenchless-repair" },
+        { type: "text", text: " pipe bursting, or spot repair. Which one makes sense depends on depth, length, and what the line runs under." },
+      ],
     },
     {
       type: "callout",

@@ -113,8 +113,11 @@ export const castIronSewerLineFailingFortWorth: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "A belly is the one that limits your choices. Lining a bellied pipe gives you a lined bellied pipe — it will still hold water and still catch solids. If the camera shows a significant low spot, the grade has to be corrected, and that means excavation or tunneling rather than a liner.",
+      content: [
+        { type: "text", text: "A belly is the one that limits your choices. Lining a bellied pipe gives you a lined bellied pipe — it will still hold water and still catch solids. If the camera shows a significant low spot, the grade has to be corrected, and that means excavation or " },
+        { type: "link", text: "tunneling", href: "/plumbing/plumbing-tunneling" },
+        { type: "text", text: " rather than a liner." },
+      ],
     },
     {
       type: "paragraph",
@@ -144,6 +147,18 @@ export const castIronSewerLineFailingFortWorth: BlogPost = {
       type: "paragraph",
       content:
         "If you have recurring clogs in an older home, the useful next step is not another clearing. It is a camera run so you know whether you are managing a narrowed line, repairing one section, or planning a replacement — and so nobody is guessing at the quote.",
+    },
+    {
+      type: "callout",
+      text: "Roots exploit exactly the joints that corrosion opens up. See",
+      linkText: "tree roots in your sewer line",
+      href: "/blog/tree-roots-in-sewer-line-fort-worth",
+    },
+    {
+      type: "callout",
+      text: "On what actually clears a restricted line versus what only buys a month, see",
+      linkText: "hydro jetting vs. snaking",
+      href: "/blog/hydro-jetting-vs-snaking-fort-worth",
     },
     {
       type: "paragraph",

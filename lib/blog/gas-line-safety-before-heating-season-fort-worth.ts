@@ -149,8 +149,11 @@ export const gasLineSafetyBeforeHeatingSeasonFortWorth: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "Sizing matters more than people expect. Adding a high-demand appliance to a line that was sized for the original load starves everything on that branch, which shows up as a furnace that cannot keep up and a water heater that runs cold during heavy use. A proper install starts with a load calculation for the whole system, not just the new appliance.",
+      content: [
+        { type: "text", text: "Sizing matters more than people expect. Adding a high-demand appliance to a line that was sized for the original load starves everything on that branch, which shows up as a furnace that cannot keep up and a " },
+        { type: "link", text: "water heater", href: "/plumbing/tank-heater-installation" },
+        { type: "text", text: " that runs cold during heavy use. A proper install starts with a load calculation for the whole system, not just the new appliance." },
+      ],
     },
     {
       type: "callout",

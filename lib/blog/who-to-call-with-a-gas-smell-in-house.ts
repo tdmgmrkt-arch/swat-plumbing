@@ -27,8 +27,11 @@ export const whoToCallWithAGasSmellInHouse: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "At S.W.A.T. Plumbing LLC, we provide trusted gas line repair, gas leak detection, emergency plumbing repair, and main gas line services throughout Fort Worth, Aledo, and surrounding areas. Our team responds quickly to locate gas leaks safely and restore your system with dependable repairs.",
+      content: [
+        { type: "text", text: "At S.W.A.T. Plumbing LLC, we provide trusted gas line repair, gas " },
+        { type: "link", text: "leak detection", href: "/plumbing/plumbing-leak-repairs" },
+        { type: "text", text: ", emergency plumbing repair, and main gas line services throughout Fort Worth, Aledo, and surrounding areas. Our team responds quickly to locate gas leaks safely and restore your system with dependable repairs." },
+      ],
     },
     { type: "heading", text: "Signs of a Gas Leak Inside Your Home" },
     {
@@ -206,6 +209,12 @@ export const whoToCallWithAGasSmellInHouse: BlogPost = {
       type: "paragraph",
       content:
         "At S.W.A.T. Plumbing LLC, we proudly provide trusted gas leak detection, gas line repair, emergency plumbing repair, and main gas line services throughout Fort Worth, Aledo, and surrounding communities.",
+    },
+    {
+      type: "callout",
+      text: "If the smell is strongest at the range rather than throughout the house, start with",
+      linkText: "our guide to gas odors near the stove",
+      href: "/blog/smell-gas-near-stove-aledo-tx",
     },
     {
       type: "paragraph",

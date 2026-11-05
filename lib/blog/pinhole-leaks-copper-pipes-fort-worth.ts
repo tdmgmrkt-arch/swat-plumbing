@@ -147,6 +147,12 @@ export const pinholeLeaksCopperPipesFortWorth: BlogPost = {
         "A pinhole leak in isolation is a repair. Two or more pinholes on the same system is a signal worth taking seriously. A camera-and-inspection visit will identify whether other sections of the same run are showing the same interior pitting \u2014 information that decides whether spot repair or full repipe is the right investment.",
     },
     {
+      type: "callout",
+      text: "Repeated pinholes are a system signal rather than a run of bad luck. See",
+      linkText: "6 signs your home needs whole house repiping",
+      href: "/blog/whole-house-repiping-signs-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

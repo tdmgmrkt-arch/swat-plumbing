@@ -85,8 +85,11 @@ export const slabLeakRepairFortWorthTxExperts: BlogPost = {
     { type: "heading", text: "Professional Slab Leak Detection in Fort Worth TX" },
     {
       type: "paragraph",
-      content:
-        "Before any repair can begin, the exact location of the leak must be identified. Professional slab leak detection in Fort Worth TX uses advanced tools to pinpoint the problem without unnecessary damage to your home.",
+      content: [
+        { type: "text", text: "Before any repair can begin, the exact location of the leak must be identified. Professional slab " },
+        { type: "link", text: "leak detection", href: "/plumbing/plumbing-leak-repairs" },
+        { type: "text", text: " in Fort Worth TX uses advanced tools to pinpoint the problem without unnecessary damage to your home." },
+      ],
     },
     {
       type: "list",

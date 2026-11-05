@@ -99,8 +99,11 @@ export const irrigationBackflowPreventerFreezeAledoTx: BlogPost = {
     },
     {
       type: "paragraph",
-      content:
-        "That last one catches people during an outage. An outdoor tankless unit relies on an electric freeze protection element, and in a freeze that comes with a power loss it has no defense.",
+      content: [
+        { type: "text", text: "That last one catches people during an outage. An outdoor " },
+        { type: "link", text: "tankless", href: "/plumbing/tankless-water-heaters" },
+        { type: "text", text: " unit relies on an electric freeze protection element, and in a freeze that comes with a power loss it has no defense." },
+      ],
     },
     { type: "heading", text: "If It Already Burst" },
     {
@@ -124,6 +127,18 @@ export const irrigationBackflowPreventerFreezeAledoTx: BlogPost = {
       type: "paragraph",
       content:
         "Early November is the right time for this in Parker County. The first hard freeze usually arrives somewhere between late November and early January, and the assembly does not care whether you got to it — it only cares whether there is water sitting in it when the temperature drops.",
+    },
+    {
+      type: "callout",
+      text: "Hose bibs need the same treatment the same afternoon. See",
+      linkText: "winterizing outdoor faucets before the first freeze",
+      href: "/blog/hose-bib-winterization-aledo-tx",
+    },
+    {
+      type: "callout",
+      text: "The indoor side of freeze prep is covered in",
+      linkText: "our water heater winter checklist",
+      href: "/blog/water-heater-winter-prep-fort-worth",
     },
     {
       type: "paragraph",

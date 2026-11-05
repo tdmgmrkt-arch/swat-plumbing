@@ -163,6 +163,12 @@ export const waterLeakDetectionNearMeAledoTx: BlogPost = {
         "At S.W.A.T. Plumbing LLC, we provide expert water leak detection in Aledo, TX, using advanced tools to locate leaks without unnecessary damage to your home. Our team works quickly to identify the source, explain your options, and deliver reliable repairs that last.",
     },
     {
+      type: "callout",
+      text: "If the first sign was the bill rather than the water, work through",
+      linkText: "our hidden leak checklist",
+      href: "/blog/high-water-bill-hidden-leak-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

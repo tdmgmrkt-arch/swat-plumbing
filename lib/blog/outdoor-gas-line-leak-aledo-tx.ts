@@ -118,6 +118,18 @@ export const outdoorGasLineLeakAledoTx: BlogPost = {
         "Any gas smell \u2014 indoors or out \u2014 should be checked by a licensed professional. Detection is fast, the tools are calibrated for the job, and once the source is confirmed the repair is straightforward.",
     },
     {
+      type: "callout",
+      text: "An odor inside the house is a different response with a different urgency. See",
+      linkText: "what to do when you smell gas near the stove",
+      href: "/blog/smell-gas-near-stove-aledo-tx",
+    },
+    {
+      type: "callout",
+      text: "For who to call and in what order once you are safely outside, see",
+      linkText: "who to call with a gas smell in the house",
+      href: "/blog/who-to-call-with-a-gas-smell-in-house",
+    },
+    {
       type: "paragraph",
       content: [
         {
