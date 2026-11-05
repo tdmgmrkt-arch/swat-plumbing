@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import Script from "next/script"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import "./globals.css"
 import { siteConfig } from "@/lib/site-config"
 import { canonicalUrl } from "@/lib/utils"
 import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { AccessibilityWidget } from "@/components/site/accessibility-widget"
+import OutageNotice from "@/components/site/outage-notice"
+import {
+  OUTAGE_NOTICE_STORAGE_KEYS,
+  SITE_OUTAGE_BANNER_ENABLED,
+} from "@/lib/site-outage"
 
 /**
  * GA4 Measurement ID. Set in .env.local as NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX.
@@ -99,17 +105,25 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // Session script may set data-outage-* before hydration.
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        {SITE_OUTAGE_BANNER_ENABLED ? (
+          <Script id="outage-session" strategy="beforeInteractive">
+            {`try{var k=${JSON.stringify(OUTAGE_NOTICE_STORAGE_KEYS)};if(sessionStorage.getItem(k.dismissed)==="1")document.documentElement.setAttribute("data-outage-dismissed","");else if(sessionStorage.getItem(k.popupSeen)==="1")document.documentElement.setAttribute("data-outage-popup-seen","")}catch(e){}`}
+          </Script>
+        ) : null}
         {/* Skip-to-main — keyboard/screen-reader users press Tab once on
             page load and can jump past the nav. Visually hidden by default,
             appears with focus styling on keyboard activation. */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:px-4 focus:py-2 focus:bg-red-600 focus:text-white focus:font-bold focus:text-sm focus:tracking-wide focus:uppercase focus:rounded-sm focus:outline-2 focus:outline-white focus:outline-offset-2"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-[calc(var(--outage-banner-offset,0px)+0.75rem)] focus:left-4 focus:z-100 focus:px-4 focus:py-2 focus:bg-red-600 focus:text-white focus:font-bold focus:text-sm focus:tracking-wide focus:uppercase focus:rounded-sm focus:outline-2 focus:outline-white focus:outline-offset-2"
         >
           Skip to main content
         </a>
+        {SITE_OUTAGE_BANNER_ENABLED ? <OutageNotice /> : null}
         {children}
         <AccessibilityWidget />
       </body>

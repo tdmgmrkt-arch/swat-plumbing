@@ -58,6 +58,10 @@
 }
 
 :root {
+  /* Height of the temporary outage strip. OutageNotice measures the real bar
+     and overrides this; 0px keeps the sticky header flush when the notice is off. */
+  --outage-banner-offset: 0px;
+
   /* Brand colors */
   --brand-red: #dc2626;
   --brand-red-dark: #b91c1c;
@@ -160,6 +164,18 @@
   bottom: 12px;
   right: 12px;
   border-width: 0 2px 2px 0;
+}
+
+/* Applied before paint by the outage session script. Keeps a dismissed visit
+   from flashing the notice back, without a gap under the sticky header. */
+html[data-outage-dismissed] [data-outage-notice] {
+  display: none !important;
+}
+html[data-outage-dismissed] {
+  --outage-banner-offset: 0px !important;
+}
+html[data-outage-popup-seen] [data-outage-dialog] {
+  display: none !important;
 }
 
 /* Hide reCAPTCHA v3 floating badge — disclosure is shown inline under each
