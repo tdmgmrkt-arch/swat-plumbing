@@ -198,6 +198,12 @@ export const slabLeakRepairFortWorthTxExperts: BlogPost = {
         "At S.W.A.T. Plumbing LLC, we specialize in slab leak detection and repair in Fort Worth TX, using advanced tools and proven methods to locate and fix leaks quickly. Whether it\u2019s a small pipe issue or a major foundation leak, our team provides reliable solutions designed to last.",
     },
     {
+      type: "callout",
+      text: "Soil movement is usually the underlying cause here. See",
+      linkText: "foundation watering and plumbing leaks",
+      href: "/blog/foundation-watering-plumbing-leaks-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

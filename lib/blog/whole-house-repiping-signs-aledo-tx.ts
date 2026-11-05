@@ -105,6 +105,12 @@ export const wholeHouseRepipingSignsAledoTx: BlogPost = {
         "The decision to repipe rarely gets easier by waiting. If your home is showing two or more of the six signs above, an on-site evaluation will give you a clear picture of what\u2019s left in the current system and what a repipe would actually cost.",
     },
     {
+      type: "callout",
+      text: "Repeat pinholes are the signal that usually leads here. See",
+      linkText: "pinhole leaks in copper pipes",
+      href: "/blog/pinhole-leaks-copper-pipes-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

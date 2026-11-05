@@ -148,6 +148,12 @@ export const washingMachineHoseBurstFortWorth: BlogPost = {
         "If a hose has already failed, the priority is stopping the water and getting the supply back under control. If one has not, replacing a pair of aging rubber hoses is the cheapest insurance in your house and takes about fifteen minutes.",
     },
     {
+      type: "callout",
+      text: "Know where to stop the water before it happens. See",
+      linkText: "where your main water shut-off valve is",
+      href: "/blog/main-water-shutoff-valve-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

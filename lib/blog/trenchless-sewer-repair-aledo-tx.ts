@@ -137,6 +137,12 @@ export const trenchlessSewerRepairAledoTx: BlogPost = {
         "If a camera inspection has already shown your line is failing, a follow-up trenchless evaluation determines whether pipe bursting, CIPP lining, or excavation is the right method. Most Aledo lots and lateral configurations are trenchless-compatible.",
     },
     {
+      type: "callout",
+      text: "A camera run decides whether trenchless is even an option. See",
+      linkText: "sewer camera inspection before buying a home",
+      href: "/blog/sewer-camera-inspection-before-buying-home-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

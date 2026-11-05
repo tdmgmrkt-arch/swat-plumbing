@@ -172,6 +172,12 @@ export const waterSoftenerWorthItAledoTx: BlogPost = {
         "The right first step is a hardness test and a look at your existing water heater and fixtures, not a quote. If the number comes back low, we will tell you so. If it comes back high, you will get a sized recommendation with the ownership costs stated up front.",
     },
     {
+      type: "callout",
+      text: "Hard water also shortens water heater life. See",
+      linkText: "how to flush a water heater in Aledo",
+      href: "/blog/how-to-flush-water-heater-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

@@ -124,6 +124,12 @@ export const lowWaterPressureFortWorth: BlogPost = {
         "A licensed technician will identify the actual cause in a single visit, using pressure gauges, meter readings, and a visual inspection of the main and shut-offs. Most fixes are straightforward once the diagnosis is confirmed.",
     },
     {
+      type: "callout",
+      text: "Pressure that is too high is the more damaging fault. See",
+      linkText: "signs your PRV is failing",
+      href: "/blog/high-water-pressure-prv-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

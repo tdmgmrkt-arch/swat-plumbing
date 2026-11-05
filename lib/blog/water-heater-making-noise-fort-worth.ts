@@ -144,6 +144,12 @@ export const waterHeaterMakingNoiseFortWorth: BlogPost = {
         "A ten-minute inspection and flush will settle whether your noisy heater has years of life left or is on borrowed time. If sediment has already calcified, a professional service call catches the problem before the tank fails on its own schedule.",
     },
     {
+      type: "callout",
+      text: "Flushing is the fix, and it is a job you can often do yourself. See",
+      linkText: "how to flush a water heater in Aledo",
+      href: "/blog/how-to-flush-water-heater-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

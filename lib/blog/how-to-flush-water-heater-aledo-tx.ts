@@ -150,6 +150,12 @@ export const howToFlushWaterHeaterAledoTx: BlogPost = {
         "A professional flush includes an anode inspection, a T&P valve test, a static pressure reading, a check of the expansion tank, and an honest assessment of remaining tank life. That last item is the one worth paying for — knowing you have two good years left lets you replace on your schedule instead of in an emergency.",
     },
     {
+      type: "callout",
+      text: "If it is already rumbling, sediment is the cause. See",
+      linkText: "water heater popping and rumbling noises",
+      href: "/blog/water-heater-making-noise-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

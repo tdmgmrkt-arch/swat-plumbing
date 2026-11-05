@@ -142,6 +142,12 @@ export const hoseBibWinterizationAledoTx: BlogPost = {
         "If you want the whole exterior handled at once — bibs checked and replaced, irrigation drained and the backflow insulated, exposed pipe wrapped, and the main shut-off located and exercised — it is a single visit, and it is far cheaper in October than in January.",
     },
     {
+      type: "callout",
+      text: "The irrigation backflow assembly is the other thing that breaks first. See",
+      linkText: "winterizing your backflow preventer",
+      href: "/blog/irrigation-backflow-preventer-freeze-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

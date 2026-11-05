@@ -235,6 +235,12 @@ export const noHotWaterInHouseFortWorth: BlogPost = {
         "At S.W.A.T. Plumbing LLC, we proudly provide trusted water heater repair, tankless water heater service, water heater installation, and emergency plumbing services throughout Fort Worth and surrounding communities.",
     },
     {
+      type: "callout",
+      text: "If the heater works but runs out early, that is capacity rather than a fault. See",
+      linkText: "when your water heater cannot keep up",
+      href: "/blog/water-heater-cant-keep-up-holidays-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

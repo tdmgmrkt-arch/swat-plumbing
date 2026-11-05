@@ -156,6 +156,12 @@ export const holidayKitchenDrainPrepFortWorth: BlogPost = {
         "A pre-holiday visit covers the kitchen branch, the disposal, the main line cleanout, and a camera run if there is any history of recurring backups. It takes an hour in October and it removes the most predictable plumbing emergency on the calendar.",
     },
     {
+      type: "callout",
+      text: "If it is already slow, start here. See",
+      linkText: "kitchen sink will not drain",
+      href: "/blog/kitchen-sink-wont-drain-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

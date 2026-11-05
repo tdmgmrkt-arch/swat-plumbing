@@ -175,6 +175,12 @@ export const waterHeaterWinterPrepFortWorth: BlogPost = {
         "A pre-season service visit covers the flush, the anode inspection, the T&P test, pressure and expansion tank checks, a combustion and venting look, and a straight assessment of how much life the unit has left. That last part is the point — it turns a future emergency into a decision you get to make.",
     },
     {
+      type: "callout",
+      text: "Hose bibs and the backflow assembly need the same afternoon. See",
+      linkText: "winterizing outdoor faucets in Aledo",
+      href: "/blog/hose-bib-winterization-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

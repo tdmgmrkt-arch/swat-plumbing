@@ -160,6 +160,12 @@ export const hardWaterSignsAledoTx: BlogPost = {
         "The right starting point is a hardness number and an honest look at your existing equipment, not a sales pitch. A technician will test the water at the tap, check your water heater for sediment, inspect fixture aerators for scale, and tell you what size system the house actually needs — or tell you that your hardness is low enough to leave alone.",
     },
     {
+      type: "callout",
+      text: "On whether softening is worth the cost here, see",
+      linkText: "is a water softener worth it in Aledo",
+      href: "/blog/water-softener-worth-it-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

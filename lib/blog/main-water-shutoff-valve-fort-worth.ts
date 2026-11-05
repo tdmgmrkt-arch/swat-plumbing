@@ -148,6 +148,12 @@ export const mainWaterShutoffValveFortWorth: BlogPost = {
         "If your shut-off valve is seized, corroded, or you can\u2019t locate one at all, a professional visit installs a proper ball valve at the main and confirms it functions. This is one of the cheapest, highest-value preventative repairs a Fort Worth homeowner can make.",
     },
     {
+      type: "callout",
+      text: "The reason to find it before you need it. See",
+      linkText: "burst washing machine hoses",
+      href: "/blog/washing-machine-hose-burst-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

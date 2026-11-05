@@ -165,6 +165,12 @@ export const waterPoolingInYardAledoTx: BlogPost = {
         "If you have a wet spot that has not dried in a week, start with the meter test and the irrigation shut-off. If both point to a real leak, detection is non-destructive and usually resolves the question in a single visit — which line, where exactly, and what the repair actually requires.",
     },
     {
+      type: "callout",
+      text: "If the bill moved first, work through",
+      linkText: "our hidden leak checklist",
+      href: "/blog/high-water-bill-hidden-leak-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

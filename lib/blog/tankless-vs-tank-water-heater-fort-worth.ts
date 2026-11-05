@@ -122,6 +122,12 @@ export const tanklessVsTankWaterHeaterFortWorth: BlogPost = {
         "The right water heater for your home depends on how much hot water you use, whether you have a softener, whether you have natural gas, and how long you plan to stay. A quick in-home assessment usually settles the question in fifteen minutes \u2014 no sales pressure, no upsell.",
     },
     {
+      type: "callout",
+      text: "Whichever you choose, hard water decides its service life. See",
+      linkText: "hard water in Aledo",
+      href: "/blog/hard-water-signs-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

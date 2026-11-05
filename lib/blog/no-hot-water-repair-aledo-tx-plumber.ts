@@ -281,6 +281,12 @@ export const noHotWaterRepairAledoTxPlumber: BlogPost = {
     },
     { type: "heading", text: "If You Need No Hot Water Repair in Aledo TX" },
     {
+      type: "callout",
+      text: "Noise before the failure is usually sediment. See",
+      linkText: "water heater popping and rumbling noises",
+      href: "/blog/water-heater-making-noise-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

@@ -141,6 +141,12 @@ export const hydroJettingVsSnakingFortWorth: BlogPost = {
         "Whether the right answer is a snake, a jetter, or a follow-up repair depends on what\u2019s actually in the pipe. S.W.A.T. Plumbing\u2019s Fort Worth trucks carry both, along with camera equipment, so the diagnosis and clearing happen in the same visit \u2014 no second dispatch, no upsell for a truck that showed up without the right tool.",
     },
     {
+      type: "callout",
+      text: "Recurring clogs in an older home often trace to the pipe itself. See",
+      linkText: "cast iron sewer lines in older Fort Worth homes",
+      href: "/blog/cast-iron-sewer-line-failing-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

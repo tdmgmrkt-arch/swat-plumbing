@@ -258,6 +258,12 @@ export const emergencyPlumberNearMeInAledoTx: BlogPost = {
     },
     { type: "heading", text: "If You Need an Emergency Plumber Near Me in Aledo TX" },
     {
+      type: "callout",
+      text: "The most common after-hours flood has one cheap prevention. See",
+      linkText: "burst washing machine hoses",
+      href: "/blog/washing-machine-hose-burst-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

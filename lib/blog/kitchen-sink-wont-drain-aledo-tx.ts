@@ -139,6 +139,12 @@ export const kitchenSinkWontDrainAledoTx: BlogPost = {
       ],
     },
     {
+      type: "callout",
+      text: "If clearing it keeps failing, the main line may be the problem. See",
+      linkText: "hydro jetting vs. snaking",
+      href: "/blog/hydro-jetting-vs-snaking-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

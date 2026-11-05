@@ -111,6 +111,12 @@ export const highWaterPressurePrvAledoTx: BlogPost = {
         "A pressure test takes ten minutes and settles the question of whether your fixture problems are downstream failures or a supply-side pressure issue. If the reading confirms the PRV is failing, replacement is a same-visit job in most cases.",
     },
     {
+      type: "callout",
+      text: "Sustained high pressure is what drives pinhole failures. See",
+      linkText: "pinhole leaks in copper pipes",
+      href: "/blog/pinhole-leaks-copper-pipes-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

@@ -106,6 +106,12 @@ export const summerPlumbingProblemsNorthTexas: BlogPost = {
         "Most summer failures are preventable with a single seasonal inspection and a short list of small repairs. The ones that aren\u2019t \u2014 slab leaks, main-line failures, water heater ruptures \u2014 are handled fastest when the call comes in early, not once the water is already ankle-deep.",
     },
     {
+      type: "callout",
+      text: "The winter counterpart to this list is",
+      linkText: "frozen pipes and attic supply lines",
+      href: "/blog/frozen-pipes-attic-plumbing-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

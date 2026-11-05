@@ -220,6 +220,12 @@ export const sewerLineRepairNearMeFortWorthTx: BlogPost = {
     },
     { type: "heading", text: "If You Need Sewer Line Repair Near Me in Fort Worth TX" },
     {
+      type: "callout",
+      text: "For the no-dig option and when it applies, see",
+      linkText: "trenchless sewer repair in Aledo",
+      href: "/blog/trenchless-sewer-repair-aledo-tx",
+    },
+    {
       type: "paragraph",
       content: [
         {

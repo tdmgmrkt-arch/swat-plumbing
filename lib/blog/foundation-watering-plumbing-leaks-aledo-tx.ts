@@ -141,6 +141,12 @@ export const foundationWateringPlumbingLeaksAledoTx: BlogPost = {
         "If you have had foundation movement, or you have seen any combination of the symptoms above, the plumbing is worth checking even when nothing has failed outright. Detection is non-destructive — acoustic listening, pressure isolation, and camera inspection locate the problem before anyone cuts concrete.",
     },
     {
+      type: "callout",
+      text: "The same soil movement is what breaks lines under the slab. See",
+      linkText: "5 warning signs of a slab leak",
+      href: "/blog/slab-leak-repair-fort-worth-tx-experts",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

@@ -159,6 +159,12 @@ export const treeRootsInSewerLineFortWorth: BlogPost = {
         "If your main line has backed up more than once in the last two years, the next step is a camera inspection rather than another cable job. Knowing the pipe material, the number of intrusion points, and the overall condition turns an open-ended recurring expense into a decision you can actually make.",
     },
     {
+      type: "callout",
+      text: "Roots exploit joints that corrosion has already opened. See",
+      linkText: "cast iron sewer lines in older Fort Worth homes",
+      href: "/blog/cast-iron-sewer-line-failing-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

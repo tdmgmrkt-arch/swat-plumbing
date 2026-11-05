@@ -110,6 +110,12 @@ export const sewerCameraInspectionBeforeBuyingHomeFortWorth: BlogPost = {
         "S.W.A.T. Plumbing runs pre-purchase sewer camera inspections on a scheduled option-period timeline \u2014 typically within 24 to 48 hours of the request \u2014 and provides a written report and video file suitable for your realtor and inspector to reference during negotiation.",
     },
     {
+      type: "callout",
+      text: "On an older home, this is the most likely finding. See",
+      linkText: "cast iron sewer lines in older Fort Worth homes",
+      href: "/blog/cast-iron-sewer-line-failing-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

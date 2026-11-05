@@ -104,6 +104,12 @@ export const toiletKeepsRunningFortWorth: BlogPost = {
         "If your toilet has been running for more than a few days, or the usual fixes haven\u2019t held, it\u2019s worth having a professional confirm the cause before it drives another quarter\u2019s worth of water bills. Most fixes are quick, flat-rated, and warrantied.",
     },
     {
+      type: "callout",
+      text: "A running toilet is a common cause of an unexplained bill. See",
+      linkText: "our hidden leak checklist",
+      href: "/blog/high-water-bill-hidden-leak-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {

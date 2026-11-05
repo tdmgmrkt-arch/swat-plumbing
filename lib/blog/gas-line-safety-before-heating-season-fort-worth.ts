@@ -168,6 +168,12 @@ export const gasLineSafetyBeforeHeatingSeasonFortWorth: BlogPost = {
         "A pre-season gas safety inspection covers a full detector sweep, a pressure test, connector and shut-off inspection, and a flame quality check at every appliance. It is a short visit, and it moves gas problems off the coldest night of the year.",
     },
     {
+      type: "callout",
+      text: "If you smell gas at any point, stop and read",
+      linkText: "who to call with a gas smell in the house",
+      href: "/blog/who-to-call-with-a-gas-smell-in-house",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

@@ -164,6 +164,12 @@ export const waterHeaterLeakingFromBottomFortWorth: BlogPost = {
         "A technician confirms the source with a dry-surface test, checks static pressure at a hose bib, inspects the expansion tank and T&P discharge, and gives you a straight repair-or-replace answer with the reasoning behind it. Diagnosis takes about twenty minutes.",
     },
     {
+      type: "callout",
+      text: "If the tank is sound and the issue is capacity instead, see",
+      linkText: "when your water heater cannot keep up",
+      href: "/blog/water-heater-cant-keep-up-holidays-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },

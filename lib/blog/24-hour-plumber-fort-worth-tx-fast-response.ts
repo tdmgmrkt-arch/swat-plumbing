@@ -273,6 +273,12 @@ export const twentyFourHourPlumberFortWorthTxFastResponse: BlogPost = {
     },
     { type: "heading", text: "If You Need a 24 Hour Plumber in Fort Worth TX" },
     {
+      type: "callout",
+      text: "Before help arrives, know where to stop the water. See",
+      linkText: "where your main water shut-off valve is",
+      href: "/blog/main-water-shutoff-valve-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         {
