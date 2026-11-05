@@ -41,6 +41,12 @@ export const hoseBibWinterizationAledoTx: BlogPost = {
       content:
         "Then comes the part that catches people out. The split does not leak while it is frozen. Ice plugs the break. The first warm day in spring, somebody opens the faucet to water the lawn and water pours into the wall cavity behind the drywall. Most of these breaks are not discovered until months after they happen.",
     },
+    {
+      type: "callout",
+      text: "For a burst pipe or active leak during a freeze event, see",
+      linkText: "Emergency Plumber Services",
+      href: "/plumbing/emergency-plumbers",
+    },
     { type: "heading", text: "The Twenty-Minute Winterization" },
     {
       type: "list",
@@ -112,12 +118,6 @@ export const hoseBibWinterizationAledoTx: BlogPost = {
       linkText: "Plumbing Leak Repairs",
       href: "/plumbing/plumbing-leak-repairs",
     },
-    {
-      type: "callout",
-      text: "For a burst pipe or active leak during a freeze event, see",
-      linkText: "Emergency Plumber Services",
-      href: "/plumbing/emergency-plumbers",
-    },
     { type: "heading", text: "Worth Doing Once: Upgrade the Bib" },
     {
       type: "paragraph",
@@ -159,6 +159,5 @@ export const hoseBibWinterizationAledoTx: BlogPost = {
           text: " for Fort Worth. Emergency freeze response runs 24/7 all winter.",
         },
       ],
-    },
-  ],
+    },],
 }

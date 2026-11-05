@@ -55,6 +55,12 @@ export const frozenPipesAtticPlumbingFortWorth: BlogPost = {
         "The prep that actually matters takes an afternoon and you want it done before the forecast, not during the run on hardware stores.",
     },
     {
+      type: "callout",
+      text: "Before a freeze is forecast, make sure you can find and turn the valve. See",
+      linkText: "where your main water shut-off valve is",
+      href: "/blog/main-water-shutoff-valve-fort-worth",
+    },
+    {
       type: "list",
       intro: "In rough order of return on effort:",
       items: [
@@ -153,12 +159,6 @@ export const frozenPipesAtticPlumbingFortWorth: BlogPost = {
       href: "/blog/hose-bib-winterization-aledo-tx",
     },
     {
-      type: "callout",
-      text: "Before a freeze is forecast, make sure you can find and turn the valve. See",
-      linkText: "where your main water shut-off valve is",
-      href: "/blog/main-water-shutoff-valve-fort-worth",
-    },
-    {
       type: "paragraph",
       content: [
         { type: "text", text: "When it does break, call " },
@@ -170,6 +170,5 @@ export const frozenPipesAtticPlumbingFortWorth: BlogPost = {
           text: " for Fort Worth. Shut the main off before you call, and we will work the list in the order the water is moving.",
         },
       ],
-    },
-  ],
+    },],
 }

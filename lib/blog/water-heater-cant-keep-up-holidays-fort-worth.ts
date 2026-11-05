@@ -56,6 +56,12 @@ export const waterHeaterCantKeepUpHolidaysFortWorth: BlogPost = {
         "There is also first-hour rating, which combines the stored volume with the recovery rate to describe how much hot water the unit can actually deliver in the first hour of heavy use. That is the figure worth comparing if you are shopping, and it is printed on the unit's energy label.",
     },
     {
+      type: "callout",
+      text: "If you are weighing a larger tank against going tankless, see",
+      linkText: "tankless vs. tank for a Fort Worth home",
+      href: "/blog/tankless-vs-tank-water-heater-fort-worth",
+    },
+    {
       type: "paragraph",
       content:
         "One more thing works against you in late fall: incoming water temperature. The city water arriving at your house is colder in November than it was in August, so the heater has to raise it further to reach the same setpoint. The same tank genuinely recovers more slowly in winter than it did in summer. Nothing is wrong — the job got harder.",
@@ -144,12 +150,6 @@ export const waterHeaterCantKeepUpHolidaysFortWorth: BlogPost = {
       href: "/blog/how-to-flush-water-heater-aledo-tx",
     },
     {
-      type: "callout",
-      text: "If you are weighing a larger tank against going tankless, see",
-      linkText: "tankless vs. tank for a Fort Worth home",
-      href: "/blog/tankless-vs-tank-water-heater-fort-worth",
-    },
-    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },
@@ -161,6 +161,5 @@ export const waterHeaterCantKeepUpHolidaysFortWorth: BlogPost = {
           text: " for Fort Worth. We will tell you whether you have a capacity problem or a failing unit before you spend anything on the wrong one.",
         },
       ],
-    },
-  ],
+    },],
 }

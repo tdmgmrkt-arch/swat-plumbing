@@ -74,6 +74,12 @@ export const outdoorGasLineLeakAledoTx: BlogPost = {
         "The frustrating truth about yard leaks is that the smell isn\u2019t always over the leak. Natural gas migrates along the outside of buried pipe, through gravel bedding, through utility trenches, and around foundations. A leak at the pool heater can present as a strong smell at the meter fifty feet away.",
     },
     {
+      type: "callout",
+      text: "For who to call and in what order once you are safely outside, see",
+      linkText: "who to call with a gas smell in the house",
+      href: "/blog/who-to-call-with-a-gas-smell-in-house",
+    },
+    {
       type: "paragraph",
       content:
         "Licensed plumbers use combustible gas detectors \u2014 handheld instruments sensitive enough to pick up parts-per-million concentrations of methane in the air. Working outward from the strongest reading and along the known line path, the leak location can usually be pinpointed within a few feet before any excavation begins.",
@@ -124,12 +130,6 @@ export const outdoorGasLineLeakAledoTx: BlogPost = {
       href: "/blog/smell-gas-near-stove-aledo-tx",
     },
     {
-      type: "callout",
-      text: "For who to call and in what order once you are safely outside, see",
-      linkText: "who to call with a gas smell in the house",
-      href: "/blog/who-to-call-with-a-gas-smell-in-house",
-    },
-    {
       type: "paragraph",
       content: [
         {
@@ -147,6 +147,5 @@ export const outdoorGasLineLeakAledoTx: BlogPost = {
           text: " for Fort Worth and a licensed technician will be dispatched with gas detection equipment on the first visit.",
         },
       ],
-    },
-  ],
+    },],
 }

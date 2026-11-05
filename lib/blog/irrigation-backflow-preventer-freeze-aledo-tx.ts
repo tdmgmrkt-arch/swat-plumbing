@@ -58,6 +58,12 @@ export const irrigationBackflowPreventerFreezeAledoTx: BlogPost = {
       content:
         "A failed assembly is not subtle. When it thaws, it sprays — sometimes continuously, from the body or the relief port, at full supply pressure. People discover it by water running down the side of the house or an unexplained jump in the water bill.",
     },
+    {
+      type: "callout",
+      text: "The indoor side of freeze prep is covered in",
+      linkText: "our water heater winter checklist",
+      href: "/blog/water-heater-winter-prep-fort-worth",
+    },
     { type: "heading", text: "Winterizing It Properly" },
     {
       type: "paragraph",
@@ -135,12 +141,6 @@ export const irrigationBackflowPreventerFreezeAledoTx: BlogPost = {
       href: "/blog/hose-bib-winterization-aledo-tx",
     },
     {
-      type: "callout",
-      text: "The indoor side of freeze prep is covered in",
-      linkText: "our water heater winter checklist",
-      href: "/blog/water-heater-winter-prep-fort-worth",
-    },
-    {
       type: "paragraph",
       content: [
         { type: "text", text: "If you would rather have it done and checked properly, call " },
@@ -152,6 +152,5 @@ export const irrigationBackflowPreventerFreezeAledoTx: BlogPost = {
           text: " for Fort Worth. It is a short visit now and a considerably longer one in January.",
         },
       ],
-    },
-  ],
+    },],
 }

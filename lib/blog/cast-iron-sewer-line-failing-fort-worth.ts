@@ -52,6 +52,12 @@ export const castIronSewerLineFailingFortWorth: BlogPost = {
       ],
     },
     {
+      type: "callout",
+      text: "On what actually clears a restricted line versus what only buys a month, see",
+      linkText: "hydro jetting vs. snaking",
+      href: "/blog/hydro-jetting-vs-snaking-fort-worth",
+    },
+    {
       type: "paragraph",
       content: [
         { type: "strong", text: "Bellies. " },
@@ -155,12 +161,6 @@ export const castIronSewerLineFailingFortWorth: BlogPost = {
       href: "/blog/tree-roots-in-sewer-line-fort-worth",
     },
     {
-      type: "callout",
-      text: "On what actually clears a restricted line versus what only buys a month, see",
-      linkText: "hydro jetting vs. snaking",
-      href: "/blog/hydro-jetting-vs-snaking-fort-worth",
-    },
-    {
       type: "paragraph",
       content: [
         { type: "text", text: "Call " },
@@ -172,6 +172,5 @@ export const castIronSewerLineFailingFortWorth: BlogPost = {
           text: " for Aledo and Parker County. We will show you the footage and walk the options against what the camera actually found.",
         },
       ],
-    },
-  ],
+    },],
 }
