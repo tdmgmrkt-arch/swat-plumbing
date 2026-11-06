@@ -2,11 +2,12 @@
  * Temporary site-wide outage notice.
  *
  * Mounted from `app/layout.tsx` while `SITE_OUTAGE_BANNER_ENABLED` is true.
- * Set the flag to `false` and redeploy to take the notice down. Dismissal is
- * stored in sessionStorage, so a refresh in the same visit stays quiet and a
- * new visit shows the notice again.
+ * Internet is restored, so the flag is false and the notice is not rendered.
+ * Set it back to `true` and redeploy if the notice needs to return.
+ * Dismissal is stored in sessionStorage, so a refresh in the same visit stays
+ * quiet and a new visit shows the notice again.
  */
-export const SITE_OUTAGE_BANNER_ENABLED = true
+export const SITE_OUTAGE_BANNER_ENABLED = false
 
 export const OUTAGE_NOTICE_STORAGE_KEYS = {
   dismissed: "swat-outage-notice-dismissed",
