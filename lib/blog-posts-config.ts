@@ -40,6 +40,10 @@ import { waterHeaterCantKeepUpHolidaysFortWorth } from "./blog/water-heater-cant
 import { frozenPipesAtticPlumbingFortWorth } from "./blog/frozen-pipes-attic-plumbing-fort-worth"
 import { castIronSewerLineFailingFortWorth } from "./blog/cast-iron-sewer-line-failing-fort-worth"
 import { irrigationBackflowPreventerFreezeAledoTx } from "./blog/irrigation-backflow-preventer-freeze-aledo-tx"
+import { reverseOsmosisWorthItFortWorth } from "./blog/reverse-osmosis-worth-it-fort-worth"
+import { carbonMonoxideSafetyAledoTx } from "./blog/carbon-monoxide-safety-aledo-tx"
+import { sumpPumpFailsFallRainFortWorth } from "./blog/sump-pump-fails-fall-rain-fort-worth"
+import { tapWaterTasteAledoTx } from "./blog/tap-water-taste-aledo-tx"
 
 export type { BlogPost, BlogCategory, ContentBlock } from "./blog/_types"
 export { BLOG_CATEGORIES } from "./blog/_types"
@@ -99,6 +103,10 @@ export const blogPosts: Record<string, BlogPost> = {
   [frozenPipesAtticPlumbingFortWorth.slug]: frozenPipesAtticPlumbingFortWorth,
   [castIronSewerLineFailingFortWorth.slug]: castIronSewerLineFailingFortWorth,
   [irrigationBackflowPreventerFreezeAledoTx.slug]: irrigationBackflowPreventerFreezeAledoTx,
+  [reverseOsmosisWorthItFortWorth.slug]: reverseOsmosisWorthItFortWorth,
+  [carbonMonoxideSafetyAledoTx.slug]: carbonMonoxideSafetyAledoTx,
+  [sumpPumpFailsFallRainFortWorth.slug]: sumpPumpFailsFallRainFortWorth,
+  [tapWaterTasteAledoTx.slug]: tapWaterTasteAledoTx,
 }
 
 /** All posts, sorted newest-first by `date`. */
