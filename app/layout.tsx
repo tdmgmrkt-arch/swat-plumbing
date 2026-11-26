@@ -8,10 +8,15 @@ import { canonicalUrl } from "@/lib/utils"
 import { defaultOgImages, defaultTwitterImages } from "@/lib/metadata"
 import { AccessibilityWidget } from "@/components/site/accessibility-widget"
 import OutageNotice from "@/components/site/outage-notice"
+import ThanksgivingBanner from "@/components/site/thanksgiving-banner"
 import {
   OUTAGE_NOTICE_STORAGE_KEYS,
   SITE_OUTAGE_BANNER_ENABLED,
 } from "@/lib/site-outage"
+import {
+  THANKSGIVING_BANNER_ENABLED,
+  THANKSGIVING_BANNER_HIDE_SCRIPT,
+} from "@/lib/thanksgiving-banner"
 
 /**
  * GA4 Measurement ID. Set in .env.local as NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX.
@@ -105,13 +110,18 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      // Session script may set data-outage-* before hydration.
+      // Session and holiday scripts may set data-* on <html> before hydration.
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {SITE_OUTAGE_BANNER_ENABLED ? (
           <Script id="outage-session" strategy="beforeInteractive">
             {`try{var k=${JSON.stringify(OUTAGE_NOTICE_STORAGE_KEYS)};if(sessionStorage.getItem(k.dismissed)==="1")document.documentElement.setAttribute("data-outage-dismissed","");else if(sessionStorage.getItem(k.popupSeen)==="1")document.documentElement.setAttribute("data-outage-popup-seen","")}catch(e){}`}
+          </Script>
+        ) : null}
+        {THANKSGIVING_BANNER_ENABLED ? (
+          <Script id="thanksgiving-banner" strategy="beforeInteractive">
+            {THANKSGIVING_BANNER_HIDE_SCRIPT}
           </Script>
         ) : null}
         {/* Skip-to-main — keyboard/screen-reader users press Tab once on
@@ -124,6 +134,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {SITE_OUTAGE_BANNER_ENABLED ? <OutageNotice /> : null}
+        {THANKSGIVING_BANNER_ENABLED ? <ThanksgivingBanner /> : null}
         {children}
         <AccessibilityWidget />
       </body>
